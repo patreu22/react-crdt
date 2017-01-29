@@ -2,25 +2,28 @@ var express = require('express');
 var app = express();
 
 app.get('/', function(req,res){
-	res.send('Hello World');
+	res.send('<h1>Hello World</h1>');
 })
 
 app.listen(3000, function(){
 	console.log('Demo Server is listening on port 3000');
-	var timer = new TimestampRegister(false);
-	console.log(timer);
-	console.log(timer.getValue)
-	console.log(timer.getTimeStamp)
-	var testDate = new Date("2017-01-29T18:13:09.377Z");
-	console.log(timer.mergeNewValue(true, new Date()));
-	console.log(timer);
+	
+	testRegister();
 })
 
+function testRegister(){
+	var	registerFromClient = new TimestampRegister(true, new Date("2017-01-29T18:13:09.377Z"))
+	var register = new TimestampRegister(false);
+	console.log(register);
+	console.log(register.getValue)
+	console.log(register.getTimeStamp)
+	console.log(register.mergeNewValue(registerFromClient));
+	console.log(register);
+}
 
-
-function TimestampRegister(defaultValue){
+function TimestampRegister(defaultValue, date = new Date()){
 	this.value = defaultValue;
-	this.timestamp = new Date();
+	this.timestamp = date;
 
 	this.setValue = function(val, stamp){
 		this.value = val
@@ -36,12 +39,12 @@ function TimestampRegister(defaultValue){
 	};
 
 
-	this.mergeNewValue = function(val, stamp){
-		if (stamp > this.timestamp){
-			this.setValue(val, stamp);
-			//console.log("Current value switched to "+val)
+	this.mergeNewValue = function(incomingRegister){
+		if (incomingRegister.timestamp > this.timestamp){
+			this.setValue(incomingRegister.value, incomingRegister.timestamp);
+			console.log("Current value switched to "+val)
 		}else{
-			console.log(this.timestamp + " is a newer timestamp than " + stamp + ". Value won't change.")
+			console.log(this.timestamp + " is a newer timestamp than " + incomingRegister.timestamp + ". Value won't change.")
 		};
 	};
 };
