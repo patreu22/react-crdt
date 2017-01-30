@@ -1,6 +1,6 @@
-function TimestampRegister(defaultValue){
+function TimestampRegister(defaultValue, date = new Date()){
 	this.value = defaultValue;
-	this.timestamp = new Date();
+	this.timestamp = date;
 
 	this.setValue = function(val, stamp){
 		this.value = val
@@ -16,12 +16,12 @@ function TimestampRegister(defaultValue){
 	};
 
 
-	this.mergeNewValue = function(val, stamp){
-		if (stamp > this.timestamp){
-			this.setValue(val, stamp);
-			//console.log("Current value switched to "+val)
+	this.mergeNewValue = function(incomingRegister){
+		if (incomingRegister.timestamp > this.timestamp){
+			this.setValue(incomingRegister.value, incomingRegister.timestamp);
+			console.log("Current value switched to "+val)
 		}else{
-			console.log(this.timestamp + " is a newer timestamp than " + stamp + ". Value won't change.")
+			console.log(this.timestamp + " is a newer timestamp than " + incomingRegister.timestamp + ". Value won't change.")
 		};
 	};
 };
