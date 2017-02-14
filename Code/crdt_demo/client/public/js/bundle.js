@@ -21735,44 +21735,65 @@
 	var Content = function (_React$Component) {
 	  _inherits(Content, _React$Component);
 	
-	  function Content() {
+	  //Set initial localTimestampRegister
+	  function Content(props) {
 	    _classCallCheck(this, Content);
 	
-	    return _possibleConstructorReturn(this, (Content.__proto__ || Object.getPrototypeOf(Content)).apply(this, arguments));
+	    var _this = _possibleConstructorReturn(this, (Content.__proto__ || Object.getPrototypeOf(Content)).call(this, props));
+	
+	    _this.state = { localTimestampRegister: new _timestampRegister.TimestampRegister(false) };
+	    console.log(_this.state.localTimestampRegister.value);
+	    return _this;
 	  }
 	
+	  //Setup long polling
+	
+	
 	  _createClass(Content, [{
-	    key: "componentDidMount",
-	
-	
-	    //Send initial Request for long polling
-	    value: function componentDidMount() {
-	      console.log("Did mount");
+	    key: "longPolling",
+	    value: function longPolling() {
 	      var xhr = new XMLHttpRequest();
 	      xhr.open('GET', '/api/lp', true);
 	      xhr.setRequestHeader("Content-type", "text/plain");
 	      xhr.onreadystatechange = function () {
 	        //Call a function when the state changes.
 	        if (xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) {
-	          console.log('Long Polling started');
 	          console.log('Response Text:');
 	          console.log(xhr.responseText);
 	          this.updateTimestampRegister(JSON.parse(xhr.responseText));
+	          this.longPolling();
+	          //Force the toggle to change if pushed by a Server
+	          //Das ist falscht
+	          //this.setState({time: localTimestampRegister.value});
 	        };
 	      }.bind(this);
 	      xhr.send();
-	      console.log("Long Polling Request sent");
+	      console.log("New long polling request sent");
+	    }
+	
+	    //Send initial Request for long polling
+	
+	  }, {
+	    key: "componentDidMount",
+	    value: function componentDidMount() {
+	      this.longPolling();
 	    }
 	  }, {
 	    key: "updateTimestampRegister",
 	    value: function updateTimestampRegister(register) {
+	      console.log("Before update");
+	      console.log(this.state.localTimestampRegister);
 	      console.log("+++Now updating Timestamp+++");
+	      this.setState({ localTimestampRegister: this.state.localTimestampRegister.mergeNewValue(register) });
+	      console.log("After update");
+	      console.log(this.state.localTimestampRegister);
+	      console.log("Did the Merge");
 	    }
 	  }, {
 	    key: "toggleChanged",
 	    value: function toggleChanged(isChecked) {
-	      //Create a new Register
-	      var register = new _timestampRegister.TimestampRegister(isChecked);
+	      //Update Local Register
+	      this.updateTimestampRegister(new _timestampRegister.TimestampRegister(isChecked));
 	
 	      //Send changed Object to Server
 	      var xhr = new XMLHttpRequest();
@@ -21786,12 +21807,13 @@
 	          console.log("Toggle Status is now: " + isChecked);
 	        };
 	      };
-	      xhr.send(JSON.stringify(register));
+	      xhr.send(JSON.stringify(this.state.localTimestampRegister));
 	    }
 	  }, {
 	    key: "render",
 	
 	
+	    //checked={this.state.localTimestampRegister.value}
 	    //What is shown in the browser
 	    value: function render() {
 	      var _this2 = this;
@@ -21804,8 +21826,8 @@
 	          null,
 	          _react2.default.createElement("br", null),
 	          _react2.default.createElement(_reactToggle2.default, {
-	            defaultChecked: false,
 	            icons: false,
+	            checked: this.state.localTimestampRegister.value,
 	            onChange: function onChange(myToggle) {
 	              return _this2.toggleChanged(myToggle.target.checked);
 	            } })
@@ -22220,7 +22242,7 @@
 	});
 	exports.TimestampRegister = TimestampRegister;
 	function TimestampRegister(defaultValue) {
-		var date = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : new Date();
+		var date = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : new Date().getTime();
 	
 		this.value = defaultValue;
 		this.timestamp = date;
@@ -22241,11 +22263,12 @@
 		this.mergeNewValue = function (incomingRegister) {
 			if (incomingRegister.timestamp > this.timestamp) {
 				this.setValue(incomingRegister.value, incomingRegister.timestamp);
-				console.log("Current value switched to " + val);
+				console.log("Current value switched to " + this.value);
 			} else {
 				console.log(this.timestamp + " is a newer timestamp than " + incomingRegister.timestamp + ". Value won't change.");
 			};
-		};
+			return this;
+		}.bind(this);
 	};
 
 /***/ },

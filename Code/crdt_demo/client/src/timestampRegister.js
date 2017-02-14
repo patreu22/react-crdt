@@ -1,4 +1,4 @@
-export function TimestampRegister(defaultValue, date = new Date()){
+export function TimestampRegister(defaultValue, date = new Date().getTime()){
 	this.value = defaultValue;
 	this.timestamp = date;
 
@@ -16,14 +16,15 @@ export function TimestampRegister(defaultValue, date = new Date()){
 	});
 
 
-	this.mergeNewValue = function(incomingRegister){
+	this.mergeNewValue = (function(incomingRegister){
 		if (incomingRegister.timestamp > this.timestamp){
 			this.setValue(incomingRegister.value, incomingRegister.timestamp);
-			console.log("Current value switched to "+val)
+			console.log("Current value switched to "+this.value)
 		}else{
 			console.log(this.timestamp + " is a newer timestamp than " + incomingRegister.timestamp + ". Value won't change.")
 		};
-	};
+		return this;
+	}).bind(this);
 };
 
 
