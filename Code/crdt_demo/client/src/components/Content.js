@@ -56,16 +56,26 @@ class Content extends React.Component {
     }else{
       this.setState({localOpCounter: this.state.localOpCounter.decrement()});
     }
-  }
 
-  btnClicked(increase){
-    this.updateOpCounter(increase)
+    // //Send changed Object to Server
+    // var xhr = new XMLHttpRequest();
+    // xhr.open('POST', '/api', true);
+    // xhr.setRequestHeader("Content-type", "application/json");
+    // xhr.onreadystatechange = function() {//Call a function when the state changes.
+    //   if(xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) {
+    //      console.log("###Counter changed POST request sent###");
+    //      console.log("Counter Status is now: "+ this.state.localOpCounter.value);
+    //   };
+    // };
+    // xhr.send(JSON.stringify(this.state.localOpCounter));
+
+
   }
 
   toggleChanged(isChecked){
     //Update Local Register
     this.updateTimestampRegister(new TimestampRegister(isChecked));
-    //...random comment
+
     //Send changed Object to Server
     var xhr = new XMLHttpRequest();
     xhr.open('POST', '/api', true);
@@ -96,8 +106,8 @@ class Content extends React.Component {
 			  </label>
         <div>
           <label>{this.state.localOpCounter.value}</label>
-          <button onClick={() => this.btnClicked(true)}>Increment</button>
-          <button onClick={() => this.btnClicked(false)}>Decrement</button>
+          <button onClick={() => this.updateOpCounter(true)}>Increment</button>
+          <button onClick={() => this.updateOpCounter(false)}>Decrement</button>
         </div>
       </div>
   	);
