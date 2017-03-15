@@ -65,7 +65,7 @@ class Content extends React.Component {
   toggleChanged(isChecked){
     //Update Local Register
     this.updateTimestampRegister(new TimestampRegister(isChecked));
-
+    //...random comment
     //Send changed Object to Server
     var xhr = new XMLHttpRequest();
     xhr.open('POST', '/api', true);
