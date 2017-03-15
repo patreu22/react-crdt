@@ -21783,6 +21783,7 @@
 	  }, {
 	    key: "componentDidMount",
 	    value: function componentDidMount() {
+	      this.getInitialState();
 	      this.longPolling();
 	    }
 	  }, {
@@ -21798,17 +21799,19 @@
 	      } else {
 	        this.setState({ localOpCounter: this.state.localOpCounter.decrement() });
 	      }
-	    }
-	  }, {
-	    key: "btnClicked",
-	    value: function btnClicked(increase) {
-	      console.log("Btn Clicked");
-	      console.log("State:");
-	      console.log(this.state);
-	      this.updateOpCounter(increase);
-	      console.log("Update performed");
-	      console.log("State:");
-	      console.log(this.state);
+	
+	      //Send changed Object to Server
+	      var xhr = new XMLHttpRequest();
+	      xhr.open('POST', '/api', true);
+	      xhr.setRequestHeader("Content-type", "application/json");
+	      xhr.onreadystatechange = function () {
+	        //Call a function when the state changes.
+	        if (xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) {
+	          console.log("###Counter changed POST request sent###");
+	          console.log("Counter Status is now: " + this.state.localOpCounter.value);
+	        };
+	      };
+	      xhr.send(JSON.stringify(this.state.localOpCounter));
 	    }
 	  }, {
 	    key: "toggleChanged",
@@ -21818,7 +21821,6 @@
 	
 	      //Send changed Object to Server
 	      var xhr = new XMLHttpRequest();
-	
 	      xhr.open('POST', '/api', true);
 	      xhr.setRequestHeader("Content-type", "application/json");
 	      xhr.onreadystatechange = function () {
@@ -21831,11 +21833,33 @@
 	      xhr.send(JSON.stringify(this.state.localTimestampRegister));
 	    }
 	  }, {
-	    key: "render",
-	
+	    key: "getInitialState",
+	    value: function getInitialState() {
+	      var xhr = new XMLHttpRequest();
+	      xhr.open('GET', '/api/initial', true);
+	      xhr.setRequestHeader("Content-type", "text/plain");
+	      xhr.onreadystatechange = function () {
+	        //Call a function when the state changes.
+	        if (xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) {
+	          console.log('Initial Response:');
+	          console.log(xhr.responseText);
+	          if (!(xhr.responseText == "{}")) {
+	            var response = JSON.parse(xhr.responseText);
+	            this.toggleChanged(response.value);
+	            console.log("Initial timestamp has been set");
+	          } else {
+	            console.log("Response was empty");
+	          }
+	        };
+	      }.bind(this);
+	      xhr.send();
+	    }
 	
 	    //checked={this.state.localTimestampRegister.value}
 	    //What is shown in the browser
+	
+	  }, {
+	    key: "render",
 	    value: function render() {
 	      var _this2 = this;
 	
@@ -21864,14 +21888,14 @@
 	          _react2.default.createElement(
 	            "button",
 	            { onClick: function onClick() {
-	                return _this2.btnClicked(true);
+	                return _this2.updateOpCounter(true);
 	              } },
 	            "Increment"
 	          ),
 	          _react2.default.createElement(
 	            "button",
 	            { onClick: function onClick() {
-	                return _this2.btnClicked(true);
+	                return _this2.updateOpCounter(false);
 	              } },
 	            "Decrement"
 	          )
@@ -22294,6 +22318,7 @@
 		this.setValue = function (val, stamp) {
 			this.value = val;
 			this.timestamp = stamp;
+			return this;
 		};
 	
 		this.getValue = function () {

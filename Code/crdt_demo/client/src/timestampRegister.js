@@ -5,6 +5,7 @@ export function TimestampRegister(defaultValue, date = new Date().getTime()){
 	this.setValue = (function(val, stamp){
 		this.value = val;
 		this.timestamp = stamp;
+		return this
 	});
 
 	this.getValue = (function(){

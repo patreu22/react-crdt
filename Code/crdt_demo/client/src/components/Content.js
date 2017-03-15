@@ -39,9 +39,9 @@ class Content extends React.Component {
       console.log("New long polling request sent");
   }
 
-
   //Send initial Request for long polling
   componentDidMount(){
+    this.getInitialState();
     this.longPolling();
   };
 
@@ -57,17 +57,17 @@ class Content extends React.Component {
       this.setState({localOpCounter: this.state.localOpCounter.decrement()});
     }
 
-    // //Send changed Object to Server
-    // var xhr = new XMLHttpRequest();
-    // xhr.open('POST', '/api', true);
-    // xhr.setRequestHeader("Content-type", "application/json");
-    // xhr.onreadystatechange = function() {//Call a function when the state changes.
-    //   if(xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) {
-    //      console.log("###Counter changed POST request sent###");
-    //      console.log("Counter Status is now: "+ this.state.localOpCounter.value);
-    //   };
-    // };
-    // xhr.send(JSON.stringify(this.state.localOpCounter));
+    //Send changed Object to Server
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', '/api', true);
+    xhr.setRequestHeader("Content-type", "application/json");
+    xhr.onreadystatechange = function() {//Call a function when the state changes.
+      if(xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) {
+         console.log("###Counter changed POST request sent###");
+         console.log("Counter Status is now: "+ this.state.localOpCounter.value);
+      };
+    };
+    xhr.send(JSON.stringify(this.state.localOpCounter));
 
 
   }
@@ -88,6 +88,28 @@ class Content extends React.Component {
     };
     xhr.send(JSON.stringify(this.state.localTimestampRegister));
   };
+
+
+  getInitialState(){
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', '/api/initial', true);
+        xhr.setRequestHeader("Content-type", "text/plain");
+        xhr.onreadystatechange = (function() {//Call a function when the state changes.
+        if(xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) {
+           console.log('Initial Response:');
+           console.log(xhr.responseText);
+           if (!(xhr.responseText == "{}")){
+             var response = JSON.parse(xhr.responseText)
+             this.toggleChanged(response.value);
+             console.log("Initial timestamp has been set")
+           }else{
+             console.log("Response was empty");
+           }
+        };
+      }).bind(this);
+        xhr.send();
+    }
+
 
 
 

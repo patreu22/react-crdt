@@ -5,6 +5,7 @@ var bodyParser = require('body-parser');
 
 var clients = [];
 var clientRequestDict = {}
+var tempState = {};
 //Local IP
 //192.168.178.20
 
@@ -15,7 +16,6 @@ app.use(bodyParser.json());
 
 app.get('/', function (req, res) {
   	console.log('###GET REQUEST received');
-
   	//Add IP Address to the clients-array if not existing
   	var remIP = req.connection.remoteAddress
   	if (clients.indexOf(remIP) == -1){
@@ -40,13 +40,19 @@ app.use(express.static(__dirname + '/client/public'));
 app.post('/api', function (req, res){
 	console.log('###API Post Request received###');
   sendToAllClients(req.body);
+  lastObjState = req.body
   res.statusCode = 200;
   res.end();
 });
 
 //Register Client for LongPolling
 app.get('/api/lp', function(req, res){
+  //After the first sending the long polling is initialized
   clientRequestDict[req.connection.remoteAddress] = res;
+});
+
+app.get('/api/initial', function(req,res){
+  res.end(JSON.stringify(tempState));
 });
 
 
@@ -57,10 +63,12 @@ app.listen(3000, function () {
 
 //Send new TimestampRegister to all Clients
 function sendToAllClients(fileToSend){
+    tempState = fileToSend
     clients.forEach(function(client){
         clientRequestDict[client].end(JSON.stringify(fileToSend));
     })
 };
+
 
 function registerClient(clientIP){
     clients.push(clientIP);
