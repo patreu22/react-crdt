@@ -15,7 +15,7 @@ app.use(bodyParser.json());
 
 app.get('/', function (req, res) {
   	console.log('###GET REQUEST received');
-  
+
   	//Add IP Address to the clients-array if not existing
   	var remIP = req.connection.remoteAddress
   	if (clients.indexOf(remIP) == -1){
@@ -23,8 +23,9 @@ app.get('/', function (req, res) {
       console.log("Client "+remIP+" registered");
   	}else{
   		console.log("Client "+remIP+" already exists in Client Array");
+      console.log("All Cients: "+ clients)
   	}
-  
+
   	//Serve Index Site
   	res.sendFile(__dirname + '/client/public/index.html');
 });
@@ -32,7 +33,7 @@ app.get('/', function (req, res) {
 
 
 
-app.use(express.static(__dirname + '/client/public')); 
+app.use(express.static(__dirname + '/client/public'));
 
 
 //Handle Toggle-Change
@@ -63,6 +64,4 @@ function sendToAllClients(fileToSend){
 
 function registerClient(clientIP){
     clients.push(clientIP);
-
 };
-

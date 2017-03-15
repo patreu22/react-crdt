@@ -1,15 +1,21 @@
 import React from "react";
 import "../css/Content.css"
 import Toggle from "react-toggle"
-import {TimestampRegister} from '../timestampRegister';
+import {TimestampRegister} from '../TimestampRegister';
+import {OpCounter} from '../OpCounter';
 
 class Content extends React.Component {
 
   //Set initial localTimestampRegister
   constructor(props){
     super(props);
-    this.state = { localTimestampRegister: new TimestampRegister(false)};
-    console.log(this.state.localTimestampRegister.value)  
+    this.state = {
+      localTimestampRegister: new TimestampRegister(false),
+      localOpCounter: new OpCounter(5)
+    };
+    console.log(this.state)
+    console.log("TimestampRegister: "+this.state.localTimestampRegister.value)
+    console.log("OpCounter: "+this.state.localOpCounter.value)
   }
 
 
@@ -40,26 +46,28 @@ class Content extends React.Component {
   };
 
 
-
-
   updateTimestampRegister(register){
-    console.log("Before update")
-    console.log(this.state.localTimestampRegister)
-    console.log("+++Now updating Timestamp+++")
     this.setState({localTimestampRegister: this.state.localTimestampRegister.mergeNewValue(register)});
-    console.log("After update")
-    console.log(this.state.localTimestampRegister)
-    console.log("Did the Merge");
   };
 
+  updateOpCounter(increase){
+    if (increase){
+      this.setState({localOpCounter: this.state.localOpCounter.increment()});
+    }else{
+      this.setState({localOpCounter: this.state.localOpCounter.decrement()});
+    }
+  }
+
+  btnClicked(increase){
+    this.updateOpCounter(increase)
+  }
 
   toggleChanged(isChecked){
     //Update Local Register
     this.updateTimestampRegister(new TimestampRegister(isChecked));
-    
+
     //Send changed Object to Server
     var xhr = new XMLHttpRequest();
-    
     xhr.open('POST', '/api', true);
     xhr.setRequestHeader("Content-type", "application/json");
     xhr.onreadystatechange = function() {//Call a function when the state changes.
@@ -81,12 +89,17 @@ class Content extends React.Component {
   			<label>
   				<br/>
   				<Toggle
-    				icons={false} 
+    				icons={false}
             checked = {this.state.localTimestampRegister.value}
     				onChange={
               (myToggle) => this.toggleChanged(myToggle.target.checked)} />
-			</label>
-  		</div>
+			  </label>
+        <div>
+          <label>{this.state.localOpCounter.value}</label>
+          <button onClick={() => this.btnClicked(true)}>Increment</button>
+          <button onClick={() => this.btnClicked(false)}>Decrement</button>
+        </div>
+      </div>
   	);
   };
 
