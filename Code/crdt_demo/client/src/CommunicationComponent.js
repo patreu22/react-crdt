@@ -11,23 +11,24 @@ this.sendToLocal = function(crdt){
   local.downstream(crdt)
 };
 
-this.sendToRemote = function(crdt){
-
+this.sendToServer = function(crdt){
   //Send changed Object to Server
   var xhr = new XMLHttpRequest();
   xhr.open('POST', '/api', true);
+  console.log("Prepare Request. Data:")
+  console.log(crdt)
   xhr.setRequestHeader("Content-type", "application/json");
   xhr.onreadystatechange = (function() {//Call a function when the state changes.
     if(xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) {
        console.log("###Counter changed POST request sent###");
-       console.log("Counter Status is now: "+ this.crdt.value);
+       console.log("Counter Status is now: "+ crdt.value);
     };
-  }).bind(this);
-  xhr.send(JSON.stringify(this.crdt));
+  })
+  xhr.send(JSON.stringify(crdt));
 };
 
 //'/api/initial'
-this.getInitialStateFromServer = function(crdt, path){
+this.getInitialStateFromServer = function(crdt, path, app, completionHandler){
   var xhr = new XMLHttpRequest();
   xhr.open('GET', path , true);
   xhr.setRequestHeader("Content-type", "text/plain");
@@ -38,18 +39,20 @@ this.getInitialStateFromServer = function(crdt, path){
      console.log(xhr.responseText);
      if (!(xhr.responseText == "{}")){
        var response = JSON.parse(xhr.responseText)
-       crdt.downstream(response);
+       console.log("Initital Response data:")
+       console.log(response)
+       completionHandler(crdt.setRegister(response.value, response.timestamp), app);
        console.log("Initial Value Set")
      }else{
        console.log("Response was empty");
      }
-  };
+  }
 }).bind(this);
   xhr.send();
 }
 
 
-this.getAllComponents(){
+this.getAllComponents = function(){
   var retArray = []
   for (var key in crdtDict){
       value = crdtDict[key]

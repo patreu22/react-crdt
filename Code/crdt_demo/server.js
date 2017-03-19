@@ -53,6 +53,7 @@ app.get('/api/lp', function(req, res){
 });
 
 app.get('/api/initial', function(req,res){
+  console.log(req.body)
   res.end(JSON.stringify(tempState));
 });
 

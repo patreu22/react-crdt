@@ -7,19 +7,18 @@ import {OpCounter} from '../OpCounter';
 
 class Content extends React.Component {
 
-  var communicationComponent;
-
   //Set initial localTimestampRegister
   constructor(props){
     super(props);
     this.state = {
-      localTimestampRegister: new TimestampRegister(false),
-      localOpCounter: new OpCounter()
+      communicationComponent: new CommunicationComponent(),
+      localTimestampRegister: new TimestampRegister("timestampDemo", false),
+      localOpCounter: new OpCounter("counterDemo")
     };
-    communicationComponent = new CommunicationComponent()
-    communicationComponent.addCRDT(this.state.localTimestampRegister)
-    communicationComponent.addCRDT(this.state.localOpCounter)
-    console.log("communicationComponent: "+ communicationComponent)
+
+    this.state.communicationComponent.addCRDT(this.state.localTimestampRegister)
+    this.state.communicationComponent.addCRDT(this.state.localOpCounter)
+    console.log("CommunicationComponent: "+ JSON.stringify(this.state.communicationComponent.crdtDict))
     console.log("TimestampRegister: "+this.state.localTimestampRegister.value)
     console.log("OpCounter: "+this.state.localOpCounter.value)
   }
@@ -55,7 +54,7 @@ class Content extends React.Component {
 
 
   updateTimestampRegister(register){
-    this.setState({localTimestampRegister: this.state.localTimestampRegister.mergeNewValue(register)});
+    this.setState({localTimestampRegister: this.state.localTimestampRegister.downstream(register)});
   };
 
   updateOpCounter(increase){
@@ -64,19 +63,22 @@ class Content extends React.Component {
     }else{
       this.setState({localOpCounter: this.state.localOpCounter.decrement()});
     }
-    communicationComponent.sendToServer(this.state.localOpCounter);
+    this.state.communicationComponent.sendToServer(this.state.localOpCounter);
   }
 
   toggleChanged(isChecked){
     //Update Local Register
-    this.setState({localTimestampRegister: this.state.localTimestampRegister.downstream(new TimestampRegister(isChecked))});
-    communicationComponent.sendToServer(this.state.localTimestampRegister);
+    var tempReg = this.state.localTimestampRegister.downstream(new TimestampRegister("Dummy",isChecked));
+    this.setState({localTimestampRegister: tempReg});
+    this.state.communicationComponent.sendToServer(this.state.localTimestampRegister);
   };
 
 
-  getInitialStateFor(crdt){
-    communicationComponent.getInitialStateFromServer(crdt, '/api/initial')
-  }
+  getInitialStateFor(crdt){  
+    this.state.communicationComponent.getInitialStateFromServer(crdt, '/api/initial', this, function(initialCRDT, app){
+      app.setState({localTimestampRegister: initialCRDT})
+    });
+  };
 
 
 
