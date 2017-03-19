@@ -2,18 +2,24 @@ import React from "react";
 import "../css/Content.css"
 import Toggle from "react-toggle"
 import {TimestampRegister} from '../TimestampRegister';
+import {CommunicationComponent} from '../CommunicationComponent';
 import {OpCounter} from '../OpCounter';
 
 class Content extends React.Component {
+
+  var communicationComponent;
 
   //Set initial localTimestampRegister
   constructor(props){
     super(props);
     this.state = {
       localTimestampRegister: new TimestampRegister(false),
-      localOpCounter: new OpCounter(5)
+      localOpCounter: new OpCounter()
     };
-    console.log(this.state)
+    communicationComponent = new CommunicationComponent()
+    communicationComponent.addCRDT(this.state.localTimestampRegister)
+    communicationComponent.addCRDT(this.state.localOpCounter)
+    console.log("communicationComponent: "+ communicationComponent)
     console.log("TimestampRegister: "+this.state.localTimestampRegister.value)
     console.log("OpCounter: "+this.state.localOpCounter.value)
   }
@@ -28,6 +34,8 @@ class Content extends React.Component {
       if(xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) {
          console.log('Response Text:');
          console.log(xhr.responseText);
+
+         //Das hier muss allgemeiner sein!!!
          this.updateTimestampRegister(JSON.parse(xhr.responseText));
          this.longPolling();
          //Force the toggle to change if pushed by a Server
@@ -41,7 +49,7 @@ class Content extends React.Component {
 
   //Send initial Request for long polling
   componentDidMount(){
-    this.getInitialState();
+    this.getInitialStateFor(this.state.localTimestampRegister);
     this.longPolling();
   };
 
@@ -56,59 +64,19 @@ class Content extends React.Component {
     }else{
       this.setState({localOpCounter: this.state.localOpCounter.decrement()});
     }
-
-    //Send changed Object to Server
-    var xhr = new XMLHttpRequest();
-    xhr.open('POST', '/api', true);
-    xhr.setRequestHeader("Content-type", "application/json");
-    xhr.onreadystatechange = function() {//Call a function when the state changes.
-      if(xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) {
-         console.log("###Counter changed POST request sent###");
-         console.log("Counter Status is now: "+ this.state.localOpCounter.value);
-      };
-    };
-    xhr.send(JSON.stringify(this.state.localOpCounter));
-
-
+    communicationComponent.sendToServer(this.state.localOpCounter);
   }
 
   toggleChanged(isChecked){
     //Update Local Register
-    this.updateTimestampRegister(new TimestampRegister(isChecked));
-
-    //Send changed Object to Server
-    var xhr = new XMLHttpRequest();
-    xhr.open('POST', '/api', true);
-    xhr.setRequestHeader("Content-type", "application/json");
-    xhr.onreadystatechange = function() {//Call a function when the state changes.
-      if(xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) {
-         console.log("###Toggle changed POST request sent###");
-         console.log("Toggle Status is now: "+ isChecked);
-      };
-    };
-    xhr.send(JSON.stringify(this.state.localTimestampRegister));
+    this.setState({localTimestampRegister: this.state.localTimestampRegister.downstream(new TimestampRegister(isChecked))});
+    communicationComponent.sendToServer(this.state.localTimestampRegister);
   };
 
 
-  getInitialState(){
-        var xhr = new XMLHttpRequest();
-        xhr.open('GET', '/api/initial', true);
-        xhr.setRequestHeader("Content-type", "text/plain");
-        xhr.onreadystatechange = (function() {//Call a function when the state changes.
-        if(xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) {
-           console.log('Initial Response:');
-           console.log(xhr.responseText);
-           if (!(xhr.responseText == "{}")){
-             var response = JSON.parse(xhr.responseText)
-             this.toggleChanged(response.value);
-             console.log("Initial timestamp has been set")
-           }else{
-             console.log("Response was empty");
-           }
-        };
-      }).bind(this);
-        xhr.send();
-    }
+  getInitialStateFor(crdt){
+    communicationComponent.getInitialStateFromServer(crdt, '/api/initial')
+  }
 
 
 

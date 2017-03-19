@@ -21810,7 +21810,7 @@
 	          console.log("###Counter changed POST request sent###");
 	          console.log("Counter Status is now: " + this.state.localOpCounter.value);
 	        };
-	      };
+	      }.bind(this);
 	      xhr.send(JSON.stringify(this.state.localOpCounter));
 	    }
 	  }, {

@@ -1,10 +1,9 @@
-export function OpCounter(value=0){
+export function OpCounter(name, value=0){
+	this.name = name
 	this.value = value;
-	this.increase = undefined;
 
 	this.increment = (function(){
 		this.value += 1;
-		this.increase = true
 		console.log("Incremented");
 		console.log(this.value)
 		return this
@@ -12,7 +11,6 @@ export function OpCounter(value=0){
 
 	this.decrement = (function(){
 		this.value -= 1;
-		this.increase = false
 		console.log("Decremented");
 		console.log(this.value)
 		return this
@@ -22,8 +20,12 @@ export function OpCounter(value=0){
 		return this.value;
 	});
 
-	this.mergeValue = (function(incomingCounter){
-		if(incomingCounter.increase == true){
+	this.getName = function(){
+		return this.name;
+	}
+
+	this.downstream = (function(shouldIncrement){
+		if(shouldIncrement == true){
 			this.increment();
 		}else{
 			this.decrement();
