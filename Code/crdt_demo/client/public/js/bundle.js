@@ -21759,11 +21759,11 @@
 	    return _this;
 	  }
 	
-	  //Setup long polling
-	
-	
 	  _createClass(Content, [{
 	    key: "longPolling",
+	
+	
+	    // //Setup long polling
 	    value: function longPolling() {
 	      var xhr = new XMLHttpRequest();
 	      xhr.open('GET', '/api/lp', true);
@@ -21771,11 +21771,20 @@
 	      xhr.onreadystatechange = function () {
 	        //Call a function when the state changes.
 	        if (xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) {
-	          console.log('Response Text:');
-	          console.log(xhr.responseText);
-	
 	          //Das hier muss allgemeiner sein!!!
-	          this.updateTimestampRegister(JSON.parse(xhr.responseText));
+	          //this.state.communicationComponent.longPolling()
+	          var obj = JSON.parse(xhr.responseText);
+	          var crdt = this.state.communicationComponent.getCRDTwithName(obj.name);
+	          //Get Object in state
+	
+	          for (var key in this.state) {
+	            if (this.state[key].name === obj.name) {
+	              this.setState({ key: this.state[key].downstream(obj) });
+	              console.log("Set new state!");
+	            }
+	          }
+	
+	          //this.updateTimestampRegister(JSON.parse(xhr.responseText));
 	          this.longPolling();
 	          //Force the toggle to change if pushed by a Server
 	          //Das ist falscht
@@ -21792,6 +21801,7 @@
 	    key: "componentDidMount",
 	    value: function componentDidMount() {
 	      this.getInitialStateFor(this.state.localTimestampRegister);
+	      //this.state.communicationComponent.longPolling();
 	      this.longPolling();
 	    }
 	  }, {
@@ -21821,7 +21831,7 @@
 	    key: "getInitialStateFor",
 	    value: function getInitialStateFor(crdt) {
 	      this.state.communicationComponent.getInitialStateFromServer(crdt, '/api/initial', this, function (initialCRDT, app) {
-	        app.setState({ localTimestampRegister: initialCRDT });
+	        app.updateTimestampRegister(initialCRDT);
 	      });
 	    }
 	  }, {
@@ -22347,8 +22357,8 @@
 	    xhr.onreadystatechange = function () {
 	      //Call a function when the state changes.
 	      if (xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) {
-	        console.log("###Counter changed POST request sent###");
-	        console.log("Counter Status is now: " + crdt.value);
+	        console.log("---POST Request successful.---");
+	        console.log("Response: " + xhr.responseText);
 	      };
 	    };
 	    xhr.send(JSON.stringify(crdt));
@@ -22368,7 +22378,12 @@
 	          var response = JSON.parse(xhr.responseText);
 	          console.log("Initital Response data:");
 	          console.log(response);
-	          completionHandler(crdt.setRegister(response.value, response.timestamp), app);
+	          Object.keys(this.crdtDict).forEach(function (key, index) {
+	            console.log(key);
+	          });
+	          //AUF REGISTER ZUGESCHNITTEN!!!
+	          var ts = response.timestampDemo;
+	          completionHandler(crdt.setRegister(ts.value, ts.timestamp), app);
 	          console.log("Initial Value Set");
 	        } else {
 	          console.log("Response was empty");
@@ -22385,6 +22400,34 @@
 	      retArray.append(value);
 	    }
 	    return retArray;
+	  };
+	
+	  this.crdtIsInDictWithName = function (name) {
+	    Object.keys(this.crdtDict).forEach(function (key, value) {
+	      if (key === name) {
+	        return true;
+	      }
+	    });
+	    return false;
+	  };
+	
+	  this.getCRDTwithName = function (name) {
+	    return this.crdtDict[name];
+	  };
+	
+	  this.longPolling = function () {
+	    var xhr = new XMLHttpRequest();
+	    xhr.open('GET', '/api/lp', true);
+	    xhr.setRequestHeader("Content-type", "text/plain");
+	    xhr.onreadystatechange = function () {
+	      //Call a function when the state changes.
+	      if (xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) {
+	        console.log('Response Text:');
+	        console.log(xhr.responseText);
+	
+	        //...Baustelle
+	      }
+	    };
 	  };
 	};
 

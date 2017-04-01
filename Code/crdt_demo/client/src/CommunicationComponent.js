@@ -20,8 +20,8 @@ this.sendToServer = function(crdt){
   xhr.setRequestHeader("Content-type", "application/json");
   xhr.onreadystatechange = (function() {//Call a function when the state changes.
     if(xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) {
-       console.log("###Counter changed POST request sent###");
-       console.log("Counter Status is now: "+ crdt.value);
+       console.log("---POST Request successful.---")
+       console.log("Response: "+xhr.responseText)
     };
   })
   xhr.send(JSON.stringify(crdt));
@@ -41,7 +41,12 @@ this.getInitialStateFromServer = function(crdt, path, app, completionHandler){
        var response = JSON.parse(xhr.responseText)
        console.log("Initital Response data:")
        console.log(response)
-       completionHandler(crdt.setRegister(response.value, response.timestamp), app);
+       Object.keys(this.crdtDict).forEach(function(key, index){
+         console.log(key)
+       });
+       //AUF REGISTER ZUGESCHNITTEN!!!
+       var ts = response.timestampDemo
+       completionHandler(crdt.setRegister(ts.value, ts.timestamp), app);
        console.log("Initial Value Set")
      }else{
        console.log("Response was empty");
@@ -61,7 +66,31 @@ this.getAllComponents = function(){
   return retArray
 }
 
+this.crdtIsInDictWithName = function(name){
+  Object.keys(this.crdtDict).forEach(function(key, value){
+    if(key === name){
+      return true
+    }
+  })
+  return false
+}
 
+this.getCRDTwithName = function(name){
+  return this.crdtDict[name]
+}
 
+this.longPolling = function(){
+  var xhr = new XMLHttpRequest();
+  xhr.open('GET', '/api/lp', true);
+  xhr.setRequestHeader("Content-type", "text/plain");
+  xhr.onreadystatechange = (function() {//Call a function when the state changes.
+    if(xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) {
+      console.log('Response Text:');
+      console.log(xhr.responseText);
+
+      //...Baustelle
+    }
+  })
+};
 
 };
