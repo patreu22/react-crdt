@@ -21775,15 +21775,17 @@
 	          //Das hier muss allgemeiner sein!!!
 	          //this.state.communicationComponent.longPolling()
 	          var obj = JSON.parse(xhr.responseText);
-	          var crdt = this.state.communicationComponent.getCRDTwithName(obj.name);
+	          var crdt = this.state.communicationComponent.getCRDTwithName(obj.crdtName);
 	          //Get Object in state
-	          console.log("Obj: " + obj);
-	          console.log("Crdt: " + crdt);
+	          console.log("Obj: " + JSON.stringify(obj));
+	          console.log("Crdt: " + JSON.stringify(crdt));
+	          console.log("State: " + JSON.stringify(this.state));
 	
 	          for (var key in this.state) {
-	            if (this.state[key].name === obj.name) {
+	            if (this.state[key].name === obj.crdtName) {
+	              console.log("Key Polling Match: " + obj.crdtName);
 	              console.log("Key: " + this.state[key].name);
-	              var newObj = this.state[key].downstream(obj);
+	              var newObj = this.state[key].downstream(obj.operation);
 	              console.log("After downstream: " + JSON.stringify(newObj));
 	              this.setState({ key: newObj });
 	              console.log("Set new state!");
@@ -21848,7 +21850,7 @@
 	    key: "toggleChanged",
 	    value: function toggleChanged(isChecked) {
 	      //Update Local Register
-	      var tempReg = this.state.localTimestampRegister.downstream(new _TimestampRegister.TimestampRegister("Dummy", isChecked));
+	      var tempReg = this.state.localTimestampRegister.downstream({ value: isChecked, timestamp: new Date().getTime() });
 	      this.setState({ localTimestampRegister: tempReg });
 	      this.state.communicationComponent.sendToServer(this.state.localTimestampRegister, "timestampRegister");
 	    }
@@ -22339,12 +22341,12 @@
 			return this.timestamp;
 		};
 	
-		this.downstream = function (incomingRegister) {
-			if (incomingRegister.timestamp > this.timestamp) {
-				this.setRegister(incomingRegister.value, incomingRegister.timestamp);
+		this.downstream = function (operation) {
+			if (operation.timestamp > this.timestamp) {
+				this.setRegister(operation.value, operation.timestamp);
 				console.log("Current value switched to " + this.value);
 			} else {
-				console.log(this.timestamp + " is a newer timestamp than " + incomingRegister.timestamp + ". Value won't change.");
+				console.log(this.timestamp + " is a newer timestamp than " + operation.timestamp + ". Value won't change.");
 			};
 			return this;
 		}.bind(this);
@@ -22442,7 +22444,7 @@
 	              console.log("Data: " + JSON.stringify(data));
 	              switch (data.crdtType) {
 	                case "timestampRegister":
-	                  completionHandler(that.crdtDict[key].setRegister(data.operation.value, data.operation.timestamp), app);
+	                  completionHandler(that.crdtDict[key].downstream({ value: data.operation.value, timestamp: data.operation.timestamp }), app);
 	                  console.log("timestampRegister detected");
 	                  break;
 	                case "opCounter":

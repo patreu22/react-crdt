@@ -83,7 +83,7 @@ this.getInitialStateFromServer = function(path, app, completionHandler){
            console.log("Data: "+ JSON.stringify(data))
            switch (data.crdtType){
              case "timestampRegister":
-              completionHandler(that.crdtDict[key].setRegister(data.operation.value, data.operation.timestamp), app);
+              completionHandler(that.crdtDict[key].downstream({value: data.operation.value, timestamp: data.operation.timestamp}), app);
               console.log("timestampRegister detected")
               break
             case "opCounter":

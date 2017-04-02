@@ -35,15 +35,17 @@ class Content extends React.Component {
          //Das hier muss allgemeiner sein!!!
          //this.state.communicationComponent.longPolling()
          var obj = JSON.parse(xhr.responseText)
-         var crdt = this.state.communicationComponent.getCRDTwithName(obj.name)
+         var crdt = this.state.communicationComponent.getCRDTwithName(obj.crdtName)
          //Get Object in state
-         console.log("Obj: "+obj)
-         console.log("Crdt: "+crdt)
+         console.log("Obj: "+JSON.stringify(obj))
+         console.log("Crdt: "+JSON.stringify(crdt))
+         console.log("State: "+JSON.stringify(this.state))
 
         for (var key in this.state) {
-          if(this.state[key].name === obj.name){
+          if(this.state[key].name === obj.crdtName){
+            console.log("Key Polling Match: "+obj.crdtName)
             console.log("Key: "+this.state[key].name)
-            var newObj = this.state[key].downstream(obj)
+            var newObj = this.state[key].downstream(obj.operation)
             console.log("After downstream: "+ JSON.stringify(newObj))
             this.setState({key: newObj})
             console.log("Set new state!")
@@ -102,7 +104,7 @@ class Content extends React.Component {
 
   toggleChanged(isChecked){
     //Update Local Register
-    var tempReg = this.state.localTimestampRegister.downstream(new TimestampRegister("Dummy",isChecked));
+    var tempReg = this.state.localTimestampRegister.downstream({value: isChecked, timestamp: new Date().getTime()});
     this.setState({localTimestampRegister: tempReg});
     this.state.communicationComponent.sendToServer(this.state.localTimestampRegister, "timestampRegister");
   };

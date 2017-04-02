@@ -21,12 +21,12 @@ export function TimestampRegister(name, defaultValue, date = new Date().getTime(
 		return this.timestamp;
 	});
 
-	this.downstream = (function(incomingRegister){
-		if (incomingRegister.timestamp > this.timestamp){
-			this.setRegister(incomingRegister.value, incomingRegister.timestamp);
+	this.downstream = (function(operation){
+		if (operation.timestamp > this.timestamp){
+			this.setRegister(operation.value, operation.timestamp);
 			console.log("Current value switched to "+this.value);
 		}else{
-			console.log(this.timestamp + " is a newer timestamp than " + incomingRegister.timestamp + ". Value won't change.");
+			console.log(this.timestamp + " is a newer timestamp than " + operation.timestamp + ". Value won't change.");
 		};
 		return this;
 	}).bind(this);
