@@ -45,6 +45,7 @@ class Content extends React.Component {
           if(this.state[key].name === obj.crdtName){
             console.log("Key Polling Match: "+obj.crdtName)
             console.log("Key: "+this.state[key].name)
+            console.log("Operation: "+obj.operation)
             var newObj = this.state[key].downstream(obj.operation)
             console.log("After downstream: "+ JSON.stringify(newObj))
             this.setState({key: newObj})
@@ -91,20 +92,10 @@ class Content extends React.Component {
     });
   }
 
-  updateOpCounter(increase){
-    if (increase){
-      this.setState({localOpCounter: this.state.localOpCounter.increment()});
-    }else{
-      this.setState({localOpCounter: this.state.localOpCounter.decrement()});
-    }
-    this.state.communicationComponent.sendToServer(this.state.localOpCounter, "opCounter", increase);
-    //Protokoll:
-    //{
-    //  name: {
-    //    operation: {increase: true}
-    //  }
-    //}
-    //
+  counterChanged(increase){
+    var operation = {"increase": increase}
+    this.setState({localOpCounter: this.state.localOpCounter.downstream(operation)});
+    this.state.communicationComponent.sendToServer(this.state.localOpCounter, "opCounter", operation);
   };
 
   toggleChanged(isChecked){
@@ -141,8 +132,8 @@ class Content extends React.Component {
 			  </label>
         <div>
           <label>{this.state.localOpCounter.value}</label>
-          <button onClick={() => this.updateOpCounter(true)}>Increment</button>
-          <button onClick={() => this.updateOpCounter(false)}>Decrement</button>
+          <button onClick={() => this.counterChanged(true)}>Increment</button>
+          <button onClick={() => this.counterChanged(false)}>Decrement</button>
         </div>
       </div>
   	);

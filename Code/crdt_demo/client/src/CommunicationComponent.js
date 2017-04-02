@@ -11,7 +11,7 @@ this.sendToLocal = function(crdt){
   local.downstream(crdt)
 };
 
-this.sendToServer = function(crdt, crdtType, increase){
+this.sendToServer = function(crdt, crdtType, operation){
   //Send changed Object to Server
   var xhr = new XMLHttpRequest();
   xhr.open('POST', '/api', true);
@@ -26,7 +26,6 @@ this.sendToServer = function(crdt, crdtType, increase){
   var msg = {}
   console.log("CRDT: "+JSON.stringify(crdt))
   console.log("CRDT Type: "+ crdtType)
-  console.log("Increase: "+ increase)
   switch (crdtType){
     case "timestampRegister":
       msg = {
@@ -42,9 +41,7 @@ this.sendToServer = function(crdt, crdtType, increase){
       msg = {
         crdtName: crdt.name,
         crdtType: crdtType,
-        operation: {
-          increase: increase
-        }
+        "operation": operation
       }
       break
     default:
