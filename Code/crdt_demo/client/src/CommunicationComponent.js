@@ -11,12 +11,10 @@ this.sendToLocal = function(crdt){
   local.downstream(crdt)
 };
 
-this.sendToServer = function(crdt){
+this.sendToServer = function(crdt, crdtType, increase){
   //Send changed Object to Server
   var xhr = new XMLHttpRequest();
   xhr.open('POST', '/api', true);
-  console.log("Prepare Request. Data:")
-  console.log(crdt)
   xhr.setRequestHeader("Content-type", "application/json");
   xhr.onreadystatechange = (function() {//Call a function when the state changes.
     if(xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) {
@@ -24,11 +22,45 @@ this.sendToServer = function(crdt){
        console.log("Response: "+xhr.responseText)
     };
   })
-  xhr.send(JSON.stringify(crdt));
+
+  var msg = {}
+  console.log("CRDT: "+JSON.stringify(crdt))
+  console.log("CRDT Type: "+ crdtType)
+  console.log("Increase: "+ increase)
+  switch (crdtType){
+    case "timestampRegister":
+      msg = {
+        crdtName: crdt.name,
+        crdtType: crdtType,
+        operation: {
+          value: crdt.value,
+          timestamp: crdt.timestamp
+        }
+      }
+      break
+    case "opCounter":
+      msg = {
+        crdtName: crdt.name,
+        crdtType: crdtType,
+        operation: {
+          increase: increase
+        }
+      }
+      break
+    default:
+      console.log("Default branch")
+      msg = {}
+  }
+
+  console.log("Message to send: "+JSON.stringify(msg))
+  xhr.send(JSON.stringify(msg));
+
+
+
 };
 
 //'/api/initial'
-this.getInitialStateFromServer = function(crdt, path, app, completionHandler){
+this.getInitialStateFromServer = function(path, app, completionHandler){
   var xhr = new XMLHttpRequest();
   xhr.open('GET', path , true);
   xhr.setRequestHeader("Content-type", "text/plain");
@@ -40,17 +72,39 @@ this.getInitialStateFromServer = function(crdt, path, app, completionHandler){
      if (!(xhr.responseText == "{}")){
        var response = JSON.parse(xhr.responseText)
        console.log("Initital Response data:")
-       console.log(response)
+       console.log("CRDT Dict: "+ JSON.stringify(this.crdtDict))
+       console.log(JSON.stringify(response))
+       var that = this
        Object.keys(this.crdtDict).forEach(function(key, index){
-         console.log(key)
-       });
-       //AUF REGISTER ZUGESCHNITTEN!!!
-       var ts = response.timestampDemo
-       completionHandler(crdt.setRegister(ts.value, ts.timestamp), app);
-       console.log("Initial Value Set")
-     }else{
+         console.log("Current Key: "+ key)
+         if (key in response){
+           console.log("Key matched: "+key)
+           var data = response[key]
+           console.log("Data: "+ JSON.stringify(data))
+           switch (data.crdtType){
+             case "timestampRegister":
+              completionHandler(that.crdtDict[key].setRegister(data.operation.value, data.operation.timestamp), app);
+              console.log("timestampRegister detected")
+              break
+            case "opCounter":
+              completionHandler(that.crdtDict[key].downstream(data.operation.increase), app)
+              console.log("opCounter")
+              break
+            default:
+              console.log("Default")
+              break
+            }
+         }
+      });
+
+      //  //AUF REGISTER ZUGESCHNITTEN!!!
+      //  var ts = response.timestampDemo
+      //  console.log(JSON.stringify(response))
+       //
+      //  console.log("Initial Value Set")
+    }else{
        console.log("Response was empty");
-     }
+    }
   }
 }).bind(this);
   xhr.send();

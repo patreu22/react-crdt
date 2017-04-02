@@ -26,6 +26,7 @@ class Content extends React.Component {
 
   // //Setup long polling
   longPolling(){
+    console.log("Long Polling started")
       var xhr = new XMLHttpRequest();
       xhr.open('GET', '/api/lp', true);
       xhr.setRequestHeader("Content-type", "text/plain");
@@ -36,15 +37,18 @@ class Content extends React.Component {
          var obj = JSON.parse(xhr.responseText)
          var crdt = this.state.communicationComponent.getCRDTwithName(obj.name)
          //Get Object in state
+         console.log("Obj: "+obj)
+         console.log("Crdt: "+crdt)
 
         for (var key in this.state) {
           if(this.state[key].name === obj.name){
-            this.setState({key: this.state[key].downstream(obj)})
+            console.log("Key: "+this.state[key].name)
+            var newObj = this.state[key].downstream(obj)
+            console.log("After downstream: "+ JSON.stringify(newObj))
+            this.setState({key: newObj})
             console.log("Set new state!")
           }
         }
-
-
 
          //this.updateTimestampRegister(JSON.parse(xhr.responseText));
          this.longPolling();
@@ -59,15 +63,26 @@ class Content extends React.Component {
 
   //Send initial Request for long polling
   componentDidMount(){
-    this.getInitialStateFor(this.state.localTimestampRegister);
-    //this.state.communicationComponent.longPolling();
+    this.getInitialState()
     this.longPolling()
   };
 
 
   updateTimestampRegister(register){
+    console.log("+++Register: "+JSON.stringify(register))
+    console.log("State: "+JSON.stringify(this.state))
     this.setState({localTimestampRegister: this.state.localTimestampRegister.downstream(register)});
   };
+
+  updateCRDT(crdt, downstreamAttributes, app){
+    Object.keys(app.state).forEach(function(key, index){
+      if(app.state[key].name === crdt.name){
+        console.log("Name matched: "+app.state[key].name)
+        console.log("Downstream Attributes: "+JSON.stringify(downstreamAttributes))
+        app.setState({key: app.state[key].downstream(downstreamAttributes)})
+      }
+    });
+  }
 
   updateOpCounter(increase){
     if (increase){
@@ -75,20 +90,27 @@ class Content extends React.Component {
     }else{
       this.setState({localOpCounter: this.state.localOpCounter.decrement()});
     }
-    this.state.communicationComponent.sendToServer(this.state.localOpCounter);
+    this.state.communicationComponent.sendToServer(this.state.localOpCounter, "opCounter", increase);
+    //Protokoll:
+    //{
+    //  name: {
+    //    operation: {increase: true}
+    //  }
+    //}
+    //
   };
 
   toggleChanged(isChecked){
     //Update Local Register
     var tempReg = this.state.localTimestampRegister.downstream(new TimestampRegister("Dummy",isChecked));
     this.setState({localTimestampRegister: tempReg});
-    this.state.communicationComponent.sendToServer(this.state.localTimestampRegister);
+    this.state.communicationComponent.sendToServer(this.state.localTimestampRegister, "timestampRegister");
   };
 
 
-  getInitialStateFor(crdt){
-    this.state.communicationComponent.getInitialStateFromServer(crdt, '/api/initial', this, function(initialCRDT, app){
-        app.updateTimestampRegister(initialCRDT)
+  getInitialState(){
+    this.state.communicationComponent.getInitialStateFromServer('/api/initial', this, function(initialCRDT, app){
+        app.updateCRDT(initialCRDT, initialCRDT, app);
     });
   };
 

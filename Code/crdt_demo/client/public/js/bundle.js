@@ -21765,6 +21765,7 @@
 	
 	    // //Setup long polling
 	    value: function longPolling() {
+	      console.log("Long Polling started");
 	      var xhr = new XMLHttpRequest();
 	      xhr.open('GET', '/api/lp', true);
 	      xhr.setRequestHeader("Content-type", "text/plain");
@@ -21776,10 +21777,15 @@
 	          var obj = JSON.parse(xhr.responseText);
 	          var crdt = this.state.communicationComponent.getCRDTwithName(obj.name);
 	          //Get Object in state
+	          console.log("Obj: " + obj);
+	          console.log("Crdt: " + crdt);
 	
 	          for (var key in this.state) {
 	            if (this.state[key].name === obj.name) {
-	              this.setState({ key: this.state[key].downstream(obj) });
+	              console.log("Key: " + this.state[key].name);
+	              var newObj = this.state[key].downstream(obj);
+	              console.log("After downstream: " + JSON.stringify(newObj));
+	              this.setState({ key: newObj });
 	              console.log("Set new state!");
 	            }
 	          }
@@ -21800,14 +21806,26 @@
 	  }, {
 	    key: "componentDidMount",
 	    value: function componentDidMount() {
-	      this.getInitialStateFor(this.state.localTimestampRegister);
-	      //this.state.communicationComponent.longPolling();
+	      this.getInitialState();
 	      this.longPolling();
 	    }
 	  }, {
 	    key: "updateTimestampRegister",
 	    value: function updateTimestampRegister(register) {
+	      console.log("+++Register: " + JSON.stringify(register));
+	      console.log("State: " + JSON.stringify(this.state));
 	      this.setState({ localTimestampRegister: this.state.localTimestampRegister.downstream(register) });
+	    }
+	  }, {
+	    key: "updateCRDT",
+	    value: function updateCRDT(crdt, downstreamAttributes, app) {
+	      Object.keys(app.state).forEach(function (key, index) {
+	        if (app.state[key].name === crdt.name) {
+	          console.log("Name matched: " + app.state[key].name);
+	          console.log("Downstream Attributes: " + JSON.stringify(downstreamAttributes));
+	          app.setState({ key: app.state[key].downstream(downstreamAttributes) });
+	        }
+	      });
 	    }
 	  }, {
 	    key: "updateOpCounter",
@@ -21817,7 +21835,14 @@
 	      } else {
 	        this.setState({ localOpCounter: this.state.localOpCounter.decrement() });
 	      }
-	      this.state.communicationComponent.sendToServer(this.state.localOpCounter);
+	      this.state.communicationComponent.sendToServer(this.state.localOpCounter, "opCounter", increase);
+	      //Protokoll:
+	      //{
+	      //  name: {
+	      //    operation: {increase: true}
+	      //  }
+	      //}
+	      //
 	    }
 	  }, {
 	    key: "toggleChanged",
@@ -21825,13 +21850,13 @@
 	      //Update Local Register
 	      var tempReg = this.state.localTimestampRegister.downstream(new _TimestampRegister.TimestampRegister("Dummy", isChecked));
 	      this.setState({ localTimestampRegister: tempReg });
-	      this.state.communicationComponent.sendToServer(this.state.localTimestampRegister);
+	      this.state.communicationComponent.sendToServer(this.state.localTimestampRegister, "timestampRegister");
 	    }
 	  }, {
-	    key: "getInitialStateFor",
-	    value: function getInitialStateFor(crdt) {
-	      this.state.communicationComponent.getInitialStateFromServer(crdt, '/api/initial', this, function (initialCRDT, app) {
-	        app.updateTimestampRegister(initialCRDT);
+	    key: "getInitialState",
+	    value: function getInitialState() {
+	      this.state.communicationComponent.getInitialStateFromServer('/api/initial', this, function (initialCRDT, app) {
+	        app.updateCRDT(initialCRDT, initialCRDT, app);
 	      });
 	    }
 	  }, {
@@ -22347,12 +22372,10 @@
 	    local.downstream(crdt);
 	  };
 	
-	  this.sendToServer = function (crdt) {
+	  this.sendToServer = function (crdt, crdtType, increase) {
 	    //Send changed Object to Server
 	    var xhr = new XMLHttpRequest();
 	    xhr.open('POST', '/api', true);
-	    console.log("Prepare Request. Data:");
-	    console.log(crdt);
 	    xhr.setRequestHeader("Content-type", "application/json");
 	    xhr.onreadystatechange = function () {
 	      //Call a function when the state changes.
@@ -22361,11 +22384,42 @@
 	        console.log("Response: " + xhr.responseText);
 	      };
 	    };
-	    xhr.send(JSON.stringify(crdt));
+	
+	    var msg = {};
+	    console.log("CRDT: " + JSON.stringify(crdt));
+	    console.log("CRDT Type: " + crdtType);
+	    console.log("Increase: " + increase);
+	    switch (crdtType) {
+	      case "timestampRegister":
+	        msg = {
+	          crdtName: crdt.name,
+	          crdtType: crdtType,
+	          operation: {
+	            value: crdt.value,
+	            timestamp: crdt.timestamp
+	          }
+	        };
+	        break;
+	      case "opCounter":
+	        msg = {
+	          crdtName: crdt.name,
+	          crdtType: crdtType,
+	          operation: {
+	            increase: increase
+	          }
+	        };
+	        break;
+	      default:
+	        console.log("Default branch");
+	        msg = {};
+	    }
+	
+	    console.log("Message to send: " + JSON.stringify(msg));
+	    xhr.send(JSON.stringify(msg));
 	  };
 	
 	  //'/api/initial'
-	  this.getInitialStateFromServer = function (crdt, path, app, completionHandler) {
+	  this.getInitialStateFromServer = function (path, app, completionHandler) {
 	    var xhr = new XMLHttpRequest();
 	    xhr.open('GET', path, true);
 	    xhr.setRequestHeader("Content-type", "text/plain");
@@ -22377,14 +22431,36 @@
 	        if (!(xhr.responseText == "{}")) {
 	          var response = JSON.parse(xhr.responseText);
 	          console.log("Initital Response data:");
-	          console.log(response);
+	          console.log("CRDT Dict: " + JSON.stringify(this.crdtDict));
+	          console.log(JSON.stringify(response));
+	          var that = this;
 	          Object.keys(this.crdtDict).forEach(function (key, index) {
-	            console.log(key);
+	            console.log("Current Key: " + key);
+	            if (key in response) {
+	              console.log("Key matched: " + key);
+	              var data = response[key];
+	              console.log("Data: " + JSON.stringify(data));
+	              switch (data.crdtType) {
+	                case "timestampRegister":
+	                  completionHandler(that.crdtDict[key].setRegister(data.operation.value, data.operation.timestamp), app);
+	                  console.log("timestampRegister detected");
+	                  break;
+	                case "opCounter":
+	                  completionHandler(that.crdtDict[key].downstream(data.operation.increase), app);
+	                  console.log("opCounter");
+	                  break;
+	                default:
+	                  console.log("Default");
+	                  break;
+	              }
+	            }
 	          });
-	          //AUF REGISTER ZUGESCHNITTEN!!!
-	          var ts = response.timestampDemo;
-	          completionHandler(crdt.setRegister(ts.value, ts.timestamp), app);
-	          console.log("Initial Value Set");
+	
+	          //  //AUF REGISTER ZUGESCHNITTEN!!!
+	          //  var ts = response.timestampDemo
+	          //  console.log(JSON.stringify(response))
+	          //
+	          //  console.log("Initial Value Set")
 	        } else {
 	          console.log("Response was empty");
 	        }
