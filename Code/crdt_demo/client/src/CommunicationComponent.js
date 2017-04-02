@@ -1,4 +1,4 @@
-export function CommunicationComponent(){
+module.exports = function CommunicationComponent(){
 this.crdtDict = {};
 
 
@@ -72,8 +72,8 @@ this.getInitialStateFromServer = function(path, app, completionHandler){
      if (!(xhr.responseText == "{}")){
        var response = JSON.parse(xhr.responseText)
        console.log("Initital Response data:")
-       console.log("CRDT Dict: "+ JSON.stringify(this.crdtDict))
        console.log(JSON.stringify(response))
+       console.log("CRDT Dict: "+ JSON.stringify(this.crdtDict))
        var that = this
        Object.keys(this.crdtDict).forEach(function(key, index){
          console.log("Current Key: "+ key)
@@ -83,11 +83,11 @@ this.getInitialStateFromServer = function(path, app, completionHandler){
            console.log("Data: "+ JSON.stringify(data))
            switch (data.crdtType){
              case "timestampRegister":
-              completionHandler(that.crdtDict[key].downstream({value: data.operation.value, timestamp: data.operation.timestamp}), app);
+              completionHandler(that.crdtDict[key].setRegister(data.value, data.timestamp), app);
               console.log("timestampRegister detected")
               break
             case "opCounter":
-              completionHandler(that.crdtDict[key].downstream(data.operation.increase), app)
+              completionHandler(that.crdtDict[key].setValue(data.value), app)
               console.log("opCounter")
               break
             default:

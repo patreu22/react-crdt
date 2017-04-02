@@ -1,9 +1,9 @@
-import React from "react";
+var React = require("react");
 import "../css/Content.css"
 import Toggle from "react-toggle"
-import {TimestampRegister} from '../TimestampRegister';
-import {CommunicationComponent} from '../CommunicationComponent';
-import {OpCounter} from '../OpCounter';
+var TimestampRegister = require('../TimestampRegister.js');
+var CommunicationComponent = require('../CommunicationComponent.js');
+var OpCounter = require('../OpCounter.js');
 
 class Content extends React.Component {
 
@@ -52,11 +52,8 @@ class Content extends React.Component {
           }
         }
 
-         //this.updateTimestampRegister(JSON.parse(xhr.responseText));
-         this.longPolling();
-         //Force the toggle to change if pushed by a Server
-         //Das ist falscht
-         //this.setState({time: localTimestampRegister.value});
+        this.longPolling();
+
       };
     }).bind(this);
       xhr.send();
@@ -82,6 +79,14 @@ class Content extends React.Component {
         console.log("Name matched: "+app.state[key].name)
         console.log("Downstream Attributes: "+JSON.stringify(downstreamAttributes))
         app.setState({key: app.state[key].downstream(downstreamAttributes)})
+      }
+    });
+  }
+
+  setCRDT(crdt, app){
+    Object.keys(app.state).forEach(function(key, index){
+      if(app.state[key].name === crdt.name){
+        app.setState({key: crdt})
       }
     });
   }
@@ -112,7 +117,9 @@ class Content extends React.Component {
 
   getInitialState(){
     this.state.communicationComponent.getInitialStateFromServer('/api/initial', this, function(initialCRDT, app){
-        app.updateCRDT(initialCRDT, initialCRDT, app);
+        //app.updateCRDT(initialCRDT, initialCRDT, app);
+        console.log("Initial CRDT: "+JSON.stringify(initialCRDT))
+        app.setCRDT(initialCRDT, app)
     });
   };
 

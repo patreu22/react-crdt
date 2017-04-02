@@ -21712,21 +21712,11 @@
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
-	var _react = __webpack_require__(2);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
 	__webpack_require__(184);
 	
 	var _reactToggle = __webpack_require__(185);
 	
 	var _reactToggle2 = _interopRequireDefault(_reactToggle);
-	
-	var _TimestampRegister = __webpack_require__(190);
-	
-	var _CommunicationComponent = __webpack_require__(191);
-	
-	var _OpCounter = __webpack_require__(192);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -21735,6 +21725,12 @@
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var React = __webpack_require__(2);
+	
+	var TimestampRegister = __webpack_require__(190);
+	var CommunicationComponent = __webpack_require__(191);
+	var OpCounter = __webpack_require__(192);
 	
 	var Content = function (_React$Component) {
 	  _inherits(Content, _React$Component);
@@ -21746,9 +21742,9 @@
 	    var _this = _possibleConstructorReturn(this, (Content.__proto__ || Object.getPrototypeOf(Content)).call(this, props));
 	
 	    _this.state = {
-	      communicationComponent: new _CommunicationComponent.CommunicationComponent(),
-	      localTimestampRegister: new _TimestampRegister.TimestampRegister("timestampDemo", false),
-	      localOpCounter: new _OpCounter.OpCounter("counterDemo")
+	      communicationComponent: new CommunicationComponent(),
+	      localTimestampRegister: new TimestampRegister("timestampDemo", false),
+	      localOpCounter: new OpCounter("counterDemo")
 	    };
 	
 	    _this.state.communicationComponent.addCRDT(_this.state.localTimestampRegister);
@@ -21792,11 +21788,7 @@
 	            }
 	          }
 	
-	          //this.updateTimestampRegister(JSON.parse(xhr.responseText));
 	          this.longPolling();
-	          //Force the toggle to change if pushed by a Server
-	          //Das ist falscht
-	          //this.setState({time: localTimestampRegister.value});
 	        };
 	      }.bind(this);
 	      xhr.send();
@@ -21830,6 +21822,15 @@
 	      });
 	    }
 	  }, {
+	    key: "setCRDT",
+	    value: function setCRDT(crdt, app) {
+	      Object.keys(app.state).forEach(function (key, index) {
+	        if (app.state[key].name === crdt.name) {
+	          app.setState({ key: crdt });
+	        }
+	      });
+	    }
+	  }, {
 	    key: "updateOpCounter",
 	    value: function updateOpCounter(increase) {
 	      if (increase) {
@@ -21858,7 +21859,9 @@
 	    key: "getInitialState",
 	    value: function getInitialState() {
 	      this.state.communicationComponent.getInitialStateFromServer('/api/initial', this, function (initialCRDT, app) {
-	        app.updateCRDT(initialCRDT, initialCRDT, app);
+	        //app.updateCRDT(initialCRDT, initialCRDT, app);
+	        console.log("Initial CRDT: " + JSON.stringify(initialCRDT));
+	        app.setCRDT(initialCRDT, app);
 	      });
 	    }
 	  }, {
@@ -21870,36 +21873,36 @@
 	    value: function render() {
 	      var _this2 = this;
 	
-	      return _react2.default.createElement(
+	      return React.createElement(
 	        "div",
 	        { className: "Content" },
-	        _react2.default.createElement(
+	        React.createElement(
 	          "label",
 	          null,
-	          _react2.default.createElement("br", null),
-	          _react2.default.createElement(_reactToggle2.default, {
+	          React.createElement("br", null),
+	          React.createElement(_reactToggle2.default, {
 	            icons: false,
 	            checked: this.state.localTimestampRegister.value,
 	            onChange: function onChange(myToggle) {
 	              return _this2.toggleChanged(myToggle.target.checked);
 	            } })
 	        ),
-	        _react2.default.createElement(
+	        React.createElement(
 	          "div",
 	          null,
-	          _react2.default.createElement(
+	          React.createElement(
 	            "label",
 	            null,
 	            this.state.localOpCounter.value
 	          ),
-	          _react2.default.createElement(
+	          React.createElement(
 	            "button",
 	            { onClick: function onClick() {
 	                return _this2.updateOpCounter(true);
 	              } },
 	            "Increment"
 	          ),
-	          _react2.default.createElement(
+	          React.createElement(
 	            "button",
 	            { onClick: function onClick() {
 	                return _this2.updateOpCounter(false);
@@ -21912,7 +21915,7 @@
 	  }]);
 	
 	  return Content;
-	}(_react2.default.Component);
+	}(React.Component);
 	
 	;
 	
@@ -22312,11 +22315,8 @@
 
 	"use strict";
 	
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-	exports.TimestampRegister = TimestampRegister;
-	function TimestampRegister(name, defaultValue) {
+	module.exports = function TimestampRegister(name) {
+		var defaultValue = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
 		var date = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : new Date().getTime();
 	
 		this.name = name;
@@ -22358,11 +22358,7 @@
 
 	'use strict';
 	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.CommunicationComponent = CommunicationComponent;
-	function CommunicationComponent() {
+	module.exports = function CommunicationComponent() {
 	  this.crdtDict = {};
 	
 	  this.addCRDT = function (crdt) {
@@ -22433,8 +22429,8 @@
 	        if (!(xhr.responseText == "{}")) {
 	          var response = JSON.parse(xhr.responseText);
 	          console.log("Initital Response data:");
-	          console.log("CRDT Dict: " + JSON.stringify(this.crdtDict));
 	          console.log(JSON.stringify(response));
+	          console.log("CRDT Dict: " + JSON.stringify(this.crdtDict));
 	          var that = this;
 	          Object.keys(this.crdtDict).forEach(function (key, index) {
 	            console.log("Current Key: " + key);
@@ -22444,11 +22440,11 @@
 	              console.log("Data: " + JSON.stringify(data));
 	              switch (data.crdtType) {
 	                case "timestampRegister":
-	                  completionHandler(that.crdtDict[key].downstream({ value: data.operation.value, timestamp: data.operation.timestamp }), app);
+	                  completionHandler(that.crdtDict[key].setRegister(data.value, data.timestamp), app);
 	                  console.log("timestampRegister detected");
 	                  break;
 	                case "opCounter":
-	                  completionHandler(that.crdtDict[key].downstream(data.operation.increase), app);
+	                  completionHandler(that.crdtDict[key].setValue(data.value), app);
 	                  console.log("opCounter");
 	                  break;
 	                default:
@@ -22515,15 +22511,16 @@
 
 	"use strict";
 	
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-	exports.OpCounter = OpCounter;
-	function OpCounter(name) {
+	module.exports = function OpCounter(name) {
 		var value = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
 	
 		this.name = name;
 		this.value = value;
+	
+		this.setValue = function (val) {
+			this.value = val;
+			return this;
+		}.bind(this);
 	
 		this.increment = function () {
 			this.value += 1;
@@ -22547,8 +22544,8 @@
 			return this.name;
 		};
 	
-		this.downstream = function (shouldIncrement) {
-			if (shouldIncrement == true) {
+		this.downstream = function (operation) {
+			if (operation.increase) {
 				this.increment();
 			} else {
 				this.decrement();

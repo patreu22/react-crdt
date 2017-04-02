@@ -1,6 +1,11 @@
-export function OpCounter(name, value=0){
+module.exports =  function OpCounter(name, value=0){
 	this.name = name
 	this.value = value;
+
+	this.setValue = (function(val){
+		this.value = val
+		return this
+	}).bind(this);
 
 	this.increment = (function(){
 		this.value += 1;
@@ -24,8 +29,8 @@ export function OpCounter(name, value=0){
 		return this.name;
 	}
 
-	this.downstream = (function(shouldIncrement){
-		if(shouldIncrement == true){
+	this.downstream = (function(operation){
+		if(operation.increase){
 			this.increment();
 		}else{
 			this.decrement();

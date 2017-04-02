@@ -1,4 +1,4 @@
-export function TimestampRegister(name, defaultValue, date = new Date().getTime()){
+module.exports =  function TimestampRegister(name, defaultValue = false, date = new Date().getTime()){
 	this.name = name
 	this.value = defaultValue
 	this.timestamp = date;
