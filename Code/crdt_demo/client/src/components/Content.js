@@ -35,20 +35,26 @@ class Content extends React.Component {
          //Das hier muss allgemeiner sein!!!
          //this.state.communicationComponent.longPolling()
          var obj = JSON.parse(xhr.responseText)
+         console.log("State before: "+ JSON.stringify(this.state))
          var crdt = this.state.communicationComponent.getCRDTwithName(obj.crdtName)
          //Get Object in state
          console.log("Obj: "+JSON.stringify(obj))
          console.log("Crdt: "+JSON.stringify(crdt))
          console.log("State: "+JSON.stringify(this.state))
 
+        var i = 0
         for (var key in this.state) {
+          console.log("i: "+i)
+          console.log("i-ter Key: "+key)
+          i += 1
           if(this.state[key].name === obj.crdtName){
             console.log("Key Polling Match: "+obj.crdtName)
             console.log("Key: "+this.state[key].name)
-            console.log("Operation: "+obj.operation)
+            console.log("Operation: "+JSON.stringify(obj.operation))
+
             var newObj = this.state[key].downstream(obj.operation)
             console.log("After downstream: "+ JSON.stringify(newObj))
-            this.setState({key: newObj})
+            this.setState({[key] : newObj})
             console.log("Set new state!")
           }
         }

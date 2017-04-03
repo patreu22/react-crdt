@@ -21720,6 +21720,8 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
+	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -21771,20 +21773,26 @@
 	          //Das hier muss allgemeiner sein!!!
 	          //this.state.communicationComponent.longPolling()
 	          var obj = JSON.parse(xhr.responseText);
+	          console.log("State before: " + JSON.stringify(this.state));
 	          var crdt = this.state.communicationComponent.getCRDTwithName(obj.crdtName);
 	          //Get Object in state
 	          console.log("Obj: " + JSON.stringify(obj));
 	          console.log("Crdt: " + JSON.stringify(crdt));
 	          console.log("State: " + JSON.stringify(this.state));
 	
+	          var i = 0;
 	          for (var key in this.state) {
+	            console.log("i: " + i);
+	            console.log("i-ter Key: " + key);
+	            i += 1;
 	            if (this.state[key].name === obj.crdtName) {
 	              console.log("Key Polling Match: " + obj.crdtName);
 	              console.log("Key: " + this.state[key].name);
-	              console.log("Operation: " + obj.operation);
+	              console.log("Operation: " + JSON.stringify(obj.operation));
+	
 	              var newObj = this.state[key].downstream(obj.operation);
 	              console.log("After downstream: " + JSON.stringify(newObj));
-	              this.setState({ key: newObj });
+	              this.setState(_defineProperty({}, key, newObj));
 	              console.log("Set new state!");
 	            }
 	          }
