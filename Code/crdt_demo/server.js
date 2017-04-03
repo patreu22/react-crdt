@@ -2,6 +2,9 @@ var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
 var ip = require('ip');
+var TimestampRegister = require("./client/src/TimestampRegister.js")
+var OpCounter = require("./client/src/OpCounter.js")
+
 
 
 var clients = [];
@@ -37,11 +40,10 @@ app.get('/', function (req, res) {
 app.use(express.static(__dirname + '/client/public'));
 
 
-//Handle Toggle-Change
+//Handle new request
 app.post('/api', function (req, res){
 	console.log('###API Post Request received###');
-  sendToAllClients(req.body);
-  lastObjState = req.body
+  sendToAllClientsExcept(req.connection.remoteAddress, req.body);
   res.statusCode = 200;
   res.end();
 });
@@ -53,7 +55,7 @@ app.get('/api/lp', function(req, res){
 });
 
 app.get('/api/initial', function(req,res){
-  console.log(req.body)
+  console.log("Initial to send: "+ JSON.stringify(tempState))
   res.end(JSON.stringify(tempState));
 });
 
@@ -65,13 +67,47 @@ var listener = app.listen(3000, function () {
 
 
 //Send new TimestampRegister to all Clients
-function sendToAllClients(fileToSend){
-    tempState = fileToSend
-    clients.forEach(function(client){
-        clientRequestDict[client].end(JSON.stringify(fileToSend));
-    })
-};
+function sendToAllClientsExcept(sender, fileToSend){
+    console.log("File to send: "+ JSON.stringify(fileToSend))
+    //Client-Features for the server
+    if (fileToSend.crdtName in tempState){
+      console.log("Hey")
+      var tempFile = tempState[fileToSend.crdtName]
+    }else{
+      console.log("Ho")
+      switch (fileToSend.crdtType){
+        case "timestampRegister":
+         var tempFile = new TimestampRegister(fileToSend.crdtName, false, fileToSend.operation.timestamp - 1)
+         console.log("timestampRegister detected")
+         break
+       case "opCounter":
+         var tempFile = new OpCounter(fileToSend.crdtName)
+         console.log("opCounter")
+         break
+       default:
+         console.log("Default")
+         break
+       }
+      tempFile.crdtType = fileToSend.crdtType
+      console.log(JSON.stringify(fileToSend))
+      console.log(JSON.stringify(tempFile))
+    }
+    tempState[fileToSend.crdtName] = tempFile.downstream(fileToSend.operation)
 
+    if (Object.keys(clientRequestDict).length === 0){
+      console.log("No Clients registered.")
+    }else{
+      clients.forEach(function(client){
+          if (sender !== client){
+            console.log("###Data to send###")
+            console.log(JSON.stringify(fileToSend))
+            clientRequestDict[client].end(JSON.stringify(fileToSend));
+          }else{
+            console.log("Sender and Client is both "+sender)
+          }
+      });
+    }
+};
 
 function registerClient(clientIP){
     clients.push(clientIP);
