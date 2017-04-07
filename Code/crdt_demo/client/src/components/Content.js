@@ -70,7 +70,7 @@ class Content extends React.Component {
   //Send initial Request for long polling
   componentDidMount(){
     this.getInitialState()
-    this.longPolling()
+    this.state.communicationComponent.longPolling(this)
   };
 
 

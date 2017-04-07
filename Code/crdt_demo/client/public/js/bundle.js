@@ -21810,7 +21810,7 @@
 	    key: "componentDidMount",
 	    value: function componentDidMount() {
 	      this.getInitialState();
-	      this.longPolling();
+	      this.state.communicationComponent.longPolling(this);
 	    }
 	  }, {
 	    key: "updateTimestampRegister",
@@ -22357,6 +22357,8 @@
 
 	'use strict';
 	
+	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+	
 	module.exports = function CommunicationComponent() {
 	  this.crdtDict = {};
 	
@@ -22485,7 +22487,9 @@
 	    return this.crdtDict[name];
 	  };
 	
-	  this.longPolling = function () {
+	  //Setup long polling
+	  this.longPolling = function (app) {
+	    console.log("Long polling started");
 	    var xhr = new XMLHttpRequest();
 	    xhr.open('GET', '/api/lp', true);
 	    xhr.setRequestHeader("Content-type", "text/plain");
@@ -22494,12 +22498,79 @@
 	      if (xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) {
 	        console.log('Response Text:');
 	        console.log(xhr.responseText);
+	        var obj = JSON.parse(xhr.responseText);
+	        var crdt = this.getCRDTwithName(obj.crdtName);
+	        //Get Object in state
+	        console.log("Obj: " + JSON.stringify(obj));
+	        console.log("Crdt: " + JSON.stringify(crdt));
+	        console.log("State: " + JSON.stringify(this.state));
 	
-	        //...Baustelle
+	        var i = 0;
+	        for (var key in app.state) {
+	          console.log("i: " + i);
+	          console.log("i-ter Key: " + key);
+	          i += 1;
+	          if (app.state[key].name === obj.crdtName) {
+	            console.log("Key Polling Match: " + obj.crdtName);
+	            console.log("Key: " + app.state[key].name);
+	            console.log("Operation: " + JSON.stringify(obj.operation));
+	
+	            var newObj = app.state[key].downstream(obj.operation);
+	            console.log("After downstream: " + JSON.stringify(newObj));
+	            app.setState(_defineProperty({}, key, newObj));
+	            console.log("Set new state!");
+	          }
+	        }
+	        this.longPolling(app);
 	      }
-	    };
+	    }.bind(this);
+	    xhr.send();
+	    console.log("New long polling request sent by CommunicationComponent");
 	  };
 	};
+	
+	// // //Setup long polling
+	// longPolling(){
+	//   console.log("Long Polling started")
+	//     var xhr = new XMLHttpRequest();
+	//     xhr.open('GET', '/api/lp', true);
+	//     xhr.setRequestHeader("Content-type", "text/plain");
+	//     xhr.onreadystatechange = (function() {//Call a function when the state changes.
+	//     if(xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) {
+	//        //Das hier muss allgemeiner sein!!!
+	//        //this.state.communicationComponent.longPolling()
+	//        var obj = JSON.parse(xhr.responseText)
+	//        console.log("State before: "+ JSON.stringify(this.state))
+	//        var crdt = this.state.communicationComponent.getCRDTwithName(obj.crdtName)
+	//        //Get Object in state
+	//        console.log("Obj: "+JSON.stringify(obj))
+	//        console.log("Crdt: "+JSON.stringify(crdt))
+	//        console.log("State: "+JSON.stringify(this.state))
+	//
+	//       var i = 0
+	//       for (var key in this.state) {
+	//         console.log("i: "+i)
+	//         console.log("i-ter Key: "+key)
+	//         i += 1
+	//         if(this.state[key].name === obj.crdtName){
+	//           console.log("Key Polling Match: "+obj.crdtName)
+	//           console.log("Key: "+this.state[key].name)
+	//           console.log("Operation: "+JSON.stringify(obj.operation))
+	//
+	//           var newObj = this.state[key].downstream(obj.operation)
+	//           console.log("After downstream: "+ JSON.stringify(newObj))
+	//           this.setState({[key] : newObj})
+	//           console.log("Set new state!")
+	//         }
+	//       }
+	//
+	//       this.longPolling();
+	//
+	//     };
+	//   }).bind(this);
+	//     xhr.send();
+	//     console.log("New long polling request sent");
+	// }
 
 /***/ },
 /* 192 */
