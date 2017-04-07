@@ -2,6 +2,7 @@ module.exports = function CommunicationComponent(){
 this.crdtDict = {};
 
 
+
 this.addCRDT = (function(crdt){
   this.crdtDict[crdt.name] = crdt
 }).bind(this);
@@ -139,6 +140,7 @@ this.longPolling = function(app){
   xhr.setRequestHeader("Content-type", "text/plain");
   xhr.onreadystatechange = (function() {//Call a function when the state changes.
     if(xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) {
+      console.log("####LP ANSWER!!!####")
       console.log('Response Text:');
       console.log(xhr.responseText);
       var obj = JSON.parse(xhr.responseText)
@@ -146,18 +148,16 @@ this.longPolling = function(app){
       //Get Object in state
       console.log("Obj: "+JSON.stringify(obj))
       console.log("Crdt: "+JSON.stringify(crdt))
-      console.log("State: "+JSON.stringify(this.state))
+      console.log("State: "+JSON.stringify(app.state))
 
       var i = 0
       for (var key in app.state) {
         console.log("i: "+i)
-        console.log("i-ter Key: "+key)
+        console.log("i-ter Key: "+ key)
         i += 1
-        if(app.state[key].name === obj.crdtName){
-          console.log("Key Polling Match: "+obj.crdtName)
-          console.log("Key: "+app.state[key].name)
+        if(app.state[key].name === obj.crdtName && key !== "key"){
+          console.log("#LPReceiver: Performing downstream operation!")
           console.log("Operation: "+JSON.stringify(obj.operation))
-
           var newObj = app.state[key].downstream(obj.operation)
           console.log("After downstream: "+ JSON.stringify(newObj))
           app.setState({[key] : newObj})

@@ -21720,8 +21720,6 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -21758,56 +21756,53 @@
 	  }
 	
 	  _createClass(Content, [{
-	    key: "longPolling",
+	    key: "componentDidMount",
 	
 	
-	    // //Setup long polling
-	    value: function longPolling() {
-	      console.log("Long Polling started");
-	      var xhr = new XMLHttpRequest();
-	      xhr.open('GET', '/api/lp', true);
-	      xhr.setRequestHeader("Content-type", "text/plain");
-	      xhr.onreadystatechange = function () {
-	        //Call a function when the state changes.
-	        if (xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) {
-	          //Das hier muss allgemeiner sein!!!
-	          //this.state.communicationComponent.longPolling()
-	          var obj = JSON.parse(xhr.responseText);
-	          console.log("State before: " + JSON.stringify(this.state));
-	          var crdt = this.state.communicationComponent.getCRDTwithName(obj.crdtName);
-	          //Get Object in state
-	          console.log("Obj: " + JSON.stringify(obj));
-	          console.log("Crdt: " + JSON.stringify(crdt));
-	          console.log("State: " + JSON.stringify(this.state));
-	
-	          var i = 0;
-	          for (var key in this.state) {
-	            console.log("i: " + i);
-	            console.log("i-ter Key: " + key);
-	            i += 1;
-	            if (this.state[key].name === obj.crdtName) {
-	              console.log("Key Polling Match: " + obj.crdtName);
-	              console.log("Key: " + this.state[key].name);
-	              console.log("Operation: " + JSON.stringify(obj.operation));
-	
-	              var newObj = this.state[key].downstream(obj.operation);
-	              console.log("After downstream: " + JSON.stringify(newObj));
-	              this.setState(_defineProperty({}, key, newObj));
-	              console.log("Set new state!");
-	            }
-	          }
-	
-	          this.longPolling();
-	        };
-	      }.bind(this);
-	      xhr.send();
-	      console.log("New long polling request sent");
-	    }
+	    // // //Setup long polling
+	    // longPolling(){
+	    //   console.log("Long Polling started")
+	    //     var xhr = new XMLHttpRequest();
+	    //     xhr.open('GET', '/api/lp', true);
+	    //     xhr.setRequestHeader("Content-type", "text/plain");
+	    //     xhr.onreadystatechange = (function() {//Call a function when the state changes.
+	    //     if(xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) {
+	    //        //Das hier muss allgemeiner sein!!!
+	    //        //this.state.communicationComponent.longPolling()
+	    //        var obj = JSON.parse(xhr.responseText)
+	    //        console.log("State before: "+ JSON.stringify(this.state))
+	    //        var crdt = this.state.communicationComponent.getCRDTwithName(obj.crdtName)
+	    //        //Get Object in state
+	    //        console.log("Obj: "+JSON.stringify(obj))
+	    //        console.log("Crdt: "+JSON.stringify(crdt))
+	    //        console.log("State: "+JSON.stringify(this.state))
+	    //
+	    //       var i = 0
+	    //       for (var key in this.state) {
+	    //         console.log("i: "+i)
+	    //         console.log("i-ter Key: "+key)
+	    //         i += 1
+	    //         if(this.state[key].name === obj.crdtName){
+	    //           console.log("Key Polling Match: "+obj.crdtName)
+	    //           console.log("Key: "+this.state[key].name)
+	    //           console.log("Operation: "+JSON.stringify(obj.operation))
+	    //
+	    //           var newObj = this.state[key].downstream(obj.operation)
+	    //           console.log("After downstream: "+ JSON.stringify(newObj))
+	    //           this.setState({[key] : newObj})
+	    //           console.log("Set new state!")
+	    //         }
+	    //       }
+	    //
+	    //       this.longPolling();
+	    //
+	    //     };
+	    //   }).bind(this);
+	    //     xhr.send();
+	    //     console.log("New long polling request sent");
+	    // }
 	
 	    //Send initial Request for long polling
-	
-	  }, {
-	    key: "componentDidMount",
 	    value: function componentDidMount() {
 	      this.getInitialState();
 	      this.state.communicationComponent.longPolling(this);
@@ -22496,6 +22491,7 @@
 	    xhr.onreadystatechange = function () {
 	      //Call a function when the state changes.
 	      if (xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) {
+	        console.log("####LP ANSWER!!!####");
 	        console.log('Response Text:');
 	        console.log(xhr.responseText);
 	        var obj = JSON.parse(xhr.responseText);
@@ -22503,18 +22499,16 @@
 	        //Get Object in state
 	        console.log("Obj: " + JSON.stringify(obj));
 	        console.log("Crdt: " + JSON.stringify(crdt));
-	        console.log("State: " + JSON.stringify(this.state));
+	        console.log("State: " + JSON.stringify(app.state));
 	
 	        var i = 0;
 	        for (var key in app.state) {
 	          console.log("i: " + i);
 	          console.log("i-ter Key: " + key);
 	          i += 1;
-	          if (app.state[key].name === obj.crdtName) {
-	            console.log("Key Polling Match: " + obj.crdtName);
-	            console.log("Key: " + app.state[key].name);
+	          if (app.state[key].name === obj.crdtName && key !== "key") {
+	            console.log("#LPReceiver: Performing downstream operation!");
 	            console.log("Operation: " + JSON.stringify(obj.operation));
-	
 	            var newObj = app.state[key].downstream(obj.operation);
 	            console.log("After downstream: " + JSON.stringify(newObj));
 	            app.setState(_defineProperty({}, key, newObj));
@@ -22612,8 +22606,6 @@
 		};
 	
 		this.downstream = function (operation) {
-			console.log("Operation: " + JSON.stringify(operation));
-			console.log("Operation.Increase: " + operation.increase);
 			if (operation.increase) {
 				this.increment();
 			} else {

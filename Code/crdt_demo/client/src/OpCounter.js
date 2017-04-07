@@ -30,8 +30,6 @@ module.exports =  function OpCounter(name, value=0){
 	}
 
 	this.downstream = (function(operation){
-		console.log("Operation: "+JSON.stringify(operation))
-		console.log("Operation.Increase: "+operation.increase)
 		if(operation.increase){
 			this.increment();
 		}else{
