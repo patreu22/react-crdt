@@ -83,9 +83,6 @@ var listener = app.listen(3000, function () {
   console.log(ip.address()+":"+listener.address().port);
 });
 
-//for debugging
-var errorCntr = 0
-var successCntr = 0
 //Send new TimestampRegister to all Clients
 function sendToAllClientsExcept(sender, fileToSend){
     console.log("File to send: "+ JSON.stringify(fileToSend))
@@ -120,10 +117,8 @@ function sendToAllClientsExcept(sender, fileToSend){
             console.log("#Polling: Queue length STACE: "+pollingQueue[client].length)
             if (Object.keys(clientRequestDict[client]).length === 0){
                 console.log("!Error: Can't use Long Polling right now")
-                errorCntr +=1
             }else{
               console.log("Success: Use long polling right now")
-              successCntr += 1
               clientRequestDict[client].end(JSON.stringify(pollingQueue[client].shift()));
               clientRequestDict[client] = {}
             }
@@ -132,8 +127,6 @@ function sendToAllClientsExcept(sender, fileToSend){
           }
       });
     }
-    console.log("Error Count: "+errorCntr)
-    console.log("Success Count: "+successCntr)
 };
 
 function registerClient(clientIP){
