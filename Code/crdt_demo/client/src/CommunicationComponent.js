@@ -3,6 +3,8 @@ this.crdtDict = {};
 this.pendingMessagesQueue = []
 this.correspondingApp = app
 
+var CircularJSON = require("circular-json")
+
 window.addEventListener("online", onlineAgain.bind(this))
 function onlineAgain(){
     this.pendingMessagesQueue.forEach(function(message, mIndex){
@@ -69,17 +71,16 @@ this.getInitialStateFromServer = function(){
      console.log(xhr.responseText);
      if (!(xhr.responseText == "{}")){
        var response = JSON.parse(xhr.responseText)
-       var that = this
        Object.keys(this.crdtDict).forEach(function(key, index){
          if (key in response){
            var data = response[key]
            switch (data.crdtType){
              case "timestampRegister":
-              that.setCRDT(that.crdtDict[key].setRegister(data.value, data.timestamp))
+              this.setCRDT(this.crdtDict[key].setRegister(data.value, data.timestamp))
               console.log("timestampRegister detected")
               break
             case "opCounter":
-              that.setCRDT(that.crdtDict[key].setValue(data.value))
+              this.setCRDT(this.crdtDict[key].setValue(data.value))
               console.log("opCounter")
               break
             default:
@@ -87,7 +88,7 @@ this.getInitialStateFromServer = function(){
               break
             }
          }
-      });
+      }, this)
     }else{
        console.log("Response was empty");
     }
@@ -138,12 +139,12 @@ function wrapper(msg){
 }
 
 
-function setCRDT(crdt){
+this.setCRDT = function(crdt){
   Object.keys(this.correspondingApp.state).forEach(function(key, index){
     if(this.correspondingApp.state[key].name === crdt.name){
       this.correspondingApp.setState({key: crdt})
     }
-  }).bind(this);
+  }, this);
 }
 
 }

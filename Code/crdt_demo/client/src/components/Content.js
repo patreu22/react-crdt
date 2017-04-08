@@ -15,38 +15,10 @@ class Content extends React.Component {
       localTimestampRegister: new TimestampRegister("timestampDemo", false),
       localOpCounter: new OpCounter("counterDemo")
     };
-
     this.state.communicationComponent.addCRDT(this.state.localTimestampRegister)
     this.state.communicationComponent.addCRDT(this.state.localOpCounter)
     this.state.communicationComponent.getInitialStateFromServer()
-    console.log("CommunicationComponent: "+ JSON.stringify(this.state.communicationComponent.crdtDict))
-    console.log("TimestampRegister: "+this.state.localTimestampRegister.value)
-    console.log("OpCounter: "+this.state.localOpCounter.value)
   };
-
-  updateTimestampRegister(register){
-    console.log("+++Register: "+JSON.stringify(register))
-    console.log("State: "+JSON.stringify(this.state))
-    this.setState({localTimestampRegister: this.state.localTimestampRegister.downstream(register)});
-  };
-
-  updateCRDT(crdt, downstreamAttributes, app){
-    Object.keys(app.state).forEach(function(key, index){
-      if(app.state[key].name === crdt.name){
-        console.log("Name matched: "+app.state[key].name)
-        console.log("Downstream Attributes: "+JSON.stringify(downstreamAttributes))
-        app.setState({key: app.state[key].downstream(downstreamAttributes)})
-      }
-    });
-  }
-
-  setCRDT(crdt, app){
-    Object.keys(app.state).forEach(function(key, index){
-      if(app.state[key].name === crdt.name){
-        app.setState({key: crdt})
-      }
-    });
-  }
 
   counterChanged(increase){
     var operation = {"increase": increase}
@@ -84,9 +56,5 @@ class Content extends React.Component {
   };
 
 };
-
-
-
-
 
 export default Content;
