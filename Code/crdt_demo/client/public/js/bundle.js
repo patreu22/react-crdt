@@ -21809,7 +21809,7 @@
 	  }, {
 	    key: "getInitialState",
 	    value: function getInitialState() {
-	      this.state.communicationComponent.getInitialStateFromServer('/api/initial', this, function (initialCRDT, app) {
+	      this.state.communicationComponent.getInitialStateFromServer(this, function (initialCRDT, app) {
 	        //app.updateCRDT(initialCRDT, initialCRDT, app);
 	        console.log("Initial CRDT: " + JSON.stringify(initialCRDT));
 	        app.setCRDT(initialCRDT, app);
@@ -22314,21 +22314,21 @@
 	module.exports = function CommunicationComponent() {
 	  this.crdtDict = {};
 	  this.pendingMessagesQueue = [];
+	  this.correspondingApp = undefined;
 	
 	  window.addEventListener("online", onlineAgain.bind(this));
 	
 	  function onlineAgain() {
-	    console.log("Blub");
-	    console.log("This: " + JSON.stringify(this));
-	    console.log("Total Message Queue: " + this.pendingMessagesQueue);
 	    this.pendingMessagesQueue.forEach(function (message, mIndex) {
-	      console.log("Queue Message: " + message);
-	      console.log("This: " + this);
-	      console.log("Manage sending:" + this.manageSending);
 	      this.manageSending(wrapper(message));
-	      console.log("Message is sent");
 	    }, this);
 	    this.pendingMessagesQueue = [];
+	    if (this.correspondingApp !== undefined) {
+	      this.getInitialStateFromServer(this.correspondingApp, function (initialCRDT, app) {
+	        console.log("Get the Server's state to compensate lost pulls: " + JSON.stringify(initialCRDT));
+	        app.setCRDT(initialCRDT, app);
+	      });
+	    }
 	  }
 	
 	  this.addCRDT = function (crdt) {
@@ -22347,7 +22347,6 @@
 	        console.log("Response: " + xhr.responseText);
 	      };
 	    };
-	
 	    var msg = {};
 	    switch (crdtType) {
 	      case "timestampRegister":
@@ -22371,16 +22370,16 @@
 	        console.log("Default branch");
 	        msg = {};
 	    }
-	    console.log("Will send message now!");
 	    this.manageSending(function () {
 	      xhr.send(JSON.stringify(msg));
 	    });
 	  };
 	
 	  //'/api/initial'
-	  this.getInitialStateFromServer = function (path, app, completionHandler) {
+	  this.getInitialStateFromServer = function (app, completionHandler) {
 	    var xhr = new XMLHttpRequest();
-	    xhr.open('GET', path, true);
+	    this.correspondingApp = app;
+	    xhr.open('GET', '/api/initial', true);
 	    xhr.setRequestHeader("Content-type", "text/plain");
 	    xhr.onreadystatechange = function () {
 	      //Call the function when the state changes.
@@ -22389,16 +22388,10 @@
 	        console.log(xhr.responseText);
 	        if (!(xhr.responseText == "{}")) {
 	          var response = JSON.parse(xhr.responseText);
-	          console.log("Initital Response data:");
-	          console.log(JSON.stringify(response));
-	          console.log("CRDT Dict: " + JSON.stringify(this.crdtDict));
 	          var that = this;
 	          Object.keys(this.crdtDict).forEach(function (key, index) {
-	            console.log("Current Key: " + key);
 	            if (key in response) {
-	              console.log("Key matched: " + key);
 	              var data = response[key];
-	              console.log("Data: " + JSON.stringify(data));
 	              switch (data.crdtType) {
 	                case "timestampRegister":
 	                  completionHandler(that.crdtDict[key].setRegister(data.value, data.timestamp), app);

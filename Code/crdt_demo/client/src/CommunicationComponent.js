@@ -1,6 +1,7 @@
 module.exports = function CommunicationComponent(){
 this.crdtDict = {};
 this.pendingMessagesQueue = []
+this.correspondingApp = undefined
 
 window.addEventListener("online", onlineAgain.bind(this))
 
@@ -10,6 +11,12 @@ function onlineAgain(){
       this.manageSending(wrapper(message))
     }, this)
     this.pendingMessagesQueue = []
+    if (this.correspondingApp !== undefined){
+      this.getInitialStateFromServer(this.correspondingApp, function(initialCRDT, app){
+          console.log("Get the Server's state to compensate lost pulls: "+JSON.stringify(initialCRDT))
+          app.setCRDT(initialCRDT, app)
+      })
+    }
 }
 
 this.addCRDT = (function(crdt){
@@ -55,9 +62,10 @@ this.sendToServer = function(crdt, crdtType, operation){
 };
 
 //'/api/initial'
-this.getInitialStateFromServer = function(path, app, completionHandler){
+this.getInitialStateFromServer = function(app, completionHandler){
   var xhr = new XMLHttpRequest();
-  xhr.open('GET', path , true);
+  this.correspondingApp  = app
+  xhr.open('GET', '/api/initial' , true);
   xhr.setRequestHeader("Content-type", "text/plain");
   xhr.onreadystatechange = (function() {
     //Call the function when the state changes.

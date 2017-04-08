@@ -71,7 +71,7 @@ class Content extends React.Component {
 
 
   getInitialState(){
-    this.state.communicationComponent.getInitialStateFromServer('/api/initial', this, function(initialCRDT, app){
+    this.state.communicationComponent.getInitialStateFromServer(this, function(initialCRDT, app){
         //app.updateCRDT(initialCRDT, initialCRDT, app);
         console.log("Initial CRDT: "+JSON.stringify(initialCRDT))
         app.setCRDT(initialCRDT, app)
