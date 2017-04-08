@@ -11,26 +11,18 @@ class Content extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      communicationComponent: new CommunicationComponent(),
+      communicationComponent: new CommunicationComponent(this),
       localTimestampRegister: new TimestampRegister("timestampDemo", false),
       localOpCounter: new OpCounter("counterDemo")
     };
 
     this.state.communicationComponent.addCRDT(this.state.localTimestampRegister)
     this.state.communicationComponent.addCRDT(this.state.localOpCounter)
+    this.state.communicationComponent.getInitialStateFromServer()
     console.log("CommunicationComponent: "+ JSON.stringify(this.state.communicationComponent.crdtDict))
     console.log("TimestampRegister: "+this.state.localTimestampRegister.value)
     console.log("OpCounter: "+this.state.localOpCounter.value)
   };
-
-
-
-  //Send initial Request for long polling
-  componentDidMount(){
-    this.getInitialState()
-    this.state.communicationComponent.longPolling(this)
-  };
-
 
   updateTimestampRegister(register){
     console.log("+++Register: "+JSON.stringify(register))
@@ -68,18 +60,6 @@ class Content extends React.Component {
     this.setState({localTimestampRegister: tempReg});
     this.state.communicationComponent.sendToServer(this.state.localTimestampRegister, "timestampRegister");
   };
-
-
-  getInitialState(){
-    this.state.communicationComponent.getInitialStateFromServer(this, function(initialCRDT, app){
-        //app.updateCRDT(initialCRDT, initialCRDT, app);
-        console.log("Initial CRDT: "+JSON.stringify(initialCRDT))
-        app.setCRDT(initialCRDT, app)
-    });
-  };
-
-
-
 
   //checked={this.state.localTimestampRegister.value}
   //What is shown in the browser

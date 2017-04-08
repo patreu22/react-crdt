@@ -21742,13 +21742,14 @@
 	    var _this = _possibleConstructorReturn(this, (Content.__proto__ || Object.getPrototypeOf(Content)).call(this, props));
 	
 	    _this.state = {
-	      communicationComponent: new CommunicationComponent(),
+	      communicationComponent: new CommunicationComponent(_this),
 	      localTimestampRegister: new TimestampRegister("timestampDemo", false),
 	      localOpCounter: new OpCounter("counterDemo")
 	    };
 	
 	    _this.state.communicationComponent.addCRDT(_this.state.localTimestampRegister);
 	    _this.state.communicationComponent.addCRDT(_this.state.localOpCounter);
+	    _this.state.communicationComponent.getInitialStateFromServer();
 	    console.log("CommunicationComponent: " + JSON.stringify(_this.state.communicationComponent.crdtDict));
 	    console.log("TimestampRegister: " + _this.state.localTimestampRegister.value);
 	    console.log("OpCounter: " + _this.state.localOpCounter.value);
@@ -21756,15 +21757,6 @@
 	  }
 	
 	  _createClass(Content, [{
-	    key: "componentDidMount",
-	
-	
-	    //Send initial Request for long polling
-	    value: function componentDidMount() {
-	      this.getInitialState();
-	      this.state.communicationComponent.longPolling(this);
-	    }
-	  }, {
 	    key: "updateTimestampRegister",
 	    value: function updateTimestampRegister(register) {
 	      console.log("+++Register: " + JSON.stringify(register));
@@ -21805,15 +21797,6 @@
 	      var tempReg = this.state.localTimestampRegister.downstream({ value: isChecked, timestamp: new Date().getTime() });
 	      this.setState({ localTimestampRegister: tempReg });
 	      this.state.communicationComponent.sendToServer(this.state.localTimestampRegister, "timestampRegister");
-	    }
-	  }, {
-	    key: "getInitialState",
-	    value: function getInitialState() {
-	      this.state.communicationComponent.getInitialStateFromServer(this, function (initialCRDT, app) {
-	        //app.updateCRDT(initialCRDT, initialCRDT, app);
-	        console.log("Initial CRDT: " + JSON.stringify(initialCRDT));
-	        app.setCRDT(initialCRDT, app);
-	      });
 	    }
 	  }, {
 	    key: "render",
@@ -22307,27 +22290,23 @@
 /* 191 */
 /***/ function(module, exports) {
 
-	"use strict";
+	'use strict';
 	
 	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 	
-	module.exports = function CommunicationComponent() {
+	module.exports = function CommunicationComponent(app) {
 	  this.crdtDict = {};
 	  this.pendingMessagesQueue = [];
-	  this.correspondingApp = undefined;
+	  this.correspondingApp = app;
 	
 	  window.addEventListener("online", onlineAgain.bind(this));
-	
 	  function onlineAgain() {
 	    this.pendingMessagesQueue.forEach(function (message, mIndex) {
 	      this.manageSending(wrapper(message));
 	    }, this);
 	    this.pendingMessagesQueue = [];
 	    if (this.correspondingApp !== undefined) {
-	      this.getInitialStateFromServer(this.correspondingApp, function (initialCRDT, app) {
-	        console.log("Get the Server's state to compensate lost pulls: " + JSON.stringify(initialCRDT));
-	        app.setCRDT(initialCRDT, app);
-	      });
+	      this.getInitialStateFromServer();
 	    }
 	  }
 	
@@ -22376,7 +22355,7 @@
 	  };
 	
 	  //'/api/initial'
-	  this.getInitialStateFromServer = function (app, completionHandler) {
+	  this.getInitialStateFromServer = function () {
 	    var xhr = new XMLHttpRequest();
 	    this.correspondingApp = app;
 	    xhr.open('GET', '/api/initial', true);
@@ -22394,11 +22373,11 @@
 	              var data = response[key];
 	              switch (data.crdtType) {
 	                case "timestampRegister":
-	                  completionHandler(that.crdtDict[key].setRegister(data.value, data.timestamp), app);
+	                  that.setCRDT(that.crdtDict[key].setRegister(data.value, data.timestamp));
 	                  console.log("timestampRegister detected");
 	                  break;
 	                case "opCounter":
-	                  completionHandler(that.crdtDict[key].setValue(data.value), app);
+	                  that.setCRDT(that.crdtDict[key].setValue(data.value));
 	                  console.log("opCounter");
 	                  break;
 	                default:
@@ -22410,6 +22389,7 @@
 	        } else {
 	          console.log("Response was empty");
 	        }
+	        this.longPolling();
 	      }
 	    }.bind(this);
 	    this.manageSending(function () {
@@ -22418,7 +22398,7 @@
 	  };
 	
 	  //Setup long polling
-	  this.longPolling = function (app) {
+	  this.longPolling = function () {
 	    console.log("Long polling started");
 	    var xhr = new XMLHttpRequest();
 	    xhr.open('GET', '/api/lp', true);
@@ -22426,18 +22406,16 @@
 	    xhr.onreadystatechange = function () {
 	      //Call a function when the state changes.
 	      if (xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) {
-	        console.log('Response Text:');
-	        console.log(xhr.responseText);
 	        var obj = JSON.parse(xhr.responseText);
 	        var crdt = this.crdtDict[obj.crdtName];
 	
-	        for (var key in app.state) {
+	        for (var key in this.correspondingApp.state) {
 	          if (app.state[key].name === obj.crdtName && key !== "key") {
-	            var newObj = app.state[key].downstream(obj.operation);
-	            app.setState(_defineProperty({}, key, newObj));
+	            var newObj = this.correspondingApp.state[key].downstream(obj.operation);
+	            this.correspondingApp.setState(_defineProperty({}, key, newObj));
 	          }
 	        }
-	        this.longPolling(app);
+	        this.longPolling();
 	      }
 	    }.bind(this);
 	    this.manageSending(function () {
@@ -22459,6 +22437,14 @@
 	  function wrapper(msg) {
 	    console.log("Message: " + msg);
 	    return msg;
+	  }
+	
+	  function setCRDT(crdt) {
+	    Object.keys(this.correspondingApp.state).forEach(function (key, index) {
+	      if (this.correspondingApp.state[key].name === crdt.name) {
+	        this.correspondingApp.setState({ key: crdt });
+	      }
+	    }).bind(this);
 	  }
 	};
 
