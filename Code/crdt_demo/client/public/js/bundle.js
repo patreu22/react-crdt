@@ -22307,12 +22307,29 @@
 /* 191 */
 /***/ function(module, exports) {
 
-	'use strict';
+	"use strict";
 	
 	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 	
 	module.exports = function CommunicationComponent() {
 	  this.crdtDict = {};
+	  this.pendingMessagesQueue = [];
+	
+	  window.addEventListener("online", onlineAgain.bind(this));
+	
+	  function onlineAgain() {
+	    console.log("Blub");
+	    console.log("This: " + JSON.stringify(this));
+	    console.log("Total Message Queue: " + this.pendingMessagesQueue);
+	    this.pendingMessagesQueue.forEach(function (message, mIndex) {
+	      console.log("Queue Message: " + message);
+	      console.log("This: " + this);
+	      console.log("Manage sending:" + this.manageSending);
+	      this.manageSending(wrapper(message));
+	      this.pendingMessagesQueue.splice(mIndex, 1);
+	      console.log("Message is sent");
+	    }, this);
+	  }
 	
 	  this.addCRDT = function (crdt) {
 	    this.crdtDict[crdt.name] = crdt;
@@ -22354,7 +22371,10 @@
 	        console.log("Default branch");
 	        msg = {};
 	    }
-	    xhr.send(JSON.stringify(msg));
+	    console.log("Will send message now!");
+	    this.manageSending(function () {
+	      xhr.send(JSON.stringify(msg));
+	    });
 	  };
 	
 	  //'/api/initial'
@@ -22399,7 +22419,9 @@
 	        }
 	      }
 	    }.bind(this);
-	    xhr.send();
+	    this.manageSending(function () {
+	      xhr.send();
+	    });
 	  };
 	
 	  //Setup long polling
@@ -22425,9 +22447,26 @@
 	        this.longPolling(app);
 	      }
 	    }.bind(this);
-	    xhr.send();
-	    console.log("New long polling request sent by CommunicationComponent");
+	    this.manageSending(function () {
+	      xhr.send();
+	    });
 	  };
+	
+	  //For testing purposes
+	  this.manageSending = function (toSend) {
+	    console.log(toSend);
+	    if (window.navigator.onLine) {
+	      console.log("Browser is online!");
+	      toSend();
+	    } else {
+	      this.pendingMessagesQueue.push(wrapper(toSend));
+	    }
+	  };
+	
+	  function wrapper(msg) {
+	    console.log("Message: " + msg);
+	    return msg;
+	  }
 	};
 
 /***/ },
