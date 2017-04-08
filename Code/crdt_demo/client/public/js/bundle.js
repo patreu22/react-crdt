@@ -22326,9 +22326,9 @@
 	      console.log("This: " + this);
 	      console.log("Manage sending:" + this.manageSending);
 	      this.manageSending(wrapper(message));
-	      this.pendingMessagesQueue.splice(mIndex, 1);
 	      console.log("Message is sent");
 	    }, this);
+	    this.pendingMessagesQueue = [];
 	  }
 	
 	  this.addCRDT = function (crdt) {

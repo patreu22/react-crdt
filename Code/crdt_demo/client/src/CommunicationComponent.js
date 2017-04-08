@@ -6,17 +6,10 @@ window.addEventListener("online", onlineAgain.bind(this))
 
 
 function onlineAgain(){
-    console.log("Blub")
-    console.log("This: "+JSON.stringify(this))
-    console.log("Total Message Queue: "+this.pendingMessagesQueue)
     this.pendingMessagesQueue.forEach(function(message, mIndex){
-      console.log("Queue Message: "+message)
-      console.log("This: "+this)
-      console.log("Manage sending:" + this.manageSending)
       this.manageSending(wrapper(message))
-      this.pendingMessagesQueue.splice(mIndex, 1)
-      console.log("Message is sent")
     }, this)
+    this.pendingMessagesQueue = []
 }
 
 this.addCRDT = (function(crdt){
@@ -35,7 +28,6 @@ this.sendToServer = function(crdt, crdtType, operation){
        console.log("Response: "+xhr.responseText)
     };
   })
-
   var msg = {}
   switch (crdtType){
     case "timestampRegister":
@@ -59,9 +51,7 @@ this.sendToServer = function(crdt, crdtType, operation){
       console.log("Default branch")
       msg = {}
   }
-  console.log("Will send message now!")
   this.manageSending(function(){xhr.send(JSON.stringify(msg))})
-
 };
 
 //'/api/initial'
@@ -76,16 +66,10 @@ this.getInitialStateFromServer = function(path, app, completionHandler){
      console.log(xhr.responseText);
      if (!(xhr.responseText == "{}")){
        var response = JSON.parse(xhr.responseText)
-       console.log("Initital Response data:")
-       console.log(JSON.stringify(response))
-       console.log("CRDT Dict: "+ JSON.stringify(this.crdtDict))
        var that = this
        Object.keys(this.crdtDict).forEach(function(key, index){
-         console.log("Current Key: "+ key)
          if (key in response){
-           console.log("Key matched: "+key)
            var data = response[key]
-           console.log("Data: "+ JSON.stringify(data))
            switch (data.crdtType){
              case "timestampRegister":
               completionHandler(that.crdtDict[key].setRegister(data.value, data.timestamp), app);
@@ -145,7 +129,6 @@ this.manageSending = function(toSend){
     this.pendingMessagesQueue.push(wrapper(toSend))
   }
  }
-
 
 function wrapper(msg){
     console.log("Message: "+msg)
