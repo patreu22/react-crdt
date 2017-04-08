@@ -3,12 +3,10 @@ this.crdtDict = {};
 this.pendingMessagesQueue = []
 this.correspondingApp = app
 
-var CircularJSON = require("circular-json")
-
 window.addEventListener("online", onlineAgain.bind(this))
 function onlineAgain(){
     this.pendingMessagesQueue.forEach(function(message, mIndex){
-      this.manageSending(wrapper(message))
+      this.manageSending(mgsWrapper(message))
     }, this)
     this.pendingMessagesQueue = []
     if (this.correspondingApp !== undefined){
@@ -67,7 +65,7 @@ this.getInitialStateFromServer = function(){
   xhr.onreadystatechange = (function() {
     //Call the function when the state changes.
     if(xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) {
-     console.log('Initial Response:');
+     console.log('Initial Response');
      console.log(xhr.responseText);
      if (!(xhr.responseText == "{}")){
        var response = JSON.parse(xhr.responseText)
@@ -92,10 +90,10 @@ this.getInitialStateFromServer = function(){
     }else{
        console.log("Response was empty");
     }
-    this.longPolling()
   }
 }).bind(this);
   this.manageSending(function(){xhr.send()})
+  this.longPolling()
 }
 
 
@@ -126,15 +124,13 @@ this.longPolling = function(){
 this.manageSending = function(toSend){
   console.log(toSend)
   if (window.navigator.onLine){
-    console.log("Browser is online!")
     toSend()
   }else{
-    this.pendingMessagesQueue.push(wrapper(toSend))
+    this.pendingMessagesQueue.push(msgWrapper(toSend))
   }
  }
 
-function wrapper(msg){
-    console.log("Message: "+msg)
+function msgWrapper(msg){
     return msg
 }
 

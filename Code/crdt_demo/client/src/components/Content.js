@@ -5,6 +5,7 @@ var TimestampRegister = require('../TimestampRegister.js');
 var CommunicationComponent = require('../CommunicationComponent.js');
 var OpCounter = require('../OpCounter.js');
 
+
 class Content extends React.Component {
 
   //Set initial localTimestampRegister
