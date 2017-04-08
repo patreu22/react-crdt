@@ -42,32 +42,22 @@ app.get('/', function (req, res) {
 
 app.use(express.static(__dirname + '/client/public'));
 
-//Just for debugging
-var totalRequests = 0
+
 //Handle new request
 app.post('/api', function (req, res){
 	console.log('###API Post Request received###');
-  totalRequests += 1
-  console.log("##########")
-  console.log("#Total: " +  totalRequests+"#")
-  console.log("##########")
   sendToAllClientsExcept(req.connection.remoteAddress, req.body);
   res.statusCode = 200;
   res.end();
 });
 
-//for debugging
-var lpCounter = 0
-var sendingAttemts = 0
 
 //Register Client for LongPolling
 app.get('/api/lp', function(req, res){
-  lpCounter += 1
   var client = req.connection.remoteAddress
   //After the first sending the long polling is initialized
   clientRequestDict[client] = {}
-  clientRequestDict[client]["res"] = res;
-  clientRequestDict[client]["used"] = false
+  clientRequestDict[client] = res;
   //Check if key already exists
   if (!pollingQueue.hasOwnProperty(client)){
     //Branch on first long polling Request
@@ -75,21 +65,9 @@ app.get('/api/lp', function(req, res){
     pollingQueue[client] = []
   }else{
     //Check if something was not send yet
-    console.log("#Polling: Queue exists.")
-    console.log("#Polling: Current Queue length: "+pollingQueue[client].length)
-    //for debugging
-
     if (pollingQueue[client].length > 0){
-      if(clientRequestDict[client]["used"]){
-          console.log("####USED!!!!")
-      }else{
-          res.end(JSON.stringify(pollingQueue[client].shift()))
-          clientRequestDict[client]["res"] = {}
-          clientRequestDict[client]["used"] = true
-      }
-
-      console.log("#Polling: Sent pending file.")
-      console.log("#Polling: there was a pending file to send. Sent.")
+      res.end(JSON.stringify(pollingQueue[client].shift()))
+      clientRequestDict[client] = {}
     }
   }
 });
@@ -140,22 +118,14 @@ function sendToAllClientsExcept(sender, fileToSend){
           if (sender !== client){
             pollingQueue[client].push(fileToSend)
             console.log("#Polling: Queue length STACE: "+pollingQueue[client].length)
-            if (Object.keys(clientRequestDict[client]["res"]).length === 0){
+            if (Object.keys(clientRequestDict[client]).length === 0){
                 console.log("!Error: Can't use Long Polling right now")
                 errorCntr +=1
             }else{
               console.log("Success: Use long polling right now")
               successCntr += 1
-
-              if(clientRequestDict[client]["used"]){
-                  console.log("####USED!!!!")
-              }else{
-                clientRequestDict[client]["res"].end(JSON.stringify(pollingQueue[client].shift()));
-                sendingAttemts += 1
-                console.log("Sending Attemts: "+sendingAttemts)
-                clientRequestDict[client]["res"] = {}
-                clientRequestDict[client]["used"] = true
-              }
+              clientRequestDict[client].end(JSON.stringify(pollingQueue[client].shift()));
+              clientRequestDict[client] = {}
             }
           }else{
             console.log("Sender and Client is both "+sender)
