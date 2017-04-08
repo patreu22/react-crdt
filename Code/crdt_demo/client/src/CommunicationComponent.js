@@ -11,7 +11,8 @@ this.sendToLocal = function(crdt){
   var local = this.crdtDict[crdt.name]
   local.downstream(crdt)
 };
-
+//for debugging
+var packageId = 0
 this.sendToServer = function(crdt, crdtType, operation){
   //Send changed Object to Server
   var xhr = new XMLHttpRequest();
@@ -42,7 +43,8 @@ this.sendToServer = function(crdt, crdtType, operation){
       msg = {
         crdtName: crdt.name,
         crdtType: crdtType,
-        "operation": operation
+        "operation": operation,
+        "packageId": packageId
       }
       break
     default:
@@ -52,7 +54,7 @@ this.sendToServer = function(crdt, crdtType, operation){
 
   console.log("Message to send: "+JSON.stringify(msg))
   xhr.send(JSON.stringify(msg));
-
+  packageId += 1
 
 
 };
@@ -131,6 +133,10 @@ this.getCRDTwithName = function(name){
   return this.crdtDict[name]
 }
 
+//for debugging
+var answerCntr = 0
+var receivedPackages = []
+var lostPackages = []
 
 //Setup long polling
 this.longPolling = function(app){
@@ -140,6 +146,7 @@ this.longPolling = function(app){
   xhr.setRequestHeader("Content-type", "text/plain");
   xhr.onreadystatechange = (function() {//Call a function when the state changes.
     if(xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) {
+      answerCntr += 1
       console.log("####LP ANSWER!!!####")
       console.log('Response Text:');
       console.log(xhr.responseText);
@@ -149,6 +156,17 @@ this.longPolling = function(app){
       console.log("Obj: "+JSON.stringify(obj))
       console.log("Crdt: "+JSON.stringify(crdt))
       console.log("State: "+JSON.stringify(app.state))
+      console.log("################################################")
+      console.log("############PackageId: "+ obj.packageId)
+      console.log("################################################")
+      receivedPackages.push(obj.packageId)
+      lostPackages = []
+      for(var j=0;j<100;j++){
+        if (!receivedPackages.includes(j)){
+          lostPackages.push(j)
+        }
+      }
+      console.log("#LostPackages: "+lostPackages)
 
       var i = 0
       for (var key in app.state) {
@@ -163,6 +181,7 @@ this.longPolling = function(app){
           app.setState({[key] : newObj})
           console.log("Set new state!")
         }
+        console.log("Answers Received: "+answerCntr)
       }
       this.longPolling(app);
     }
