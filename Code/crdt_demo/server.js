@@ -4,12 +4,12 @@ var bodyParser = require('body-parser');
 var ip = require('ip');
 var TimestampRegister = require("./client/src/TimestampRegister.js")
 var OpCounter = require("./client/src/OpCounter.js")
+var OpORSet = require("./client/src/OpORSet.js")
 var CircularJSON = require("circular-json")
 
 
-
 var clients = [];
-var clientRequestDict = {}
+var clientResponseDict = {}
 var tempState = {};
 var pollingQueue = {}
 var blockFlagDict = {}
@@ -32,7 +32,6 @@ app.get('/', function (req, res) {
   		console.log("Client "+remIP+" already exists in Client Array");
       console.log("All Cients: "+ clients)
   	}
-
   	//Serve Index Site
   	res.sendFile(__dirname + '/client/public/index.html');
 });
@@ -55,9 +54,12 @@ app.post('/api', function (req, res){
 //Register Client for LongPolling
 app.get('/api/lp', function(req, res){
   var client = req.connection.remoteAddress
+  req.on("close", function(){
+    console.log("Client with address "+client+" lost connection.")
+  })
   //After the first sending the long polling is initialized
-  clientRequestDict[client] = {}
-  clientRequestDict[client] = res;
+  clientResponseDict[client] = {}
+  clientResponseDict[client] = res;
   //Check if key already exists
   if (!pollingQueue.hasOwnProperty(client)){
     //Branch on first long polling Request
@@ -67,13 +69,15 @@ app.get('/api/lp', function(req, res){
     //Check if something was not send yet
     if (pollingQueue[client].length > 0){
       res.end(JSON.stringify(pollingQueue[client].shift()))
-      clientRequestDict[client] = {}
+      console.log("Something was not sent, sent now to Client... "+client)
+      clientResponseDict[client] = {}
     }
   }
 });
 
 app.get('/api/initial', function(req,res){
   console.log("Initial to send: "+ JSON.stringify(tempState))
+  pollingQueue[req.connection.remoteAddress] = []
   res.end(JSON.stringify(tempState));
 });
 
@@ -99,6 +103,10 @@ function sendToAllClientsExcept(sender, fileToSend){
          var tempFile = new OpCounter(fileToSend.crdtName)
          console.log("opCounter")
          break
+      case "opORSet":
+        var tempFile = new OpORSet(fileToSend.crdtName)
+        console.log("opORSet")
+        break
        default:
          console.log("Default")
          break
@@ -108,19 +116,23 @@ function sendToAllClientsExcept(sender, fileToSend){
     tempState[fileToSend.crdtName] = tempFile.downstream(fileToSend.operation)
 
     //Send to all
-    if (Object.keys(clientRequestDict).length === 0){
+    if (Object.keys(clientResponseDict).length === 0){
       console.log("No Clients registered.")
     }else{
       clients.forEach(function(client){
           if (sender !== client){
             pollingQueue[client].push(fileToSend)
             console.log("#Polling: Queue length STACE: "+pollingQueue[client].length)
-            if (Object.keys(clientRequestDict[client]).length === 0){
+            console.log("Client: "+client)
+            console.log("Client Request:")
+
+            if (Object.keys(clientResponseDict[client]).length === 0){
                 console.log("!Error: Can't use Long Polling right now")
             }else{
               console.log("Success: Use long polling right now")
-              clientRequestDict[client].end(JSON.stringify(pollingQueue[client].shift()));
-              clientRequestDict[client] = {}
+              clientResponseDict[client].end(JSON.stringify(pollingQueue[client].shift()));
+              console.log("Used long polling for sending.")
+              clientResponseDict[client] = {}
             }
           }else{
             console.log("Sender and Client is both "+sender)
