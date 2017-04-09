@@ -31,6 +31,7 @@ this.sendToServer = function(crdt, crdtType, operation){
     };
   })
   var msg = {}
+  console.log("OPERATION: "+operation)
   switch (crdtType){
     case "timestampRegister":
       msg = {
@@ -46,7 +47,14 @@ this.sendToServer = function(crdt, crdtType, operation){
       msg = {
         crdtName: crdt.name,
         crdtType: crdtType,
-        "operation": operation,
+        operation: operation,
+      }
+      break
+    case "opORSet":
+      msg = {
+        crdtName: crdt.name,
+        crdtType: crdtType,
+        operation : operation
       }
       break
     default:
@@ -70,7 +78,10 @@ this.getInitialStateFromServer = function(){
      if (!(xhr.responseText == "{}")){
        var response = JSON.parse(xhr.responseText)
        Object.keys(this.crdtDict).forEach(function(key, index){
+         console.log("Key: "+ key)
          if (key in response){
+           console.log("In response!")
+           console.log("Data: "+ JSON.stringify(response[key]))
            var data = response[key]
            switch (data.crdtType){
              case "timestampRegister":
@@ -81,6 +92,10 @@ this.getInitialStateFromServer = function(){
               this.setCRDT(this.crdtDict[key].setValue(data.value))
               console.log("opCounter")
               break
+            case "opORSet":
+              console.log("Trigger!")
+              this.setCRDT(this.crdtDict[key].setUSet(data.valueSet))
+              console.log("opORSet")
             default:
               console.log("Default")
               break
@@ -136,6 +151,7 @@ function msgWrapper(msg){
 
 
 this.setCRDT = function(crdt){
+  console.log("CRDT Object: "+JSON.stringify(crdt))
   Object.keys(this.correspondingApp.state).forEach(function(key, index){
     if(this.correspondingApp.state[key].name === crdt.name){
       this.correspondingApp.setState({key: crdt})
