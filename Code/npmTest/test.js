@@ -1,4 +1,4 @@
-var ReactCRDT = require('react-crdt')
+var crdts = require('react-crdt')
 
 
-ReactCRDT.printMsg()
+crdts.printMsg()

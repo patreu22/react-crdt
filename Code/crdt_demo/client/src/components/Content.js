@@ -1,10 +1,11 @@
 var React = require("react");
 import "../css/Content.css"
 import Toggle from "react-toggle"
-var TimestampRegister = require('../TimestampRegister.js');
-var CommunicationComponent = require('../CommunicationComponent.js');
-var OpCounter = require('../OpCounter.js');
-var OpORSet = require("../OpORSet.js")
+var crdt = require("react-crdt")
+// var TimestampRegister = require('../TimestampRegister.js');
+// var CommunicationComponent = require('../CommunicationComponent.js');
+// var OpCounter = require('../OpCounter.js');
+// var OpORSet = require("../OpORSet.js")
 
 
 class Content extends React.Component {
@@ -12,10 +13,11 @@ class Content extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      communicationComponent: new CommunicationComponent(this),
-      localTimestampRegister: new TimestampRegister("timestampDemo", false),
-      localOpCounter: new OpCounter("counterDemo"),
-      localOpORSet: new OpORSet("orSetDemo")
+      communicationComponent: new crdt.CommunicationComponent(this),
+      localTimestampRegister: new crdt.TimestampRegister("timestampDemo", false),
+      localOpCounter: new crdt.OpCounter("counterDemo"),
+      localOpORSet: new crdt.OpORSet("orSetDemo"),
+      orInput: ''
     };
     this.state.communicationComponent.addCRDT(this.state.localTimestampRegister)
     this.state.communicationComponent.addCRDT(this.state.localOpCounter)
@@ -41,8 +43,7 @@ class Content extends React.Component {
       var operation = { element: { element: input, uniqueID: Math.floor(Math.random() * 1000000000)} , "add": true}
       this.setState({localOpORSet: this.state.localOpORSet.downstream(operation)});
       this.state.communicationComponent.sendToServer(this.state.localOpORSet, "opORSet", operation);
-      this.setState({orInput: ""}, function(){
-      })
+      this.setState({orInput: ""})
     }else{
       console.log("Please enter a value")
     }
@@ -55,7 +56,10 @@ class Content extends React.Component {
   }
 
   handleInput = (event) => {
-    this.setState({orInput: event.target.value})
+    console.log("Before: "+this.state.orInput)
+    this.setState({orInput: event.target.value}, function(){
+      console.log("After: "+ this.state.orInput)
+    })
   }
 
   render() {
@@ -86,7 +90,7 @@ class Content extends React.Component {
         </div>
         <div>
           <ul>{elementsToPresent}</ul>
-          <input type="text" value={this.state.orInput} onChange={this.handleInput} placeholder="Add a Text to append it to ORSet"></input>
+          <input type="text" value={this.state.orInput} onChange={this.handleInput} placeholder="Add a Text to append it to ORSet"/>
           <button onClick={this.addElementToOrSet}>Add</button>
         </div>
       </div>

@@ -1,11 +1,8 @@
 var express = require('express');
 var app = express();
-var bodyParser = require('body-parser');
 var ip = require('ip');
-var TimestampRegister = require("./client/src/TimestampRegister.js")
-var OpCounter = require("./client/src/OpCounter.js")
-var OpORSet = require("./client/src/OpORSet.js")
-var CircularJSON = require("circular-json")
+var bodyParser = require('body-parser');
+var crdt = require('react-crdt')
 
 
 var clients = [];
@@ -96,15 +93,15 @@ function sendToAllClientsExcept(sender, fileToSend){
     }else{
       switch (fileToSend.crdtType){
         case "timestampRegister":
-         var tempFile = new TimestampRegister(fileToSend.crdtName, false, fileToSend.operation.timestamp - 1)
+         var tempFile = new crdt.TimestampRegister(fileToSend.crdtName, false, fileToSend.operation.timestamp - 1)
          console.log("timestampRegister")
          break
        case "opCounter":
-         var tempFile = new OpCounter(fileToSend.crdtName)
+         var tempFile = new crdt.OpCounter(fileToSend.crdtName)
          console.log("opCounter")
          break
       case "opORSet":
-        var tempFile = new OpORSet(fileToSend.crdtName)
+        var tempFile = new crdt.OpORSet(fileToSend.crdtName)
         console.log("opORSet")
         break
        default:
