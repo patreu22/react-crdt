@@ -1,0 +1,11 @@
+{
+  "name": "react-crdt",
+  "version": "0.0.1",
+  "description": "A small module to use CmRDTs in React Projects",
+  "main": "lib.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Patrick Reuter",
+  "license": "ISC"
+}

@@ -1,4 +1,5 @@
-module.exports = function CommunicationComponent(app){
+//The communication Entity!
+module.exports.CommunicationComponent = function(app){
 this.crdtDict = {};
 this.pendingMessagesQueue = []
 this.correspondingApp = app
@@ -168,4 +169,173 @@ this.setCRDT = function(crdt){
   }, this);
 }
 
+}
+
+//Operation-Based ORSet!
+module.exports.OpORSet = function(name){
+
+this.valueSet = []
+this.name = name
+
+this.setValue = function(setValue){
+  console.log("Set value: "+setValue)
+  this.valueSet = setValue
+  return this
+}
+
+this.lookup = function(e){
+  console.log("Element to lookup: "+JSON.stringify(e))
+  var foundIt = false
+  this.valueSet.forEach(function(element){
+    if(JSON.stringify(element) === JSON.stringify(e)){
+      foundIt = true
+    }
+  })
+  if (foundIt){
+    return true
+  }else{
+    return false
+  }
+}
+
+
+this.setUniqueId = function(e){
+  var elem = {
+      "element" : e,
+      "uniqueID" : Math.floor(Math.random() * 1000000000)
+  }
+  return elem
+}
+
+this.add = function(e){
+    console.log("###e: "+JSON.stringify(e))
+    if (typeof e === 'object'){
+      console.log("Hey, it's an object")
+      if(e.uniqueID === undefined){
+        console.log("No unique ID. Setting one for object.")
+        this.valueSet.push(this.setUniqueId(e))
+      }else{
+        console.log("Unique ID found. Push to Set.")
+        this.valueSet.push(e)
+      }
+    }else{
+      console.log("Simple data structure. Append Unique ID.")
+      this.valueSet.push(this.setUniqueId(e))
+    }
+}
+
+this.remove = function(e){
+  console.log("Complete Value Set: "+JSON.stringify(this.valueSet))
+  console.log("Element to remove: "+JSON.stringify(e))
+  console.log("Lookup successful: "+this.lookup(e))
+  if(this.lookup(e)){
+    console.log("Let's check that filthy Array")
+    this.valueSet.forEach(function(element, index){
+      console.log("Current element: "+JSON.stringify(element))
+      if(JSON.stringify(element) === JSON.stringify(e)){
+        this.valueSet.splice(index,1)
+      }
+    }, this)
+  }else{
+    console.log("Can't remove. Element is not in the set.")
+  }
+}
+
+this.downstream = function(operation){
+  console.log("Operation: "+JSON.stringify(operation))
+  if(operation.add){
+    this.add(operation.element)
+  }else{
+    this.remove(operation.element)
+  }
+  console.log("After downstream: "+JSON.stringify(this))
+  return this
+}
+
+}
+
+
+//The TimestampRegister!
+module.exports.TimestampRegister =  function(name, defaultValue = false, date = new Date().getTime()){
+	this.name = name
+	this.value = defaultValue
+	this.timestamp = date;
+
+	this.setRegister = (function(val, stamp){
+		this.value = val;
+		this.timestamp = stamp;
+		return this
+	});
+
+	this.getName = function(){
+		return this.name;
+	}
+
+	this.getValue = (function(){
+		return this.value;
+	});
+
+	this.getTimeStamp = (function(){
+		return this.timestamp;
+	});
+
+	this.downstream = (function(operation){
+		if (operation.timestamp > this.timestamp){
+			this.setRegister(operation.value, operation.timestamp);
+			console.log("Current value switched to "+this.value);
+		}else{
+			console.log(this.timestamp + " is a newer timestamp than " + operation.timestamp + ". Value won't change.");
+		};
+		return this;
+	}).bind(this);
+};
+
+
+
+//The OpCounter
+module.exports.OpCounter =  function(name, value=0){
+	this.name = name
+	this.value = value;
+
+	this.setValue = (function(val){
+		console.log("Value to set: "+val)
+		this.value = val
+		return this
+	}).bind(this);
+
+	this.increment = (function(){
+		this.value += 1;
+		console.log("Incremented");
+		console.log(this.value)
+		return this
+	}).bind(this);
+
+	this.decrement = (function(){
+		this.value -= 1;
+		console.log("Decremented");
+		console.log(this.value)
+		return this
+	}).bind(this);
+
+	this.getValue = (function(){
+		return this.value;
+	});
+
+	this.getName = function(){
+		return this.name;
+	}
+
+	this.downstream = (function(operation){
+		if(operation.increase){
+			this.increment();
+		}else{
+			this.decrement();
+		}
+		return this;
+	}).bind(this);
+
+};
+
+module.exports.printMsg = function() {
+  console.log("This is a message from the demo package");
 }

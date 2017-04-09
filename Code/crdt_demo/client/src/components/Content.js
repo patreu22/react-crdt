@@ -17,12 +17,10 @@ class Content extends React.Component {
       localOpCounter: new OpCounter("counterDemo"),
       localOpORSet: new OpORSet("orSetDemo")
     };
-    console.log("Initial OpORSet: "+ JSON.stringify(this.state.localOpORSet))
     this.state.communicationComponent.addCRDT(this.state.localTimestampRegister)
     this.state.communicationComponent.addCRDT(this.state.localOpCounter)
     this.state.communicationComponent.addCRDT(this.state.localOpORSet)
-    this.state.communicationComponent.getInitialStateFromServer()
-    this.state.communicationComponent.longPolling()
+    this.state.communicationComponent.start()
   };
 
   counterChanged(increase){
@@ -32,34 +30,35 @@ class Content extends React.Component {
   };
 
   toggleChanged(isChecked){
-    //Update Local Register
-    var tempReg = this.state.localTimestampRegister.downstream({value: isChecked, timestamp: new Date().getTime()});
-    this.setState({localTimestampRegister: tempReg});
+    var operation = {value: isChecked, timestamp: new Date().getTime()}
+    this.setState({localTimestampRegister: this.state.localTimestampRegister.downstream(operation)});
     this.state.communicationComponent.sendToServer(this.state.localTimestampRegister, "timestampRegister");
   };
 
-  addElementToOrSet(){
-    var operation = { element: { element: "Hello", uniqueID: Math.floor(Math.random() * 1000000000)} , "add": true}
-    console.log("Local" +JSON.stringify(this.state.localOpORSet))
-    this.setState({localOpORSet: this.state.localOpORSet.downstream(operation)});
-    this.state.communicationComponent.sendToServer(this.state.localOpORSet, "opORSet", operation);
+  addElementToOrSet = () =>{
+    var input = this.state.orInput
+    if(input){
+      var operation = { element: { element: input, uniqueID: Math.floor(Math.random() * 1000000000)} , "add": true}
+      this.setState({localOpORSet: this.state.localOpORSet.downstream(operation)});
+      this.state.communicationComponent.sendToServer(this.state.localOpORSet, "opORSet", operation);
+      this.setState({orInput: ""}, function(){
+      })
+    }else{
+      console.log("Please enter a value")
+    }
   }
 
   removeElementFromORSet(orSet, elem){
-    console.log(this)
-    console.log("orSet: "+JSON.stringify(orSet))
-    console.log("Element to remove: "+JSON.stringify(elem))
     var operation = { element: elem, "add": false}
-    console.log("Local" +JSON.stringify(this.state.localOpORSet))
     this.setState({localOpORSet: this.state.localOpORSet.downstream(operation)});
-    console.log("LocalOpORSet after Downstream: "+JSON.stringify(this.state.localOpORSet))
     this.state.communicationComponent.sendToServer(this.state.localOpORSet, "opORSet", operation);
   }
 
-  //What is shown in the browser
-  //<ol>{elementsToPresent}</ol>
+  handleInput = (event) => {
+    this.setState({orInput: event.target.value})
+  }
+
   render() {
-    console.log("Blub:"+this.state.localOpCounter.value)
     var elementsToPresent = [];
     var orSet = this.state.localOpORSet
     var elements = orSet.valueSet
@@ -86,8 +85,9 @@ class Content extends React.Component {
           <button onClick={() => this.counterChanged(false)}>Decrement</button>
         </div>
         <div>
-          <ol>{elementsToPresent}</ol>
-          <button onClick={() => this.addElementToOrSet()}>Add</button>
+          <ul>{elementsToPresent}</ul>
+          <input type="text" value={this.state.orInput} onChange={this.handleInput} placeholder="Add a Text to append it to ORSet"></input>
+          <button onClick={this.addElementToOrSet}>Add</button>
         </div>
       </div>
   	);
