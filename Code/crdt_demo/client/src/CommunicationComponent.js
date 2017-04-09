@@ -4,11 +4,12 @@ this.pendingMessagesQueue = []
 this.correspondingApp = app
 
 window.addEventListener("online", onlineAgain.bind(this))
+
 function onlineAgain(){
     this.pendingMessagesQueue.forEach(function(message, mIndex){
-      this.manageSending(mgsWrapper(message))
+      console.log("Message Sending after re-online: "+message)
+      this.manageSending(msgWrapper(message))
     }, this)
-    this.pendingMessagesQueue = []
     if (this.correspondingApp !== undefined){
       this.getInitialStateFromServer()
     }
@@ -66,6 +67,7 @@ this.sendToServer = function(crdt, crdtType, operation){
 
 //'/api/initial'
 this.getInitialStateFromServer = function(){
+  this.pendingMessagesQueue = []
   var xhr = new XMLHttpRequest();
   this.correspondingApp  = app
   xhr.open('GET', '/api/initial' , true);
@@ -90,12 +92,13 @@ this.getInitialStateFromServer = function(){
               break
             case "opCounter":
               this.setCRDT(this.crdtDict[key].setValue(data.value))
-              console.log("opCounter")
+              console.log("opCounter recognized")
               break
             case "opORSet":
-              console.log("Trigger!")
-              this.setCRDT(this.crdtDict[key].setUSet(data.valueSet))
+              console.log("All data: "+JSON.stringify(data))
+              this.setCRDT(this.crdtDict[key].setValue(data.valueSet))
               console.log("opORSet")
+              break
             default:
               console.log("Default")
               break
@@ -108,7 +111,7 @@ this.getInitialStateFromServer = function(){
   }
 }).bind(this);
   this.manageSending(function(){xhr.send()})
-  this.longPolling()
+  //this.longPolling()
 }
 
 
@@ -153,6 +156,7 @@ function msgWrapper(msg){
 this.setCRDT = function(crdt){
   console.log("CRDT Object: "+JSON.stringify(crdt))
   Object.keys(this.correspondingApp.state).forEach(function(key, index){
+      console.log("#Set")
     if(this.correspondingApp.state[key].name === crdt.name){
       this.correspondingApp.setState({key: crdt})
     }

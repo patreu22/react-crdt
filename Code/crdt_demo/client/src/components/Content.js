@@ -22,6 +22,7 @@ class Content extends React.Component {
     this.state.communicationComponent.addCRDT(this.state.localOpCounter)
     this.state.communicationComponent.addCRDT(this.state.localOpORSet)
     this.state.communicationComponent.getInitialStateFromServer()
+    this.state.communicationComponent.longPolling()
   };
 
   counterChanged(increase){
@@ -58,6 +59,7 @@ class Content extends React.Component {
   //What is shown in the browser
   //<ol>{elementsToPresent}</ol>
   render() {
+    console.log("Blub:"+this.state.localOpCounter.value)
     var elementsToPresent = [];
     var orSet = this.state.localOpORSet
     var elements = orSet.valueSet

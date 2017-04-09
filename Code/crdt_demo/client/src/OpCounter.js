@@ -3,6 +3,7 @@ module.exports =  function OpCounter(name, value=0){
 	this.value = value;
 
 	this.setValue = (function(val){
+		console.log("Value to set: "+val)
 		this.value = val
 		return this
 	}).bind(this);

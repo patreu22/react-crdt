@@ -3,7 +3,7 @@ module.exports = function OpORSet(name){
 this.valueSet = []
 this.name = name
 
-this.setUSet = function(setValue){
+this.setValue = function(setValue){
   console.log("Set value: "+setValue)
   this.valueSet = setValue
   return this
@@ -18,10 +18,8 @@ this.lookup = function(e){
     }
   })
   if (foundIt){
-    console.log("Yeah, I found it")
     return true
   }else{
-    console.log("Jo Braaa, I dunno")
     return false
   }
 }

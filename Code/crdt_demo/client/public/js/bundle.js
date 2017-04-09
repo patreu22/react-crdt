@@ -21753,6 +21753,7 @@
 	    _this.state.communicationComponent.addCRDT(_this.state.localOpCounter);
 	    _this.state.communicationComponent.addCRDT(_this.state.localOpORSet);
 	    _this.state.communicationComponent.getInitialStateFromServer();
+	    _this.state.communicationComponent.longPolling();
 	    return _this;
 	  }
 	
@@ -21800,6 +21801,7 @@
 	    value: function render() {
 	      var _this2 = this;
 	
+	      console.log("Blub:" + this.state.localOpCounter.value);
 	      var elementsToPresent = [];
 	      var orSet = this.state.localOpORSet;
 	      var elements = orSet.valueSet;
@@ -22317,7 +22319,7 @@
 /* 191 */
 /***/ function(module, exports) {
 
-	'use strict';
+	"use strict";
 	
 	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 	
@@ -22327,11 +22329,12 @@
 	  this.correspondingApp = app;
 	
 	  window.addEventListener("online", onlineAgain.bind(this));
+	
 	  function onlineAgain() {
 	    this.pendingMessagesQueue.forEach(function (message, mIndex) {
-	      this.manageSending(mgsWrapper(message));
+	      console.log("Message Sending after re-online: " + message);
+	      this.manageSending(msgWrapper(message));
 	    }, this);
-	    this.pendingMessagesQueue = [];
 	    if (this.correspondingApp !== undefined) {
 	      this.getInitialStateFromServer();
 	    }
@@ -22391,6 +22394,7 @@
 	
 	  //'/api/initial'
 	  this.getInitialStateFromServer = function () {
+	    this.pendingMessagesQueue = [];
 	    var xhr = new XMLHttpRequest();
 	    this.correspondingApp = app;
 	    xhr.open('GET', '/api/initial', true);
@@ -22415,12 +22419,13 @@
 	                  break;
 	                case "opCounter":
 	                  this.setCRDT(this.crdtDict[key].setValue(data.value));
-	                  console.log("opCounter");
+	                  console.log("opCounter recognized");
 	                  break;
 	                case "opORSet":
-	                  console.log("Trigger!");
-	                  this.setCRDT(this.crdtDict[key].setUSet(data.valueSet));
+	                  console.log("All data: " + JSON.stringify(data));
+	                  this.setCRDT(this.crdtDict[key].setValue(data.valueSet));
 	                  console.log("opORSet");
+	                  break;
 	                default:
 	                  console.log("Default");
 	                  break;
@@ -22435,7 +22440,7 @@
 	    this.manageSending(function () {
 	      xhr.send();
 	    });
-	    this.longPolling();
+	    //this.longPolling()
 	  };
 	
 	  //Setup long polling
@@ -22481,6 +22486,7 @@
 	  this.setCRDT = function (crdt) {
 	    console.log("CRDT Object: " + JSON.stringify(crdt));
 	    Object.keys(this.correspondingApp.state).forEach(function (key, index) {
+	      console.log("#Set");
 	      if (this.correspondingApp.state[key].name === crdt.name) {
 	        this.correspondingApp.setState({ key: crdt });
 	      }
@@ -22501,6 +22507,7 @@
 		this.value = value;
 	
 		this.setValue = function (val) {
+			console.log("Value to set: " + val);
 			this.value = val;
 			return this;
 		}.bind(this);
@@ -22550,7 +22557,7 @@
 	  this.valueSet = [];
 	  this.name = name;
 	
-	  this.setUSet = function (setValue) {
+	  this.setValue = function (setValue) {
 	    console.log("Set value: " + setValue);
 	    this.valueSet = setValue;
 	    return this;
@@ -22565,10 +22572,8 @@
 	      }
 	    });
 	    if (foundIt) {
-	      console.log("Yeah, I found it");
 	      return true;
 	    } else {
-	      console.log("Jo Braaa, I dunno");
 	      return false;
 	    }
 	  };
