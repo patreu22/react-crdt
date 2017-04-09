@@ -56,9 +56,7 @@ class Content extends React.Component {
   }
 
   handleInput = (event) => {
-    console.log("Before: "+this.state.orInput)
     this.setState({orInput: event.target.value}, function(){
-      console.log("After: "+ this.state.orInput)
     })
   }
 

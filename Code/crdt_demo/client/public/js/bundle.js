@@ -21757,10 +21757,7 @@
 	    };
 	
 	    _this.handleInput = function (event) {
-	      console.log("Before: " + _this.state.orInput);
-	      _this.setState({ orInput: event.target.value }, function () {
-	        console.log("After: " + this.state.orInput);
-	      });
+	      _this.setState({ orInput: event.target.value }, function () {});
 	    };
 	
 	    _this.state = {
