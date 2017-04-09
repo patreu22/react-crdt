@@ -21772,11 +21772,23 @@
 	      this.state.communicationComponent.sendToServer(this.state.localTimestampRegister, "timestampRegister");
 	    }
 	  }, {
-	    key: "orSetChanged",
-	    value: function orSetChanged(add) {
-	      var operation = { element: "Hello", "add": add };
+	    key: "addElementToOrSet",
+	    value: function addElementToOrSet() {
+	      var operation = { element: { element: "Hello", uniqueID: Math.floor(Math.random() * 1000000000) }, "add": true };
 	      console.log("Local" + JSON.stringify(this.state.localOpORSet));
 	      this.setState({ localOpORSet: this.state.localOpORSet.downstream(operation) });
+	      this.state.communicationComponent.sendToServer(this.state.localOpORSet, "opORSet", operation);
+	    }
+	  }, {
+	    key: "removeElementFromORSet",
+	    value: function removeElementFromORSet(orSet, elem) {
+	      console.log(this);
+	      console.log("orSet: " + JSON.stringify(orSet));
+	      console.log("Element to remove: " + JSON.stringify(elem));
+	      var operation = { element: elem, "add": false };
+	      console.log("Local" + JSON.stringify(this.state.localOpORSet));
+	      this.setState({ localOpORSet: this.state.localOpORSet.downstream(operation) });
+	      console.log("LocalOpORSet after Downstream: " + JSON.stringify(this.state.localOpORSet));
 	      this.state.communicationComponent.sendToServer(this.state.localOpORSet, "opORSet", operation);
 	    }
 	
@@ -21789,12 +21801,21 @@
 	      var _this2 = this;
 	
 	      var elementsToPresent = [];
-	      var elements = this.state.localOpORSet.valueSet;
+	      var orSet = this.state.localOpORSet;
+	      var elements = orSet.valueSet;
 	      for (var i = 0; i < elements.length; i++) {
+	        var elementToRemove = elements[i];
 	        elementsToPresent.push(React.createElement(
 	          "li",
 	          { key: elements[i].uniqueID },
-	          elements[i].element
+	          elements[i].element,
+	          React.createElement(
+	            "button",
+	            { onClick: function onClick() {
+	                return _this2.removeElementFromORSet(orSet, elementToRemove);
+	              } },
+	            "Remove"
+	          )
 	        ));
 	      }
 	      return React.createElement(
@@ -21845,16 +21866,9 @@
 	          React.createElement(
 	            "button",
 	            { onClick: function onClick() {
-	                return _this2.orSetChanged(true);
+	                return _this2.addElementToOrSet();
 	              } },
 	            "Add"
-	          ),
-	          React.createElement(
-	            "button",
-	            { onClick: function onClick() {
-	                return _this2.orSetChanged(false);
-	              } },
-	            "Remove"
 	          )
 	        )
 	      );
@@ -22340,7 +22354,7 @@
 	      };
 	    };
 	    var msg = {};
-	    console.log("OPERATION: " + operation);
+	    console.log("OPERATION: " + JSON.stringify(operation));
 	    switch (crdtType) {
 	      case "timestampRegister":
 	        msg = {
@@ -22529,6 +22543,8 @@
 
 	"use strict";
 	
+	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+	
 	module.exports = function OpORSet(name) {
 	
 	  this.valueSet = [];
@@ -22541,9 +22557,18 @@
 	  };
 	
 	  this.lookup = function (e) {
-	    if (this.valueSet.indexOf(e) >= 0) {
+	    console.log("Element to lookup: " + JSON.stringify(e));
+	    var foundIt = false;
+	    this.valueSet.forEach(function (element) {
+	      if (JSON.stringify(element) === JSON.stringify(e)) {
+	        foundIt = true;
+	      }
+	    });
+	    if (foundIt) {
+	      console.log("Yeah, I found it");
 	      return true;
 	    } else {
+	      console.log("Jo Braaa, I dunno");
 	      return false;
 	    }
 	  };
@@ -22557,18 +22582,41 @@
 	  };
 	
 	  this.add = function (e) {
-	    this.valueSet.push(this.setUniqueId(e));
+	    console.log("###e: " + JSON.stringify(e));
+	    if ((typeof e === "undefined" ? "undefined" : _typeof(e)) === 'object') {
+	      console.log("Hey, it's an object");
+	      if (e.uniqueID === undefined) {
+	        console.log("No unique ID. Setting one for object.");
+	        this.valueSet.push(this.setUniqueId(e));
+	      } else {
+	        console.log("Unique ID found. Push to Set.");
+	        this.valueSet.push(e);
+	      }
+	    } else {
+	      console.log("Simple data structure. Append Unique ID.");
+	      this.valueSet.push(this.setUniqueId(e));
+	    }
 	  };
 	
 	  this.remove = function (e) {
+	    console.log("Complete Value Set: " + JSON.stringify(this.valueSet));
+	    console.log("Element to remove: " + JSON.stringify(e));
+	    console.log("Lookup successful: " + this.lookup(e));
 	    if (this.lookup(e)) {
-	      this.valueSet.splice(this.valueSet.indexOf(e), 1);
+	      console.log("Let's check that filthy Array");
+	      this.valueSet.forEach(function (element, index) {
+	        console.log("Current element: " + JSON.stringify(element));
+	        if (JSON.stringify(element) === JSON.stringify(e)) {
+	          this.valueSet.splice(index, 1);
+	        }
+	      }, this);
 	    } else {
 	      console.log("Can't remove. Element is not in the set.");
 	    }
 	  };
 	
 	  this.downstream = function (operation) {
+	    console.log("Operation: " + JSON.stringify(operation));
 	    if (operation.add) {
 	      this.add(operation.element);
 	    } else {

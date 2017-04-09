@@ -31,7 +31,7 @@ this.sendToServer = function(crdt, crdtType, operation){
     };
   })
   var msg = {}
-  console.log("OPERATION: "+operation)
+  console.log("OPERATION: "+JSON.stringify(operation))
   switch (crdtType){
     case "timestampRegister":
       msg = {

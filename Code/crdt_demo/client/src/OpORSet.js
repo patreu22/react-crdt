@@ -10,9 +10,18 @@ this.setUSet = function(setValue){
 }
 
 this.lookup = function(e){
-  if (this.valueSet.indexOf(e) >= 0){
+  console.log("Element to lookup: "+JSON.stringify(e))
+  var foundIt = false
+  this.valueSet.forEach(function(element){
+    if(JSON.stringify(element) === JSON.stringify(e)){
+      foundIt = true
+    }
+  })
+  if (foundIt){
+    console.log("Yeah, I found it")
     return true
   }else{
+    console.log("Jo Braaa, I dunno")
     return false
   }
 }
@@ -27,18 +36,41 @@ this.setUniqueId = function(e){
 }
 
 this.add = function(e){
-    this.valueSet.push(this.setUniqueId(e))
+    console.log("###e: "+JSON.stringify(e))
+    if (typeof e === 'object'){
+      console.log("Hey, it's an object")
+      if(e.uniqueID === undefined){
+        console.log("No unique ID. Setting one for object.")
+        this.valueSet.push(this.setUniqueId(e))
+      }else{
+        console.log("Unique ID found. Push to Set.")
+        this.valueSet.push(e)
+      }
+    }else{
+      console.log("Simple data structure. Append Unique ID.")
+      this.valueSet.push(this.setUniqueId(e))
+    }
 }
 
 this.remove = function(e){
+  console.log("Complete Value Set: "+JSON.stringify(this.valueSet))
+  console.log("Element to remove: "+JSON.stringify(e))
+  console.log("Lookup successful: "+this.lookup(e))
   if(this.lookup(e)){
-    this.valueSet.splice(this.valueSet.indexOf(e), 1)
+    console.log("Let's check that filthy Array")
+    this.valueSet.forEach(function(element, index){
+      console.log("Current element: "+JSON.stringify(element))
+      if(JSON.stringify(element) === JSON.stringify(e)){
+        this.valueSet.splice(index,1)
+      }
+    }, this)
   }else{
     console.log("Can't remove. Element is not in the set.")
   }
 }
 
 this.downstream = function(operation){
+  console.log("Operation: "+JSON.stringify(operation))
   if(operation.add){
     this.add(operation.element)
   }else{

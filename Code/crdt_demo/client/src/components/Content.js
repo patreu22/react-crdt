@@ -37,10 +37,21 @@ class Content extends React.Component {
     this.state.communicationComponent.sendToServer(this.state.localTimestampRegister, "timestampRegister");
   };
 
-  orSetChanged(add){
-    var operation = { element: "Hello","add": add}
+  addElementToOrSet(){
+    var operation = { element: { element: "Hello", uniqueID: Math.floor(Math.random() * 1000000000)} , "add": true}
     console.log("Local" +JSON.stringify(this.state.localOpORSet))
     this.setState({localOpORSet: this.state.localOpORSet.downstream(operation)});
+    this.state.communicationComponent.sendToServer(this.state.localOpORSet, "opORSet", operation);
+  }
+
+  removeElementFromORSet(orSet, elem){
+    console.log(this)
+    console.log("orSet: "+JSON.stringify(orSet))
+    console.log("Element to remove: "+JSON.stringify(elem))
+    var operation = { element: elem, "add": false}
+    console.log("Local" +JSON.stringify(this.state.localOpORSet))
+    this.setState({localOpORSet: this.state.localOpORSet.downstream(operation)});
+    console.log("LocalOpORSet after Downstream: "+JSON.stringify(this.state.localOpORSet))
     this.state.communicationComponent.sendToServer(this.state.localOpORSet, "opORSet", operation);
   }
 
@@ -48,9 +59,14 @@ class Content extends React.Component {
   //<ol>{elementsToPresent}</ol>
   render() {
     var elementsToPresent = [];
-    var elements = this.state.localOpORSet.valueSet
+    var orSet = this.state.localOpORSet
+    var elements = orSet.valueSet
     for(var i = 0; i < elements.length; i++){
-      elementsToPresent.push(<li key={elements[i].uniqueID}>{elements[i].element}</li>);
+      var elementToRemove = elements[i]
+      elementsToPresent.push(<li key={elements[i].uniqueID}>{
+          elements[i].element}
+          <button onClick={() => this.removeElementFromORSet(orSet, elementToRemove)}>Remove</button>
+        </li>);
     }
   	return(
   		<div className="Content">
@@ -69,8 +85,7 @@ class Content extends React.Component {
         </div>
         <div>
           <ol>{elementsToPresent}</ol>
-          <button onClick={() => this.orSetChanged(true)}>Add</button>
-          <button onClick={() => this.orSetChanged(false)}>Remove</button>
+          <button onClick={() => this.addElementToOrSet()}>Add</button>
         </div>
       </div>
   	);
