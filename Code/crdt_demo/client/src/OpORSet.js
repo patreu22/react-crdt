@@ -78,4 +78,18 @@ this.downstream = function(operation){
   return this
 }
 
+
+this.setToDisplay = function(){
+  var retSet = []
+  var itemsProcessed = 0
+  this.valueSet.forEach(function(elem){
+    itemsProcessed++;
+    var value = elem.element
+    if (retSet.indexOf(value) === -1){
+      retSet.push(value)
+    }
+  });
+}
+
+
 }

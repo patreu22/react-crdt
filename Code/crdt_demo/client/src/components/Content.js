@@ -62,13 +62,14 @@ class Content extends React.Component {
 
   render() {
     var elementsToPresent = [];
-    var orSet = this.state.localOpORSet
-    var elements = orSet.valueSet
+    //var elements = this.state.localOpORSet.valueSet
+    var elements = this.state.localOpORSet.setToDisplay()
+    console.log("Elements: "+elements)
     for(var i = 0; i < elements.length; i++){
       var elementToRemove = elements[i]
       elementsToPresent.push(<li key={elements[i].uniqueID}>{
           elements[i].element}
-          <button onClick={() => this.removeElementFromORSet(orSet, elementToRemove)}>Remove</button>
+          <button onClick={() => this.removeElementFromORSet(this.state.localOpORSet, elementToRemove)}>Remove</button>
         </li>);
     }
   	return(
