@@ -224,22 +224,56 @@ this.add = function(e){
     }
 }
 
+
 this.remove = function(e){
   console.log("Complete Value Set: "+JSON.stringify(this.valueSet))
   console.log("Element to remove: "+JSON.stringify(e))
   console.log("Lookup successful: "+this.lookup(e))
   if(this.lookup(e)){
     console.log("Let's check that filthy Array")
-    this.valueSet.forEach(function(element, index){
-      console.log("Current element: "+JSON.stringify(element))
-      if(JSON.stringify(element) === JSON.stringify(e)){
-        this.valueSet.splice(index,1)
+
+    var finished = false
+    var i = 0
+    while(!finished){
+      if(i < this.valueSet.length){
+        if(e.element === this.valueSet[i].element){
+          console.log("Bingo!")
+          this.valueSet.splice(i,1)
+          i = 0
+        }else{
+          i++;
+        }
+      }else{
+        finished = true
       }
-    }, this)
+    }
   }else{
     console.log("Can't remove. Element is not in the set.")
   }
 }
+
+
+this.setToDisplay = function(){
+    console.log("Return set to display!")
+    var retSet = []
+    var itemsProcessed = 0
+
+    for(var i=0;i<this.valueSet.length;i++){
+      var value = this.valueSet[i]
+      var alreadyInSet = false
+      for(var j=0;j<retSet.length;j++){
+        var valueToCompare = retSet[j]
+        if (value.element === valueToCompare.element){
+          alreadyInSet = true
+        }
+      }
+      if(!alreadyInSet){
+        retSet.push(value)
+      }
+    }
+    console.log("RetSet: "+ retSet)
+    return retSet
+  }
 
 this.downstream = function(operation){
   console.log("Operation: "+JSON.stringify(operation))
