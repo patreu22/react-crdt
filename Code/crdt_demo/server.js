@@ -92,8 +92,8 @@ function sendToAllClientsExcept(sender, fileToSend){
       var tempFile = tempState[fileToSend.crdtName]
     }else{
       switch (fileToSend.crdtType){
-        case "timestampRegister":
-         var tempFile = new crdt.TimestampRegister(fileToSend.crdtName, false, fileToSend.operation.timestamp - 1)
+        case "lwwRegister":
+         var tempFile = new crdt.OpLwwRegister(fileToSend.crdtName, false, fileToSend.operation.timestamp - 1)
          console.log("timestampRegister")
          break
        case "opCounter":

@@ -21727,18 +21727,11 @@
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
 	var React = __webpack_require__(2);
-	
 	var crdt = __webpack_require__(190);
-	// var TimestampRegister = require('../TimestampRegister.js');
-	// var CommunicationComponent = require('../CommunicationComponent.js');
-	// var OpCounter = require('../OpCounter.js');
-	// var OpORSet = require("../OpORSet.js")
-	
 	
 	var Content = function (_React$Component) {
 	  _inherits(Content, _React$Component);
 	
-	  //Set initial localTimestampRegister
 	  function Content(props) {
 	    _classCallCheck(this, Content);
 	
@@ -21762,12 +21755,12 @@
 	
 	    _this.state = {
 	      communicationComponent: new crdt.CommunicationComponent(_this),
-	      localTimestampRegister: new crdt.TimestampRegister("timestampDemo", false),
+	      localLwwRegister: new crdt.OpLwwRegister("lwwDemo", false),
 	      localOpCounter: new crdt.OpCounter("counterDemo"),
 	      localOpORSet: new crdt.OpORSet("orSetDemo"),
 	      orInput: ''
 	    };
-	    _this.state.communicationComponent.addCRDT(_this.state.localTimestampRegister);
+	    _this.state.communicationComponent.addCRDT(_this.state.localLwwRegister);
 	    _this.state.communicationComponent.addCRDT(_this.state.localOpCounter);
 	    _this.state.communicationComponent.addCRDT(_this.state.localOpORSet);
 	    _this.state.communicationComponent.start();
@@ -21785,8 +21778,8 @@
 	    key: "toggleChanged",
 	    value: function toggleChanged(isChecked) {
 	      var operation = { value: isChecked, timestamp: new Date().getTime() };
-	      this.setState({ localTimestampRegister: this.state.localTimestampRegister.downstream(operation) });
-	      this.state.communicationComponent.sendToServer(this.state.localTimestampRegister, "timestampRegister");
+	      this.setState({ localTimestampRegister: this.state.localLwwRegister.downstream(operation) });
+	      this.state.communicationComponent.sendToServer(this.state.localLwwRegister, "lwwRegister");
 	    }
 	  }, {
 	    key: "removeElementFromORSet",
@@ -21828,7 +21821,7 @@
 	          React.createElement("br", null),
 	          React.createElement(_reactToggle2.default, {
 	            icons: false,
-	            checked: this.state.localTimestampRegister.value,
+	            checked: this.state.localLwwRegister.value,
 	            onChange: function onChange(myToggle) {
 	              return _this2.toggleChanged(myToggle.target.checked);
 	            } })
@@ -22293,8 +22286,6 @@
 	}
 	
 	this.addCRDT = (function(crdt){
-	  console.log("***********")
-	  console.log("CRDT to Add: "+ crdt)
 	  this.crdtDict[crdt.name] = crdt
 	}).bind(this);
 	
@@ -22318,7 +22309,7 @@
 	  var msg = {}
 	  console.log("OPERATION: "+JSON.stringify(operation))
 	  switch (crdtType){
-	    case "timestampRegister":
+	    case "lwwRegister":
 	      msg = {
 	        crdtName: crdt.name,
 	        crdtType: crdtType,
@@ -22370,9 +22361,9 @@
 	           console.log("Data: "+ JSON.stringify(response[key]))
 	           var data = response[key]
 	           switch (data.crdtType){
-	             case "timestampRegister":
+	             case "lwwRegister":
 	              this.setCRDT(this.crdtDict[key].setRegister(data.value, data.timestamp))
-	              console.log("timestampRegister detected")
+	              console.log("lwwRegister detected")
 	              break
 	            case "opCounter":
 	              this.setCRDT(this.crdtDict[key].setValue(data.value))
@@ -22502,6 +22493,7 @@
 	    }
 	}
 	
+	
 	this.remove = function(e){
 	  console.log("Complete Value Set: "+JSON.stringify(this.valueSet))
 	  console.log("Element to remove: "+JSON.stringify(e))
@@ -22529,17 +22521,6 @@
 	  }
 	}
 	
-	this.downstream = function(operation){
-	  console.log("Operation: "+JSON.stringify(operation))
-	  if(operation.add){
-	    this.add(operation.element)
-	  }else{
-	    this.remove(operation.element)
-	  }
-	  console.log("After downstream: "+JSON.stringify(this))
-	  return this
-	}
-	
 	
 	this.setToDisplay = function(){
 	    console.log("Return set to display!")
@@ -22563,11 +22544,22 @@
 	    return retSet
 	  }
 	
+	this.downstream = function(operation){
+	  console.log("Operation: "+JSON.stringify(operation))
+	  if(operation.add){
+	    this.add(operation.element)
+	  }else{
+	    this.remove(operation.element)
+	  }
+	  console.log("After downstream: "+JSON.stringify(this))
+	  return this
+	}
+	
 	}
 	
 	
-	//The TimestampRegister!
-	module.exports.TimestampRegister =  function(name, defaultValue = false, date = new Date().getTime()){
+	//The Last-Writer-Wins-Register!
+	module.exports.OpLwwRegister =  function(name, defaultValue = false, date = new Date().getTime()){
 		this.name = name
 		this.value = defaultValue
 		this.timestamp = date;
