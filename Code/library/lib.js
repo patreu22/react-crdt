@@ -40,7 +40,7 @@ this.sendToServer = function(crdt, crdtType, operation){
   var msg = {}
   console.log("OPERATION: "+JSON.stringify(operation))
   switch (crdtType){
-    case "timestampRegister":
+    case "lwwRegister":
       msg = {
         crdtName: crdt.name,
         crdtType: crdtType,
@@ -92,9 +92,9 @@ this.getInitialStateFromServer = function(){
            console.log("Data: "+ JSON.stringify(response[key]))
            var data = response[key]
            switch (data.crdtType){
-             case "timestampRegister":
+             case "lwwRegister":
               this.setCRDT(this.crdtDict[key].setRegister(data.value, data.timestamp))
-              console.log("timestampRegister detected")
+              console.log("lwwRegister detected")
               break
             case "opCounter":
               this.setCRDT(this.crdtDict[key].setValue(data.value))
@@ -289,8 +289,8 @@ this.downstream = function(operation){
 }
 
 
-//The TimestampRegister!
-module.exports.TimestampRegister =  function(name, defaultValue = false, date = new Date().getTime()){
+//The Last-Writer-Wins-Register!
+module.exports.OpLwwRegister =  function(name, defaultValue = false, date = new Date().getTime()){
 	this.name = name
 	this.value = defaultValue
 	this.timestamp = date;
