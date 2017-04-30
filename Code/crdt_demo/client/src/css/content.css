@@ -142,3 +142,61 @@
   -moz-box-shadow: 0px 0px 5px 5px #0099E0;
   box-shadow: 0px 0px 5px 5px #0099E0;
 }
+
+.decrementButton {
+	-moz-border-radius: 0px;
+	border-radius: 0px;
+	font-family: Arial;
+	font-size: 40px;
+	color:white;
+	padding: 2px;
+	box-shadow: 0px;
+	background: #D3665A;
+	width : 50px;
+	height: 50px;
+	border:none;
+}
+
+.incrementButton {
+	-moz-border-radius: 0px;
+	border-radius: 0px;
+	font-family: Arial;
+	font-size: 40px;
+	color: white;
+	padding: 2px;
+	box-shadow: 0px;
+	background: #36CC7C;
+	width : 50px;
+	height: 50px;
+	border:none;
+}
+
+.counterLabel{
+	-moz-border-radius: 0px;
+	border-radius: 0px;
+	font-family: Arial;
+	font-size: 40px;
+	color: black;
+	box-shadow: 0px;
+	height: 50px;
+	border:none;
+	margin: 3px;
+}
+/*-webkit-border-radius: 0px;
+   -moz-border-radius: 0px;
+   border-radius: 0px;
+   color: #FFFFFF;
+   font-family: Arial;
+   font-size: 59px;
+   font-weight: 100;
+   padding: 40px;
+   background-color: #36CC7C;
+   text-decoration: none;
+   display: inline-block;
+   cursor: pointer;
+}
+
+.incrementOrDecrementButton:hover {
+   background: #228765;
+   text-decoration: none;
+}*/

@@ -64,7 +64,7 @@ class Content extends React.Component {
       var elementToRemove = elements[i]
       elementsToPresent.push(<li key={elements[i].uniqueID}>{
           elements[i].element}
-          <button onClick={() => this.removeElementFromORSet(this.state.localOpORSet, elementToRemove)}>Remove</button>
+          <button className={"decrementButton"} onClick={() => this.removeElementFromORSet(this.state.localOpORSet, elementToRemove)}><span className={"glyphicon glyphicon-minus"}></span></button>
         </li>);
     }
   	return(
@@ -78,14 +78,14 @@ class Content extends React.Component {
               (myToggle) => this.toggleChanged(myToggle.target.checked)} />
 			  </label>
         <div>
-          <label>{this.state.localOpCounter.value}</label>
-          <button onClick={() => this.counterChanged(true)}>Increment</button>
-          <button onClick={() => this.counterChanged(false)}>Decrement</button>
+          <label className={"counterLabel"}>{this.state.localOpCounter.value}</label>
+          <button className={"incrementButton"} onClick={() => this.counterChanged(true)}><span className={"glyphicon glyphicon-plus"}></span></button>
+          <button className={"decrementButton"} onClick={() => this.counterChanged(false)}><span className={"glyphicon glyphicon-minus"}></span></button>
         </div>
         <div>
           <ul>{elementsToPresent}</ul>
           <input type="text" value={this.state.orInput} onChange={this.handleInput} placeholder="Add a Text to append it to ORSet"/>
-          <button onClick={this.addElementToOrSet}>Add</button>
+          <button className={"incrementButton"} onClick={this.addElementToOrSet}><span className={"glyphicon glyphicon-plus"}></span></button>
         </div>
       </div>
   	);
