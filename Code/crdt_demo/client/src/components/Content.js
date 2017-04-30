@@ -1,25 +1,20 @@
-var React = require("react");
 import "../css/Content.css"
 import Toggle from "react-toggle"
+var React = require("react");
 var crdt = require("react-crdt")
-// var TimestampRegister = require('../TimestampRegister.js');
-// var CommunicationComponent = require('../CommunicationComponent.js');
-// var OpCounter = require('../OpCounter.js');
-// var OpORSet = require("../OpORSet.js")
 
 
 class Content extends React.Component {
-  //Set initial localTimestampRegister
   constructor(props){
     super(props);
     this.state = {
       communicationComponent: new crdt.CommunicationComponent(this),
-      localTimestampRegister: new crdt.TimestampRegister("timestampDemo", false),
+      localLwwRegister: new crdt.OpLwwRegister("lwwDemo", false),
       localOpCounter: new crdt.OpCounter("counterDemo"),
       localOpORSet: new crdt.OpORSet("orSetDemo"),
       orInput: ''
     };
-    this.state.communicationComponent.addCRDT(this.state.localTimestampRegister)
+    this.state.communicationComponent.addCRDT(this.state.localLwwRegister)
     this.state.communicationComponent.addCRDT(this.state.localOpCounter)
     this.state.communicationComponent.addCRDT(this.state.localOpORSet)
     this.state.communicationComponent.start()
@@ -33,8 +28,8 @@ class Content extends React.Component {
 
   toggleChanged(isChecked){
     var operation = {value: isChecked, timestamp: new Date().getTime()}
-    this.setState({localTimestampRegister: this.state.localTimestampRegister.downstream(operation)});
-    this.state.communicationComponent.sendToServer(this.state.localTimestampRegister, "timestampRegister");
+    this.setState({localTimestampRegister: this.state.localLwwRegister.downstream(operation)});
+    this.state.communicationComponent.sendToServer(this.state.localLwwRegister, "lwwRegister");
   };
 
   addElementToOrSet = () =>{
@@ -78,7 +73,7 @@ class Content extends React.Component {
   				<br/>
   				<Toggle
     				icons={false}
-            checked = {this.state.localTimestampRegister.value}
+            checked = {this.state.localLwwRegister.value}
     				onChange={
               (myToggle) => this.toggleChanged(myToggle.target.checked)} />
 			  </label>
