@@ -34,6 +34,7 @@ class Content extends React.Component {
 
   addElementToOrSet = () =>{
     var input = this.state.orInput
+    console.log("Input: "+input)
     if(input){
       var operation = { element: { element: input, uniqueID: Math.floor(Math.random() * 1000000000)} , "add": true}
       this.setState({localOpORSet: this.state.localOpORSet.downstream(operation)});
@@ -59,33 +60,44 @@ class Content extends React.Component {
     var elementsToPresent = [];
     //var elements = this.state.localOpORSet.valueSet
     var elements = this.state.localOpORSet.setToDisplay()
-    console.log("Elements: "+elements)
     for(var i = 0; i < elements.length; i++){
       var elementToRemove = elements[i]
-      elementsToPresent.push(<li key={elements[i].uniqueID}>{
+      elementsToPresent.push(<li className="shoppingElement" key={elements[i].uniqueID}>{
           elements[i].element}
-          <button className={"decrementButton"} onClick={() => this.removeElementFromORSet(this.state.localOpORSet, elementToRemove)}><span className={"glyphicon glyphicon-minus"}></span></button>
+          <span>
+            <button className={"boughtItemButton"} onClick={() => this.removeElementFromORSet(this.state.localOpORSet, elementToRemove)}><span className={"glyphicon glyphicon-check"}/></button>
+            <button className={"decrementButton"} onClick={() => this.removeElementFromORSet(this.state.localOpORSet, elementToRemove)}><span className={"glyphicon glyphicon-minus"}/>
+          </button>
+          </span>
         </li>);
     }
+
   	return(
   		<div className="Content">
-  			<label>
-  				<br/>
-  				<Toggle
-    				icons={false}
-            checked = {this.state.localLwwRegister.value}
-    				onChange={
-              (myToggle) => this.toggleChanged(myToggle.target.checked)} />
-			  </label>
-        <div>
-          <label className={"counterLabel"}>{this.state.localOpCounter.value}</label>
+          <div className="toggleContainer">
+            <label htmlFor="myToggle" className="toggleLabel">Out of money?</label>
+    				<Toggle id="myToggle"
+      				icons={false}
+              checked = {this.state.localLwwRegister.value}
+      				onChange={
+                (myToggle) => this.toggleChanged(myToggle.target.checked)} />
+          </div>
+          <br/>
+        <div className="counterContainer">
+          <label className="labelForCounter" htmlFor="myCounter">Budget for this month:</label>
+          <span id="myCounter">
+          <label className={"counterLabel"}>{this.state.localOpCounter.value}€</label>
           <button className={"incrementButton"} onClick={() => this.counterChanged(true)}><span className={"glyphicon glyphicon-plus"}></span></button>
           <button className={"decrementButton"} onClick={() => this.counterChanged(false)}><span className={"glyphicon glyphicon-minus"}></span></button>
+          </span>
         </div>
+        <br/><br/>
         <div>
-          <ul>{elementsToPresent}</ul>
-          <input type="text" value={this.state.orInput} onChange={this.handleInput} placeholder="Add a Text to append it to ORSet"/>
-          <button className={"incrementButton"} onClick={this.addElementToOrSet}><span className={"glyphicon glyphicon-plus"}></span></button>
+          <ul className="shoppingList">{elementsToPresent}</ul>
+          <div className="addElementToSetContainer">
+          <input className="addShoppingItemField" type="text" value={this.state.orInput} onChange={this.handleInput} placeholder="Add item..."/>
+          <button className={"incrementButton addItemBtn"} onClick={this.addElementToOrSet}><span className={"glyphicon glyphicon-plus"}></span></button>
+          </div>
         </div>
       </div>
   	);

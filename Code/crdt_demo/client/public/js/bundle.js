@@ -21617,7 +21617,7 @@
 	        _react2.default.createElement(
 	          "h1",
 	          null,
-	          "CRDT Demo App"
+	          "CRDT Shopping List"
 	        )
 	      );
 	    }
@@ -21639,7 +21639,7 @@
 	
 	
 	// module
-	exports.push([module.id, ".Header {\n  text-align: center;\n  background-color: #3996C4;\n  padding: 20px;\n  border-width: 0;\n  color: black;\n}\n\nh1{\n\tfont-weight: normal;\n}\n", ""]);
+	exports.push([module.id, ".Header {\n  text-align: center;\n  background-color: #AAE0BE;\n  padding: 10px;\n  border-width: 0;\n  color: #2C6040;\n}\n\nh1{\n\tfont-weight: lighter;\n}\n", ""]);
 	
 	// exports
 
@@ -21739,6 +21739,7 @@
 	
 	    _this.addElementToOrSet = function () {
 	      var input = _this.state.orInput;
+	      console.log("Input: " + input);
 	      if (input) {
 	        var operation = { element: { element: input, uniqueID: Math.floor(Math.random() * 1000000000) }, "add": true };
 	        _this.setState({ localOpORSet: _this.state.localOpORSet.downstream(operation) });
@@ -21796,72 +21797,104 @@
 	      var elementsToPresent = [];
 	      //var elements = this.state.localOpORSet.valueSet
 	      var elements = this.state.localOpORSet.setToDisplay();
-	      console.log("Elements: " + elements);
 	      for (var i = 0; i < elements.length; i++) {
 	        var elementToRemove = elements[i];
 	        elementsToPresent.push(React.createElement(
 	          "li",
-	          { key: elements[i].uniqueID },
+	          { className: "shoppingElement", key: elements[i].uniqueID },
 	          elements[i].element,
 	          React.createElement(
-	            "button",
-	            { className: "decrementButton", onClick: function onClick() {
-	                return _this2.removeElementFromORSet(_this2.state.localOpORSet, elementToRemove);
-	              } },
-	            React.createElement("span", { className: "glyphicon glyphicon-minus" })
+	            "span",
+	            null,
+	            React.createElement(
+	              "button",
+	              { className: "boughtItemButton", onClick: function onClick() {
+	                  return _this2.removeElementFromORSet(_this2.state.localOpORSet, elementToRemove);
+	                } },
+	              React.createElement("span", { className: "glyphicon glyphicon-check" })
+	            ),
+	            React.createElement(
+	              "button",
+	              { className: "decrementButton", onClick: function onClick() {
+	                  return _this2.removeElementFromORSet(_this2.state.localOpORSet, elementToRemove);
+	                } },
+	              React.createElement("span", { className: "glyphicon glyphicon-minus" })
+	            )
 	          )
 	        ));
 	      }
+	
 	      return React.createElement(
 	        "div",
 	        { className: "Content" },
 	        React.createElement(
-	          "label",
-	          null,
-	          React.createElement("br", null),
-	          React.createElement(_reactToggle2.default, {
+	          "div",
+	          { className: "toggleContainer" },
+	          React.createElement(
+	            "label",
+	            { htmlFor: "myToggle", className: "toggleLabel" },
+	            "Out of money?"
+	          ),
+	          React.createElement(_reactToggle2.default, { id: "myToggle",
 	            icons: false,
 	            checked: this.state.localLwwRegister.value,
 	            onChange: function onChange(myToggle) {
 	              return _this2.toggleChanged(myToggle.target.checked);
 	            } })
 	        ),
+	        React.createElement("br", null),
 	        React.createElement(
 	          "div",
-	          null,
+	          { className: "counterContainer" },
 	          React.createElement(
 	            "label",
-	            { className: "counterLabel" },
-	            this.state.localOpCounter.value
+	            { className: "labelForCounter", htmlFor: "myCounter" },
+	            "Budget for this month:"
 	          ),
 	          React.createElement(
-	            "button",
-	            { className: "incrementButton", onClick: function onClick() {
-	                return _this2.counterChanged(true);
-	              } },
-	            React.createElement("span", { className: "glyphicon glyphicon-plus" })
-	          ),
-	          React.createElement(
-	            "button",
-	            { className: "decrementButton", onClick: function onClick() {
-	                return _this2.counterChanged(false);
-	              } },
-	            React.createElement("span", { className: "glyphicon glyphicon-minus" })
+	            "span",
+	            { id: "myCounter" },
+	            React.createElement(
+	              "label",
+	              { className: "counterLabel" },
+	              this.state.localOpCounter.value,
+	              "\u20AC"
+	            ),
+	            React.createElement(
+	              "button",
+	              { className: "incrementButton", onClick: function onClick() {
+	                  return _this2.counterChanged(true);
+	                } },
+	              React.createElement("span", { className: "glyphicon glyphicon-plus" })
+	            ),
+	            React.createElement(
+	              "button",
+	              { className: "decrementButton", onClick: function onClick() {
+	                  return _this2.counterChanged(false);
+	                } },
+	              React.createElement("span", { className: "glyphicon glyphicon-minus" })
+	            )
 	          )
 	        ),
+	        React.createElement("br", null),
+	        React.createElement("br", null),
 	        React.createElement(
 	          "div",
 	          null,
 	          React.createElement(
 	            "ul",
-	            null,
+	            { className: "shoppingList" },
 	            elementsToPresent
 	          ),
-	          React.createElement("input", { type: "text", value: this.state.orInput, onChange: this.handleInput, placeholder: "Add a Text to append it to ORSet" }),
 	          React.createElement(
-	            "button",
-	            { className: "incrementButton", onClick: this.addElementToOrSet },
-	            React.createElement("span", { className: "glyphicon glyphicon-plus" })
+	            "div",
+	            { className: "addElementToSetContainer" },
+	            React.createElement("input", { className: "addShoppingItemField", type: "text", value: this.state.orInput, onChange: this.handleInput, placeholder: "Add item..." }),
+	            React.createElement(
+	              "button",
+	              { className: "incrementButton addItemBtn", onClick: this.addElementToOrSet },
+	              React.createElement("span", { className: "glyphicon glyphicon-plus" })
+	            )
 	          )
 	        )
 	      );
@@ -21884,7 +21917,7 @@
 	
 	
 	// module
-	exports.push([module.id, ".Content{\n\ttext-align: left;\n\tpadding-left: 20px;\n}\n\n.react-toggle {\n  display: inline-block;\n  position: relative;\n  cursor: pointer;\n  background-color: transparent;\n  border: 0;\n  padding: 0;\n\n  -webkit-touch-callout: none;\n  -webkit-user-select: none;\n  -khtml-user-select: none;\n  -moz-user-select: none;\n  -ms-user-select: none;\n  user-select: none;\n\n  -webkit-tap-highlight-color: rgba(0,0,0,0);\n  -webkit-tap-highlight-color: transparent;\n}\n\n.react-toggle-screenreader-only {\n  border: 0;\n  clip: rect(0 0 0 0);\n  height: 1px;\n  margin: -1px;\n  overflow: hidden;\n  padding: 0;\n  position: absolute;\n  width: 1px;\n}\n\n.react-toggle--disabled {\n  cursor: not-allowed;\n  opacity: 0.5;\n  -webkit-transition: opacity 0.25s;\n  transition: opacity 0.25s;\n}\n\n.react-toggle-track {\n  width: 50px;\n  height: 24px;\n  padding: 0;\n  border-radius: 30px;\n  background-color: #4D4D4D;\n  -webkit-transition: all 0.2s ease;\n  -moz-transition: all 0.2s ease;\n  transition: all 0.2s ease;\n}\n\n.react-toggle:hover:not(.react-toggle--disabled) .react-toggle-track {\n  background-color: #000000;\n}\n\n.react-toggle--checked .react-toggle-track {\n  background-color: #19AB27;\n}\n\n.react-toggle--checked:hover:not(.react-toggle--disabled) .react-toggle-track {\n  background-color: #128D15;\n}\n\n.react-toggle-track-check {\n  position: absolute;\n  width: 14px;\n  height: 10px;\n  top: 0px;\n  bottom: 0px;\n  margin-top: auto;\n  margin-bottom: auto;\n  line-height: 0;\n  left: 8px;\n  opacity: 0;\n  -webkit-transition: opacity 0.25s ease;\n  -moz-transition: opacity 0.25s ease;\n  transition: opacity 0.25s ease;\n}\n\n.react-toggle--checked .react-toggle-track-check {\n  opacity: 1;\n  -webkit-transition: opacity 0.25s ease;\n  -moz-transition: opacity 0.25s ease;\n  transition: opacity 0.25s ease;\n}\n\n.react-toggle-track-x {\n  position: absolute;\n  width: 10px;\n  height: 10px;\n  top: 0px;\n  bottom: 0px;\n  margin-top: auto;\n  margin-bottom: auto;\n  line-height: 0;\n  right: 10px;\n  opacity: 1;\n  -webkit-transition: opacity 0.25s ease;\n  -moz-transition: opacity 0.25s ease;\n  transition: opacity 0.25s ease;\n}\n\n.react-toggle--checked .react-toggle-track-x {\n  opacity: 0;\n}\n\n.react-toggle-thumb {\n  transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1) 0ms;\n  position: absolute;\n  top: 1px;\n  left: 1px;\n  width: 22px;\n  height: 22px;\n  border: 1px solid #4D4D4D;\n  border-radius: 50%;\n  background-color: #FAFAFA;\n\n  -webkit-box-sizing: border-box;\n  -moz-box-sizing: border-box;\n  box-sizing: border-box;\n\n  -webkit-transition: all 0.25s ease;\n  -moz-transition: all 0.25s ease;\n  transition: all 0.25s ease;\n}\n\n.react-toggle--checked .react-toggle-thumb {\n  left: 27px;\n  border-color: #19AB27;\n}\n\n.react-toggle--focus .react-toggle-thumb {\n  -webkit-box-shadow: 0px 0px 3px 2px #0099E0;\n  -moz-box-shadow: 0px 0px 3px 2px #0099E0;\n  box-shadow: 0px 0px 2px 3px #0099E0;\n}\n\n.react-toggle:active:not(.react-toggle--disabled) .react-toggle-thumb {\n  -webkit-box-shadow: 0px 0px 5px 5px #0099E0;\n  -moz-box-shadow: 0px 0px 5px 5px #0099E0;\n  box-shadow: 0px 0px 5px 5px #0099E0;\n}\n\n.decrementButton {\n\t-moz-border-radius: 0px;\n\tborder-radius: 0px;\n\tfont-family: Arial;\n\tfont-size: 40px;\n\tcolor:white;\n\tpadding: 2px;\n\tbox-shadow: 0px;\n\tbackground: #D3665A;\n\twidth : 50px;\n\theight: 50px;\n\tborder:none;\n}\n\n.incrementButton {\n\t-moz-border-radius: 0px;\n\tborder-radius: 0px;\n\tfont-family: Arial;\n\tfont-size: 40px;\n\tcolor: white;\n\tpadding: 2px;\n\tbox-shadow: 0px;\n\tbackground: #36CC7C;\n\twidth : 50px;\n\theight: 50px;\n\tborder:none;\n}\n\n.counterLabel{\n\t-moz-border-radius: 0px;\n\tborder-radius: 0px;\n\tfont-family: Arial;\n\tfont-size: 40px;\n\tcolor: black;\n\tbox-shadow: 0px;\n\theight: 50px;\n\tborder:none;\n\tmargin: 3px;\n}\n/*-webkit-border-radius: 0px;\n   -moz-border-radius: 0px;\n   border-radius: 0px;\n   color: #FFFFFF;\n   font-family: Arial;\n   font-size: 59px;\n   font-weight: 100;\n   padding: 40px;\n   background-color: #36CC7C;\n   text-decoration: none;\n   display: inline-block;\n   cursor: pointer;\n}\n\n.incrementOrDecrementButton:hover {\n   background: #228765;\n   text-decoration: none;\n}*/\n", ""]);
+	exports.push([module.id, ".Content{\n\ttext-align: center;\n\tpadding-left: 20px;\n\tbackground-color: #83AD93;\n\toverflow-y: scroll;\n}\n\n.shoppingList{\n\tlist-style: none;\n}\n\n.shoppingElement{\n\tmargin-bottom: 3px;\n}\n\n.labelForCounter{\n\tdisplay: inline-block;\n\tvertical-align: middle;\n}\n\n.addElementToSetContainer{\n\tdisplay: inline-block;\n}\n\n.decrementButton {\n\t-moz-border-radius: 0px;\n\tdisplay: inline-block;\n\tvertical-align: middle;\n\tborder-radius: 0px;\n\tfont-family: Arial;\n\tfont-size: 18px;\n\tcolor:white;\n\tpadding: 1px;\n\tbox-shadow: 0px;\n\tbackground: #D3665A;\n\twidth : 25px;\n\theight: 25px;\n\tborder:none;\n}\n\n.addShoppingItemField{\n\theight: 25px;\n\tdisplay: inline-block;\n\tvertical-align: middle;\n\tmargin-right: 5px; \n}\n\n.incrementButton {\n\t-moz-border-radius: 0px;\n\tdisplay: inline-block;\n\tvertical-align: middle;\n\tborder-radius: 0px;\n\tfont-family: Arial;\n\tfont-size: 18px;\n\tcolor: white;\n\tpadding: 1px;\n\tbox-shadow: 0px;\n\tbackground: #36CC7C;\n\twidth : 25px;\n\theight: 25px;\n\tborder:none;\n}\n\n.boughtItemButton {\n\t-moz-border-radius: 0px;\n\tdisplay: inline-block;\n\tvertical-align: middle;\n\tborder-radius: 0px;\n\tfont-family: Arial;\n\tfont-size: 18px;\n\tcolor: white;\n\tpadding: 1px;\n\tbox-shadow: 0px;\n\tbackground: #36CC7C;\n\twidth : 25px;\n\theight: 25px;\n\tmargin-left: 5px;\n\tborder:none;\n}\n\n.counterLabel{\n\tdisplay: inline-block;\n\tvertical-align: middle;\n\tfont-family: Arial;\n\tfont-size: 15px;\n\tpadding-left: 5px;\n\tpadding-right: 5px;\n}\n\n.counterContainer{\n\tdisplay: inline-block;\n\tmargin-top: 5px;\n\tmargin-bottom: 5px;\n}\n\n\n.toggleContainer{\n\tdisplay: inline-block;\n\tmargin-top: 5px;\n\tmargin-bottom: 5px;\n}\n\n.toggleLabel{\n\tdisplay: inline-block;\n\tvertical-align: middle;\n\tfont-size: 15px;\n\tmargin-right: 5px;\n\tmargin-left: 5px;\n}\n\n.react-toggle {\n  display: inline-block;\n\tvertical-align: middle;\n  position: relative;\n  cursor: pointer;\n  background-color: transparent;\n  border: 0;\n  padding: 0;\n\n  -webkit-touch-callout: none;\n  -webkit-user-select: none;\n  -khtml-user-select: none;\n  -moz-user-select: none;\n  -ms-user-select: none;\n  user-select: none;\n\n  -webkit-tap-highlight-color: rgba(0,0,0,0);\n  -webkit-tap-highlight-color: transparent;\n}\n\n.react-toggle-screenreader-only {\n  border: 0;\n  clip: rect(0 0 0 0);\n  height: 1px;\n  margin: -1px;\n  overflow: hidden;\n  padding: 0;\n  position: absolute;\n  width: 1px;\n}\n\n.react-toggle--disabled {\n  cursor: not-allowed;\n  opacity: 0.5;\n  -webkit-transition: opacity 0.25s;\n  transition: opacity 0.25s;\n}\n\n.react-toggle-track {\n  width: 50px;\n  height: 24px;\n  padding: 0;\n  border-radius: 30px;\n  background-color: #4D4D4D;\n  -webkit-transition: all 0.2s ease;\n  -moz-transition: all 0.2s ease;\n  transition: all 0.2s ease;\n}\n\n.react-toggle:hover:not(.react-toggle--disabled) .react-toggle-track {\n  background-color: #000000;\n}\n\n.react-toggle--checked .react-toggle-track {\n  background-color: #19AB27;\n}\n\n.react-toggle--checked:hover:not(.react-toggle--disabled) .react-toggle-track {\n  background-color: #128D15;\n}\n\n.react-toggle-track-check {\n  position: absolute;\n  width: 14px;\n  height: 10px;\n  top: 0px;\n  bottom: 0px;\n  margin-top: auto;\n  margin-bottom: auto;\n  line-height: 0;\n  left: 8px;\n  opacity: 0;\n  -webkit-transition: opacity 0.25s ease;\n  -moz-transition: opacity 0.25s ease;\n  transition: opacity 0.25s ease;\n}\n\n.react-toggle--checked .react-toggle-track-check {\n  opacity: 1;\n  -webkit-transition: opacity 0.25s ease;\n  -moz-transition: opacity 0.25s ease;\n  transition: opacity 0.25s ease;\n}\n\n.react-toggle-track-x {\n  position: absolute;\n  width: 10px;\n  height: 10px;\n  top: 0px;\n  bottom: 0px;\n  margin-top: auto;\n  margin-bottom: auto;\n  line-height: 0;\n  right: 10px;\n  opacity: 1;\n  -webkit-transition: opacity 0.25s ease;\n  -moz-transition: opacity 0.25s ease;\n  transition: opacity 0.25s ease;\n}\n\n.react-toggle--checked .react-toggle-track-x {\n  opacity: 0;\n}\n\n.react-toggle-thumb {\n  transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1) 0ms;\n  position: absolute;\n  top: 1px;\n  left: 1px;\n  width: 22px;\n  height: 22px;\n  border: 1px solid #4D4D4D;\n  border-radius: 50%;\n  background-color: #FAFAFA;\n\n  -webkit-box-sizing: border-box;\n  -moz-box-sizing: border-box;\n  box-sizing: border-box;\n\n  -webkit-transition: all 0.25s ease;\n  -moz-transition: all 0.25s ease;\n  transition: all 0.25s ease;\n}\n\n.react-toggle--checked .react-toggle-thumb {\n  left: 27px;\n  border-color: #19AB27;\n}\n\n.react-toggle--focus .react-toggle-thumb {\n  -webkit-box-shadow: 0px 0px 3px 2px #0099E0;\n  -moz-box-shadow: 0px 0px 3px 2px #0099E0;\n  box-shadow: 0px 0px 2px 3px #0099E0;\n}\n\n.react-toggle:active:not(.react-toggle--disabled) .react-toggle-thumb {\n  -webkit-box-shadow: 0px 0px 5px 5px #0099E0;\n  -moz-box-shadow: 0px 0px 5px 5px #0099E0;\n  box-shadow: 0px 0px 5px 5px #0099E0;\n}\n", ""]);
 	
 	// exports
 
@@ -22706,7 +22739,7 @@
 	
 	
 	// module
-	exports.push([module.id, ".Footer {\n  position: absolute;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  padding: 1rem;\n  background-color: #3996C4;;\n  text-align: left;\n  color: black;\n  font-family: sans-serif;\n}", ""]);
+	exports.push([module.id, ".Footer {\n  position: absolute;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  padding: 1rem;\n  background-color: #AAE0BE;;\n  text-align: left;\n  color: #2C6040;\n  font-family: Arial;\n}\n", ""]);
 	
 	// exports
 
@@ -22720,7 +22753,7 @@
 	
 	
 	// module
-	exports.push([module.id, "body {\n  margin: 0;\n  padding: 0;\n  background-color: #EDEDED;\n}\n\n\n", ""]);
+	exports.push([module.id, "html{\n  position: relative;\n  min-height: 100%;\n  background-color: #83AD93;\n}\n\nbody {\n  margin: 0;\n  padding: 0;\n  min-height: 100%;\n}\n", ""]);
 	
 	// exports
 

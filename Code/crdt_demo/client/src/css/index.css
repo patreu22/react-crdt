@@ -1,7 +1,11 @@
+html{
+  position: relative;
+  min-height: 100%;
+  background-color: #83AD93;
+}
+
 body {
   margin: 0;
   padding: 0;
-  background-color: #EDEDED;
+  min-height: 100%;
 }
-
-

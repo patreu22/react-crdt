@@ -1,11 +1,11 @@
 .Header {
   text-align: center;
-  background-color: #3996C4;
-  padding: 20px;
+  background-color: #AAE0BE;
+  padding: 10px;
   border-width: 0;
-  color: black;
+  color: #2C6040;
 }
 
 h1{
-	font-weight: normal;
+	font-weight: lighter;
 }

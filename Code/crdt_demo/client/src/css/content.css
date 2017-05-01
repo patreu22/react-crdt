@@ -1,10 +1,116 @@
 .Content{
-	text-align: left;
+	text-align: center;
 	padding-left: 20px;
+	background-color: #83AD93;
+	overflow-y: scroll;
+}
+
+.shoppingList{
+	list-style: none;
+}
+
+.shoppingElement{
+	margin-bottom: 3px;
+}
+
+.labelForCounter{
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.addElementToSetContainer{
+	display: inline-block;
+}
+
+.decrementButton {
+	-moz-border-radius: 0px;
+	display: inline-block;
+	vertical-align: middle;
+	border-radius: 0px;
+	font-family: Arial;
+	font-size: 18px;
+	color:white;
+	padding: 1px;
+	box-shadow: 0px;
+	background: #D3665A;
+	width : 25px;
+	height: 25px;
+	border:none;
+}
+
+.addShoppingItemField{
+	height: 25px;
+	display: inline-block;
+	vertical-align: middle;
+	margin-right: 5px; 
+}
+
+.incrementButton {
+	-moz-border-radius: 0px;
+	display: inline-block;
+	vertical-align: middle;
+	border-radius: 0px;
+	font-family: Arial;
+	font-size: 18px;
+	color: white;
+	padding: 1px;
+	box-shadow: 0px;
+	background: #36CC7C;
+	width : 25px;
+	height: 25px;
+	border:none;
+}
+
+.boughtItemButton {
+	-moz-border-radius: 0px;
+	display: inline-block;
+	vertical-align: middle;
+	border-radius: 0px;
+	font-family: Arial;
+	font-size: 18px;
+	color: white;
+	padding: 1px;
+	box-shadow: 0px;
+	background: #36CC7C;
+	width : 25px;
+	height: 25px;
+	margin-left: 5px;
+	border:none;
+}
+
+.counterLabel{
+	display: inline-block;
+	vertical-align: middle;
+	font-family: Arial;
+	font-size: 15px;
+	padding-left: 5px;
+	padding-right: 5px;
+}
+
+.counterContainer{
+	display: inline-block;
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
+
+.toggleContainer{
+	display: inline-block;
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
+.toggleLabel{
+	display: inline-block;
+	vertical-align: middle;
+	font-size: 15px;
+	margin-right: 5px;
+	margin-left: 5px;
 }
 
 .react-toggle {
   display: inline-block;
+	vertical-align: middle;
   position: relative;
   cursor: pointer;
   background-color: transparent;
@@ -142,61 +248,3 @@
   -moz-box-shadow: 0px 0px 5px 5px #0099E0;
   box-shadow: 0px 0px 5px 5px #0099E0;
 }
-
-.decrementButton {
-	-moz-border-radius: 0px;
-	border-radius: 0px;
-	font-family: Arial;
-	font-size: 40px;
-	color:white;
-	padding: 2px;
-	box-shadow: 0px;
-	background: #D3665A;
-	width : 50px;
-	height: 50px;
-	border:none;
-}
-
-.incrementButton {
-	-moz-border-radius: 0px;
-	border-radius: 0px;
-	font-family: Arial;
-	font-size: 40px;
-	color: white;
-	padding: 2px;
-	box-shadow: 0px;
-	background: #36CC7C;
-	width : 50px;
-	height: 50px;
-	border:none;
-}
-
-.counterLabel{
-	-moz-border-radius: 0px;
-	border-radius: 0px;
-	font-family: Arial;
-	font-size: 40px;
-	color: black;
-	box-shadow: 0px;
-	height: 50px;
-	border:none;
-	margin: 3px;
-}
-/*-webkit-border-radius: 0px;
-   -moz-border-radius: 0px;
-   border-radius: 0px;
-   color: #FFFFFF;
-   font-family: Arial;
-   font-size: 59px;
-   font-weight: 100;
-   padding: 40px;
-   background-color: #36CC7C;
-   text-decoration: none;
-   display: inline-block;
-   cursor: pointer;
-}
-
-.incrementOrDecrementButton:hover {
-   background: #228765;
-   text-decoration: none;
-}*/
