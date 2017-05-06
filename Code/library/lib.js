@@ -4,9 +4,6 @@ this.crdtDict = {};
 this.pendingMessagesQueue = []
 this.correspondingApp = app
 
-// this.sendToServerURL = "/api"
-// this.initialStartURL = "/api/initial"
-// this.longPollingURL = "/api/lp"
 
 
 window.addEventListener("online", onlineAgain.bind(this))
@@ -54,6 +51,7 @@ this.sendToServer = function(crdt, operation){
         crdtType: crdt.type,
         operation : operation
   }
+
   this.manageSending(function(){xhr.send(JSON.stringify(msg))})
 };
 
