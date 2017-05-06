@@ -4,7 +4,19 @@ this.crdtDict = {};
 this.pendingMessagesQueue = []
 this.correspondingApp = app
 
+// this.sendToServerURL = "/api"
+// this.initialStartURL = "/api/initial"
+// this.longPollingURL = "/api/lp"
+
+
 window.addEventListener("online", onlineAgain.bind(this))
+
+
+function setupApiRoutes(toServer, initial, longPolling){
+  this.sendToServerURL = toServer
+  this.initialStartURL = initial
+  this.longPollingURL = longPolling
+}
 
 function onlineAgain(){
     this.pendingMessagesQueue.forEach(function(message, mIndex){

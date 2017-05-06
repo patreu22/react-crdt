@@ -17,6 +17,7 @@ class Content extends React.Component {
     this.state.communicationComponent.addCRDT(this.state.localLwwRegister)
     this.state.communicationComponent.addCRDT(this.state.localOpCounter)
     this.state.communicationComponent.addCRDT(this.state.localOpORSet)
+    this.state.communicationComponent.setupApiRoutes("/api", "/api/initial", "/api/lp")
     this.state.communicationComponent.start()
   };
 
