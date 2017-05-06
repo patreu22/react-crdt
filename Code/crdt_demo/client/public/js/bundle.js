@@ -22821,10 +22821,12 @@
 	  while(!finished){
 	      if(i<this.valueSet.length){
 	        for(var j=0;j<idsToRemove.length;j++){
+	          console.log("Value Set: "+JSON.stringify(this.valueSet[i]))
+	          console.log("Id to remove: "+ idsToRemove[j])
 	          if(this.valueSet[i].uniqueID === idsToRemove[j]){
+	            console.log("Got one!")
 	            this.valueSet.splice(i,1)
 	              i = 0
-	              break
 	          }else{
 	            i++
 	          }
@@ -22833,6 +22835,7 @@
 	        finished = true
 	      }
 	    }
+	    console.log("Finished WHILE-loop")
 	  }
 	
 	this.getIDsToRemove = function(e){
