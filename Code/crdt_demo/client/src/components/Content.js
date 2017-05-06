@@ -38,7 +38,6 @@ class Content extends React.Component {
     console.log("Input: "+input)
     if(input){
       var operation = { element: { element: input, uniqueID: Math.floor(Math.random() * 1000000000)} , "add": true}
-      console.log("The operation!!!!")
       console.log(JSON.stringify(operation))
       this.setState({localOpORSet: this.state.localOpORSet.downstream(operation)});
       this.state.communicationComponent.sendToServer(this.state.localOpORSet, operation);
@@ -49,6 +48,10 @@ class Content extends React.Component {
   }
 
   removeElementFromORSet(orSet, elem){
+    console.log("####################################")
+    console.log("REMOOOOOVE!")
+    console.log(elem)
+    console.log("####################################")
     var operation = { element: elem, "add": false}
     this.setState({localOpORSet: this.state.localOpORSet.downstream(operation)});
     this.state.communicationComponent.sendToServer(this.state.localOpORSet, operation);
@@ -63,18 +66,16 @@ class Content extends React.Component {
     var elementsToPresent = [];
     //var elements = this.state.localOpORSet.valueSet
     var elements = this.state.localOpORSet.setToDisplay()
-    for(var i = 0; i < elements.length; i++){
-      var elementToRemove = elements[i]
-      elementsToPresent.push(<li className="shoppingElement" key={elements[i].uniqueID}>{
-          elements[i].element}
-          <span>
-            <button className={"boughtItemButton"} onClick={() => this.removeElementFromORSet(this.state.localOpORSet, elementToRemove)}><span className={"glyphicon glyphicon-check"}/></button>
-            <button className={"decrementButton"} onClick={() => this.removeElementFromORSet(this.state.localOpORSet, elementToRemove)}><span className={"glyphicon glyphicon-minus"}/>
-          </button>
-          </span>
-        </li>);
-    }
-
+    console.log("++++++++Elements: ")
+    console.log(elements)
+    var myMap = elements.map((element) =>
+      <li className="shoppingElement" key={element.uniqueID}>{element.element}
+      <span>
+        <button className={"boughtItemButton"} onClick={() => this.removeElementFromORSet(this.state.localOpORSet, element)}><span className={"glyphicon glyphicon-check"}/></button>
+        <button className={"decrementButton"} onClick={() => this.removeElementFromORSet(this.state.localOpORSet, element)}><span className={"glyphicon glyphicon-minus"}/></button>
+      </span>
+      </li>
+    )
   	return(
   		<div className="Content">
           <div className="toggleContainer">
@@ -96,7 +97,7 @@ class Content extends React.Component {
         </div>
         <br/><br/>
         <div>
-          <ul className="shoppingList">{elementsToPresent}</ul>
+          <ul className="shoppingList">{myMap}</ul>
           <div className="addElementToSetContainer">
           <input className="addShoppingItemField" type="text" value={this.state.orInput} onChange={this.handleInput} placeholder="Add item..."/>
           <button className={"incrementButton addItemBtn"} onClick={this.addElementToOrSet}><span className={"glyphicon glyphicon-plus"}></span></button>
