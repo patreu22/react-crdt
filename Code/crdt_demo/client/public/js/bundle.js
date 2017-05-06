@@ -21774,14 +21774,14 @@
 	    value: function counterChanged(increase) {
 	      var operation = { "increase": increase };
 	      this.setState({ localOpCounter: this.state.localOpCounter.downstream(operation) });
-	      this.state.communicationComponent.sendToServer(this.state.localOpCounter, "opCounter", operation);
+	      this.state.communicationComponent.sendToServer(this.state.localOpCounter, operation);
 	    }
 	  }, {
 	    key: "toggleChanged",
 	    value: function toggleChanged(isChecked) {
 	      var operation = { value: isChecked, timestamp: new Date().getTime() };
 	      this.setState({ localTimestampRegister: this.state.localLwwRegister.downstream(operation) });
-	      this.state.communicationComponent.sendToServer(this.state.localLwwRegister, "lwwRegister");
+	      this.state.communicationComponent.sendToServer(this.state.localLwwRegister, operation);
 	    }
 	  }, {
 	    key: "removeElementFromORSet",
@@ -22314,8 +22314,7 @@
 	
 	window.addEventListener("online", onlineAgain.bind(this))
 	
-	
-	function setupApiRoutes(toServer, initial, longPolling){
+	this.setupApiRoutes = function(toServer, initial, longPolling){
 	  this.sendToServerURL = toServer
 	  this.initialStartURL = initial
 	  this.longPollingURL = longPolling
@@ -22341,7 +22340,7 @@
 	}
 	
 	
-	this.sendToServer = function(crdt, crdtType, operation){
+	this.sendToServer = function(crdt, operation){
 	  //Send changed Object to Server
 	  var xhr = new XMLHttpRequest();
 	  xhr.open('POST', '/api', true);
@@ -22352,37 +22351,17 @@
 	       console.log("Response: "+xhr.responseText)
 	    };
 	  })
-	  var msg = {}
 	  console.log("OPERATION: "+JSON.stringify(operation))
-	  switch (crdtType){
-	    case "lwwRegister":
-	      msg = {
+	  var msg = {
 	        crdtName: crdt.name,
-	        crdtType: crdtType,
-	        operation: {
-	          value: crdt.value,
-	          timestamp: crdt.timestamp
-	        }
-	      }
-	      break
-	    case "opCounter":
-	      msg = {
-	        crdtName: crdt.name,
-	        crdtType: crdtType,
-	        operation: operation,
-	      }
-	      break
-	    case "opORSet":
-	      msg = {
-	        crdtName: crdt.name,
-	        crdtType: crdtType,
+	        crdtType: crdt.type,
 	        operation : operation
-	      }
-	      break
-	    default:
-	      console.log("Default branch")
-	      msg = {}
 	  }
+	
+	  console.log("#############################")
+	  console.log("Message to server:")
+	  console.log(JSON.stringify(msg))
+	  console.log("#############################")
 	  this.manageSending(function(){xhr.send(JSON.stringify(msg))})
 	};
 	
@@ -22491,6 +22470,7 @@
 	
 	this.valueSet = []
 	this.name = name
+	this.type = "opORSet"
 	
 	this.setValue = function(setValue){
 	  console.log("Set value: "+setValue)
@@ -22609,6 +22589,7 @@
 		this.name = name
 		this.value = defaultValue
 		this.timestamp = date;
+	  this.type = "lwwRegister"
 	
 		this.setRegister = (function(val, stamp){
 			this.value = val;
@@ -22645,6 +22626,7 @@
 	module.exports.OpCounter =  function(name, value=0){
 		this.name = name
 		this.value = value;
+	  this.type = "opCounter"
 	
 		this.setValue = (function(val){
 			console.log("Value to set: "+val)

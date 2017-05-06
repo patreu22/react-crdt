@@ -11,8 +11,7 @@ this.correspondingApp = app
 
 window.addEventListener("online", onlineAgain.bind(this))
 
-
-function setupApiRoutes(toServer, initial, longPolling){
+this.setupApiRoutes = function(toServer, initial, longPolling){
   this.sendToServerURL = toServer
   this.initialStartURL = initial
   this.longPollingURL = longPolling
@@ -41,7 +40,7 @@ this.start = function(){
 this.sendToServer = function(crdt, operation){
   //Send changed Object to Server
   var xhr = new XMLHttpRequest();
-  xhr.open('POST', '/api', true);
+  xhr.open('POST', this.sendToServerURL, true);
   xhr.setRequestHeader("Content-type", "application/json");
   xhr.onreadystatechange = (function() {//Call a function when the state changes.
     if(xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) {
@@ -52,13 +51,9 @@ this.sendToServer = function(crdt, operation){
   console.log("OPERATION: "+JSON.stringify(operation))
   var msg = {
         crdtName: crdt.name,
+        crdtType: crdt.type,
         operation : operation
   }
-
-  console.log("#############################")
-  console.log("Message to server:")
-  console.log(JSON.stringify(msg))
-  console.log("#############################")
   this.manageSending(function(){xhr.send(JSON.stringify(msg))})
 };
 
@@ -77,9 +72,7 @@ this.getInitialStateFromServer = function(){
      if (!(xhr.responseText == "{}")){
        var response = JSON.parse(xhr.responseText)
        Object.keys(this.crdtDict).forEach(function(key, index){
-         console.log("Key: "+ key)
          if (key in response){
-           console.log("In response!")
            console.log("Data: "+ JSON.stringify(response[key]))
            var data = response[key]
            switch (data.crdtType){

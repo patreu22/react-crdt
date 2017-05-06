@@ -24,13 +24,13 @@ class Content extends React.Component {
   counterChanged(increase){
     var operation = {"increase": increase}
     this.setState({localOpCounter: this.state.localOpCounter.downstream(operation)});
-    this.state.communicationComponent.sendToServer(this.state.localOpCounter, "opCounter", operation);
+    this.state.communicationComponent.sendToServer(this.state.localOpCounter, operation);
   };
 
   toggleChanged(isChecked){
     var operation = {value: isChecked, timestamp: new Date().getTime()}
     this.setState({localTimestampRegister: this.state.localLwwRegister.downstream(operation)});
-    this.state.communicationComponent.sendToServer(this.state.localLwwRegister, "lwwRegister");
+    this.state.communicationComponent.sendToServer(this.state.localLwwRegister, operation);
   };
 
   addElementToOrSet = () =>{
