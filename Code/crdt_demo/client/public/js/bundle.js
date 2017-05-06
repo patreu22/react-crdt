@@ -22835,7 +22835,6 @@
 	        finished = true
 	      }
 	    }
-	    console.log("Finished WHILE-loop")
 	  }
 	
 	this.getIDsToRemove = function(e){
