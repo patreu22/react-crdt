@@ -22818,6 +22818,7 @@
 	  var idsToRemove = e
 	  var finished = false
 	  var i = 0
+	  console.log("Value Set: "+this.valueSet)
 	  while(!finished){
 	      if(i<this.valueSet.length){
 	        for(var j=0;j<idsToRemove.length;j++){
@@ -22827,10 +22828,9 @@
 	            console.log("Got one!")
 	            this.valueSet.splice(i,1)
 	              i = 0
-	          }else{
-	            i++
 	          }
 	        }
+	        i++
 	      }else{
 	        finished = true
 	      }
