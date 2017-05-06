@@ -39,7 +39,7 @@ class Content extends React.Component {
     if(input){
       var operation = { element: { element: input, uniqueID: Math.floor(Math.random() * 1000000000)} , "add": true}
       this.setState({localOpORSet: this.state.localOpORSet.downstream(operation)});
-      this.state.communicationComponent.sendToServer(this.state.localOpORSet, "opORSet", operation);
+      this.state.communicationComponent.sendToServer(this.state.localOpORSet, operation);
       this.setState({orInput: ""})
     }else{
       console.log("Please enter a value")
@@ -49,7 +49,7 @@ class Content extends React.Component {
   removeElementFromORSet(orSet, elem){
     var operation = { element: elem, "add": false}
     this.setState({localOpORSet: this.state.localOpORSet.downstream(operation)});
-    this.state.communicationComponent.sendToServer(this.state.localOpORSet, "opORSet", operation);
+    this.state.communicationComponent.sendToServer(this.state.localOpORSet, operation);
   }
 
   handleInput = (event) => {
