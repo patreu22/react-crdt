@@ -38,7 +38,7 @@ this.start = function(){
 }
 
 
-this.sendToServer = function(crdt, crdtType, operation){
+this.sendToServer = function(crdt, operation){
   //Send changed Object to Server
   var xhr = new XMLHttpRequest();
   xhr.open('POST', '/api', true);
@@ -49,37 +49,16 @@ this.sendToServer = function(crdt, crdtType, operation){
        console.log("Response: "+xhr.responseText)
     };
   })
-  var msg = {}
   console.log("OPERATION: "+JSON.stringify(operation))
-  switch (crdtType){
-    case "lwwRegister":
-      msg = {
+  var msg = {
         crdtName: crdt.name,
-        crdtType: crdtType,
-        operation: {
-          value: crdt.value,
-          timestamp: crdt.timestamp
-        }
-      }
-      break
-    case "opCounter":
-      msg = {
-        crdtName: crdt.name,
-        crdtType: crdtType,
-        operation: operation,
-      }
-      break
-    case "opORSet":
-      msg = {
-        crdtName: crdt.name,
-        crdtType: crdtType,
         operation : operation
-      }
-      break
-    default:
-      console.log("Default branch")
-      msg = {}
   }
+
+  console.log("#############################")
+  console.log("Message to server:")
+  console.log(JSON.stringify(msg))
+  console.log("#############################")
   this.manageSending(function(){xhr.send(JSON.stringify(msg))})
 };
 
@@ -188,6 +167,7 @@ module.exports.OpORSet = function(name){
 
 this.valueSet = []
 this.name = name
+this.type = "opORSet"
 
 this.setValue = function(setValue){
   console.log("Set value: "+setValue)
@@ -306,6 +286,7 @@ module.exports.OpLwwRegister =  function(name, defaultValue = false, date = new 
 	this.name = name
 	this.value = defaultValue
 	this.timestamp = date;
+  this.type = "lwwRegister"
 
 	this.setRegister = (function(val, stamp){
 		this.value = val;
@@ -342,6 +323,7 @@ module.exports.OpLwwRegister =  function(name, defaultValue = false, date = new 
 module.exports.OpCounter =  function(name, value=0){
 	this.name = name
 	this.value = value;
+  this.type = "opCounter"
 
 	this.setValue = (function(val){
 		console.log("Value to set: "+val)

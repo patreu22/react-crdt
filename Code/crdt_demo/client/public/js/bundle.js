@@ -21764,6 +21764,7 @@
 	    _this.state.communicationComponent.addCRDT(_this.state.localLwwRegister);
 	    _this.state.communicationComponent.addCRDT(_this.state.localOpCounter);
 	    _this.state.communicationComponent.addCRDT(_this.state.localOpORSet);
+	    _this.state.communicationComponent.setupApiRoutes("/api", "/api/initial", "/api/lp");
 	    _this.state.communicationComponent.start();
 	    return _this;
 	  }
@@ -22306,7 +22307,19 @@
 	this.pendingMessagesQueue = []
 	this.correspondingApp = app
 	
+	// this.sendToServerURL = "/api"
+	// this.initialStartURL = "/api/initial"
+	// this.longPollingURL = "/api/lp"
+	
+	
 	window.addEventListener("online", onlineAgain.bind(this))
+	
+	
+	function setupApiRoutes(toServer, initial, longPolling){
+	  this.sendToServerURL = toServer
+	  this.initialStartURL = initial
+	  this.longPollingURL = longPolling
+	}
 	
 	function onlineAgain(){
 	    this.pendingMessagesQueue.forEach(function(message, mIndex){
