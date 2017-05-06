@@ -1,6 +1,6 @@
 {
   "name": "react-crdt",
-  "version": "0.0.7",
+  "version": "0.1.0",
   "description": "A small module to use CmRDTs in React Projects",
   "main": "lib.js",
   "scripts": {

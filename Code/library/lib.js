@@ -207,32 +207,37 @@ this.add = function(e){
     }
 }
 
-
 this.remove = function(e){
-  console.log("Complete Value Set: "+JSON.stringify(this.valueSet))
-  console.log("Element to remove: "+JSON.stringify(e))
-  console.log("Lookup successful: "+this.lookup(e))
-  if(this.lookup(e)){
-    console.log("Let's check that filthy Array")
-
-    var finished = false
-    var i = 0
-    while(!finished){
-      if(i < this.valueSet.length){
-        if(e.element === this.valueSet[i].element){
-          console.log("Bingo!")
-          this.valueSet.splice(i,1)
-          i = 0
-        }else{
-          i++;
+  var idsToRemove = e
+  var finished = false
+  var i = 0
+  while(!finished){
+      if(i<this.valueSet.length){
+        for(var j=0;j<idsToRemove.length;j++){
+          if(this.valueSet[i].uniqueID === idsToRemove[j]){
+            this.valueSet.splice(i,1)
+              i = 0
+              break
+          }else{
+            i++
+          }
         }
       }else{
         finished = true
       }
     }
-  }else{
-    console.log("Can't remove. Element is not in the set.")
   }
+
+this.getIDsToRemove = function(e){
+  var setToRemove = []
+  if(this.lookup(e)){
+    for(var i=0;i<this.valueSet.length;i++){
+      if(e.element === this.valueSet[i].element){
+        setToRemove.push(this.valueSet[i].uniqueID)
+      }
+    }
+  }
+  return setToRemove
 }
 
 
