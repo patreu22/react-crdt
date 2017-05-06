@@ -21742,8 +21742,10 @@
 	      console.log("Input: " + input);
 	      if (input) {
 	        var operation = { element: { element: input, uniqueID: Math.floor(Math.random() * 1000000000) }, "add": true };
+	        console.log("The operation!!!!");
+	        console.log(JSON.stringify(operation));
 	        _this.setState({ localOpORSet: _this.state.localOpORSet.downstream(operation) });
-	        _this.state.communicationComponent.sendToServer(_this.state.localOpORSet, "opORSet", operation);
+	        _this.state.communicationComponent.sendToServer(_this.state.localOpORSet, operation);
 	        _this.setState({ orInput: "" });
 	      } else {
 	        console.log("Please enter a value");
@@ -21788,7 +21790,7 @@
 	    value: function removeElementFromORSet(orSet, elem) {
 	      var operation = { element: elem, "add": false };
 	      this.setState({ localOpORSet: this.state.localOpORSet.downstream(operation) });
-	      this.state.communicationComponent.sendToServer(this.state.localOpORSet, "opORSet", operation);
+	      this.state.communicationComponent.sendToServer(this.state.localOpORSet, operation);
 	    }
 	  }, {
 	    key: "render",

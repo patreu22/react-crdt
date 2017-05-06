@@ -38,6 +38,8 @@ class Content extends React.Component {
     console.log("Input: "+input)
     if(input){
       var operation = { element: { element: input, uniqueID: Math.floor(Math.random() * 1000000000)} , "add": true}
+      console.log("The operation!!!!")
+      console.log(JSON.stringify(operation))
       this.setState({localOpORSet: this.state.localOpORSet.downstream(operation)});
       this.state.communicationComponent.sendToServer(this.state.localOpORSet, operation);
       this.setState({orInput: ""})
