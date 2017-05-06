@@ -6,7 +6,7 @@ var webpack = require('webpack');
 
 module.exports = {
   resolve: {
-    extensions: ['', '.js', '.jsx']
+    extensions: ['*', '.js', '.jsx']
   },
   entry:  [
     path.resolve(__dirname, 'src/index.js')
