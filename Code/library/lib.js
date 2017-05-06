@@ -217,7 +217,6 @@ this.remove = function(e){
           if(this.valueSet[i].uniqueID === idsToRemove[j]){
             this.valueSet.splice(i,1)
               i = 0
-              break
           }else{
             i++
           }
