@@ -22042,7 +22042,6 @@
 	
 	    _this.addElementToOrSet = function () {
 	      var input = _this.state.orInput;
-	      console.log("Input: " + input);
 	      if (input) {
 	        var operation = { element: { element: input, uniqueID: Math.floor(Math.random() * 1000000000) }, "add": true };
 	        console.log(JSON.stringify(operation));
@@ -22090,11 +22089,8 @@
 	  }, {
 	    key: "removeElementFromORSet",
 	    value: function removeElementFromORSet(orSet, elem) {
-	      console.log("####################################");
-	      console.log("REMOOOOOVE!");
-	      console.log(elem);
-	      console.log("####################################");
-	      var operation = { element: elem, "add": false };
+	      var idsToRemove = this.state.localOpORSet.getIDsToRemove(elem);
+	      var operation = { element: idsToRemove, "add": false };
 	      this.setState({ localOpORSet: this.state.localOpORSet.downstream(operation) });
 	      this.state.communicationComponent.sendToServer(this.state.localOpORSet, operation);
 	    }
@@ -22133,22 +22129,6 @@
 	          )
 	        );
 	      });
-	      console.log(myMap);
-	      // for(var i = 0; i < elements.length; i++){
-	      //   var elementToRemove = elements[i]
-	      //   console.log("-------------------------------------")
-	      //   console.log("This will be removed: "+ JSON.stringify(elementToRemove))
-	      //   console.log("-------------------------------------")
-	      // elementsToPresent.push(<li className="shoppingElement" key={elements[i].uniqueID}>{
-	      //     elements[i].element}
-	      //     <span>
-	      //       <button className={"boughtItemButton"} onClick={() => this.removeElementFromORSet(this.state.localOpORSet, elementToRemove)}><span className={"glyphicon glyphicon-check"}/></button>
-	      //       <button className={"decrementButton"} onClick={() => this.removeElementFromORSet(this.state.localOpORSet, elementToRemove)}><span className={"glyphicon glyphicon-minus"}/>
-	      //     </button>
-	      //     </span>
-	      //   </li>);
-	      //   }
-	
 	      return React.createElement(
 	        "div",
 	        { className: "Content" },
@@ -22834,32 +22814,37 @@
 	    }
 	}
 	
-	
 	this.remove = function(e){
-	  console.log("Complete Value Set: "+JSON.stringify(this.valueSet))
-	  console.log("Element to remove: "+JSON.stringify(e))
-	  console.log("Lookup successful: "+this.lookup(e))
-	  if(this.lookup(e)){
-	    console.log("Let's check that filthy Array")
-	
-	    var finished = false
-	    var i = 0
-	    while(!finished){
-	      if(i < this.valueSet.length){
-	        if(e.element === this.valueSet[i].element){
-	          console.log("Bingo!")
-	          this.valueSet.splice(i,1)
-	          i = 0
-	        }else{
-	          i++;
+	  var idsToRemove = e
+	  var finished = false
+	  var i = 0
+	  while(!finished){
+	      if(i<this.valueSet.length){
+	        for(var j=0;j<idsToRemove.length;j++){
+	          if(this.valueSet[i].uniqueID === idsToRemove[j]){
+	            this.valueSet.splice(i,1)
+	              i = 0
+	              break
+	          }else{
+	            i++
+	          }
 	        }
 	      }else{
 	        finished = true
 	      }
 	    }
-	  }else{
-	    console.log("Can't remove. Element is not in the set.")
 	  }
+	
+	this.getIDsToRemove = function(e){
+	  var setToRemove = []
+	  if(this.lookup(e)){
+	    for(var i=0;i<this.valueSet.length;i++){
+	      if(e.element === this.valueSet[i].element){
+	        setToRemove.push(this.valueSet[i].uniqueID)
+	      }
+	    }
+	  }
+	  return setToRemove
 	}
 	
 	

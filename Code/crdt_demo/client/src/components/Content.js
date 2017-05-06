@@ -35,7 +35,6 @@ class Content extends React.Component {
 
   addElementToOrSet = () =>{
     var input = this.state.orInput
-    console.log("Input: "+input)
     if(input){
       var operation = { element: { element: input, uniqueID: Math.floor(Math.random() * 1000000000)} , "add": true}
       console.log(JSON.stringify(operation))
@@ -48,11 +47,8 @@ class Content extends React.Component {
   }
 
   removeElementFromORSet(orSet, elem){
-    console.log("####################################")
-    console.log("REMOOOOOVE!")
-    console.log(elem)
-    console.log("####################################")
-    var operation = { element: elem, "add": false}
+    var idsToRemove = this.state.localOpORSet.getIDsToRemove(elem)
+    var operation = { element: idsToRemove, "add": false}
     this.setState({localOpORSet: this.state.localOpORSet.downstream(operation)});
     this.state.communicationComponent.sendToServer(this.state.localOpORSet, operation);
   }
