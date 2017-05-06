@@ -11106,8 +11106,6 @@ var _redux = __webpack_require__(54);
 
 var _reduxLogger = __webpack_require__(239);
 
-var _reduxLogger2 = _interopRequireDefault(_reduxLogger);
-
 var _reduxThunk = __webpack_require__(242);
 
 var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
@@ -11122,7 +11120,7 @@ var _reducers2 = _interopRequireDefault(_reducers);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var middleware = (0, _redux.applyMiddleware)((0, _reduxPromiseMiddleware2.default)(), _reduxThunk2.default, (0, _reduxLogger2.default)());
+var middleware = (0, _redux.applyMiddleware)((0, _reduxPromiseMiddleware2.default)(), _reduxThunk2.default, (0, _reduxLogger.createLogger)());
 
 exports.default = (0, _redux.createStore)(_reducers2.default, middleware);
 
