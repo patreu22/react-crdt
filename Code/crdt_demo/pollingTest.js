@@ -21,3 +21,11 @@ for(var i=0;i<executions;i++){
     tf.dispatchEvent(event)
     addBtn.click()
 }
+
+
+//Trigger Toggle
+var toggle = document.getElementById("myToggle")
+executions = 9
+for(var i=0;i<executions;i++){
+    toggle.click()
+}
