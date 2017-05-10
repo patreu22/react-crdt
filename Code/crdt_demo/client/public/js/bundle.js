@@ -22054,7 +22054,6 @@
 	    };
 	
 	    _this.handleInput = function (event) {
-	      console.log("############Hello!!!");
 	      _this.setState({ orInput: event.target.value }, function () {});
 	    };
 	
@@ -22168,14 +22167,14 @@
 	            ),
 	            React.createElement(
 	              "button",
-	              { className: "incrementButton", onClick: function onClick() {
+	              { id: "incrementCounter", className: "incrementButton", onClick: function onClick() {
 	                  return _this2.counterChanged(true);
 	                } },
 	              React.createElement("span", { className: "glyphicon glyphicon-plus" })
 	            ),
 	            React.createElement(
 	              "button",
-	              { className: "decrementButton", onClick: function onClick() {
+	              { id: "decrementCounter", className: "decrementButton", onClick: function onClick() {
 	                  return _this2.counterChanged(false);
 	                } },
 	              React.createElement("span", { className: "glyphicon glyphicon-minus" })
@@ -22195,10 +22194,10 @@
 	          React.createElement(
 	            "div",
 	            { className: "addElementToSetContainer" },
-	            React.createElement("input", { className: "addShoppingItemField", type: "text", value: this.state.orInput, onChange: this.handleInput, placeholder: "Add item..." }),
+	            React.createElement("input", { id: "addItemField", className: "addShoppingItemField", type: "text", value: this.state.orInput, onChange: this.handleInput, placeholder: "Add item..." }),
 	            React.createElement(
 	              "button",
-	              { className: "incrementButton addItemBtn", onClick: this.addElementToOrSet },
+	              { id: "addItemBtn", className: "incrementButton addItemBtn", onClick: this.addElementToOrSet },
 	              React.createElement("span", { className: "glyphicon glyphicon-plus" })
 	            )
 	          )
