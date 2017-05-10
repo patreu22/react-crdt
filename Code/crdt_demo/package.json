@@ -4,7 +4,8 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "e2e": "node_modules/.bin/nightwatch --config nightwatch.conf.BASIC.js"
   },
   "author": "",
   "license": "ISC",
@@ -19,6 +20,7 @@
     "body-parser": "^1.16.1",
     "circular-json": "^0.3.1",
     "css-loader": "^0.28.1",
+    "env2": "^2.1.1",
     "express": "^4.14.1",
     "ip": "^1.1.5",
     "react": "^15.5.4",
@@ -32,5 +34,10 @@
     "redux-promise-middleware": "^4.2.0",
     "redux-thunk": "^2.2.0",
     "webpack": "^2.5.0"
+  },
+  "devDependencies": {
+    "nightwatch": "^0.9.15",
+    "nightwatch-custom-commands-assertions": "^1.0.5",
+    "selenium-download": "^2.0.10"
   }
 }

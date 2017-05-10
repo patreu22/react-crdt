@@ -136,6 +136,6 @@ function registerClient(clientIP){
 
 //Express method for opening the Server
 var listener = app.listen(3000, function () {
-  console.log("Server is listening on Port "+listener.address().port+"on the IP Address "+ip.address())
+  console.log("Server is listening on Port "+listener.address().port+" on the IP Address "+ip.address())
   console.log(ip.address()+":"+listener.address().port);
 });
