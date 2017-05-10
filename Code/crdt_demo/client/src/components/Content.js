@@ -87,16 +87,16 @@ class Content extends React.Component {
           <label className="labelForCounter" htmlFor="myCounter">Budget for this month:</label>
           <span id="myCounter">
           <label className={"counterLabel"}>{this.state.localOpCounter.value}€</label>
-          <button className={"incrementButton"} onClick={() => this.counterChanged(true)}><span className={"glyphicon glyphicon-plus"}></span></button>
-          <button className={"decrementButton"} onClick={() => this.counterChanged(false)}><span className={"glyphicon glyphicon-minus"}></span></button>
+          <button id="incrementCounter" className={"incrementButton"} onClick={() => this.counterChanged(true)}><span className={"glyphicon glyphicon-plus"}></span></button>
+          <button id="decrementCounter" className={"decrementButton"} onClick={() => this.counterChanged(false)}><span className={"glyphicon glyphicon-minus"}></span></button>
           </span>
         </div>
         <br/><br/>
         <div>
           <ul className="shoppingList">{myMap}</ul>
           <div className="addElementToSetContainer">
-          <input className="addShoppingItemField" type="text" value={this.state.orInput} onChange={this.handleInput} placeholder="Add item..."/>
-          <button className={"incrementButton addItemBtn"} onClick={this.addElementToOrSet}><span className={"glyphicon glyphicon-plus"}></span></button>
+          <input id="addItemField" className="addShoppingItemField" type="text" value={this.state.orInput} onChange={this.handleInput} placeholder="Add item..."/>
+          <button id="addItemBtn" className={"incrementButton addItemBtn"} onClick={this.addElementToOrSet}><span className={"glyphicon glyphicon-plus"}></span></button>
           </div>
         </div>
       </div>

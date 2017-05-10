@@ -244,7 +244,6 @@ this.getIDsToRemove = function(e){
 
 
 this.setToDisplay = function(){
-    console.log("Return set to display!")
     var retSet = []
     var itemsProcessed = 0
 

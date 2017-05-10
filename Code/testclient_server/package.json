@@ -1,0 +1,17 @@
+{
+  "name": "testclient",
+  "version": "1.0.0",
+  "description": "",
+  "main": "client.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.15.2",
+    "ip": "^1.1.5",
+    "node-dom": "^0.1.0",
+    "xmlhttprequest": "^1.8.0"
+  }
+}
