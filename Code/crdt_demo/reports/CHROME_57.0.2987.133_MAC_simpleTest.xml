@@ -1,23 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testsuites errors="0"
-            failures="1"
-            tests="2">
+            failures="0"
+            tests="1">
 
   <testsuite name="simpleTest"
-    errors="0" failures="1" hostname="" id="" package="simpleTest" skipped="0"
-    tests="2" time="13.91" timestamp="Wed, 10 May 2017 23:34:00 GMT">
+    errors="0" failures="0" hostname="" id="" package="simpleTest" skipped="0"
+    tests="1" time="12.96" timestamp="Thu, 11 May 2017 00:29:16 GMT">
   
-    <testcase name="Increment the Counter" classname="simpleTest" time="4.404" assertions="2">
+    <testcase name="Increment the Counter" classname="simpleTest" time="12.96" assertions="2">
 
     
-
-    
-    </testcase>
-  
-    <testcase name="Adding something to the textfield" classname="simpleTest" time="9.505" assertions="2">
-<system-out>[[ATTACHMENT|/Users/Patrick/Desktop/Repos/BachelorCRDT/Code/crdt_demo/screenshots/simpleTest/Adding-something-to-the-textfield_ERROR_May-11-2017-013407-GMT+0200.png]]</system-out>
-      <failure message="Timed out while waiting for element &lt;.incrementButtonAddItemBtn:nth-child(1)&gt; to be present for 5000 milliseconds.">    at Object.Adding something to the textfield (/Users/Patrick/Desktop/Repos/BachelorCRDT/Code/crdt_demo/test/e2e/simpleTest.js:22:8)
-    at _combinedTickCallback (internal/process/next_tick.js:67:7)</failure>
 
     
     </testcase>

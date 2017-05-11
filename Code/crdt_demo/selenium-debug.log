@@ -1,17 +1,44 @@
-02:20:04.062 INFO - Selenium build info: version: '3.4.0', revision: 'unknown'
-02:20:04.063 INFO - Launching a standalone Selenium Server
-2017-05-11 02:20:04.106:INFO::main: Logging initialized @680ms to org.seleniumhq.jetty9.util.log.StdErrLog
-02:20:04.195 INFO - Driver provider org.openqa.selenium.ie.InternetExplorerDriver registration is skipped:
+02:29:16.764 INFO - Selenium build info: version: '3.4.0', revision: 'unknown'
+02:29:16.764 INFO - Launching a standalone Selenium Server
+2017-05-11 02:29:16.784:INFO::main: Logging initialized @278ms to org.seleniumhq.jetty9.util.log.StdErrLog
+02:29:16.840 INFO - Driver provider org.openqa.selenium.ie.InternetExplorerDriver registration is skipped:
  registration capabilities Capabilities [{ensureCleanSession=true, browserName=internet explorer, version=, platform=WINDOWS}] does not match the current platform MAC
-02:20:04.196 INFO - Driver provider org.openqa.selenium.edge.EdgeDriver registration is skipped:
+02:29:16.840 INFO - Driver provider org.openqa.selenium.edge.EdgeDriver registration is skipped:
  registration capabilities Capabilities [{browserName=MicrosoftEdge, version=, platform=WINDOWS}] does not match the current platform MAC
-02:20:04.196 INFO - Driver class not found: com.opera.core.systems.OperaDriver
-02:20:04.196 INFO - Driver provider com.opera.core.systems.OperaDriver registration is skipped:
+02:29:16.840 INFO - Driver class not found: com.opera.core.systems.OperaDriver
+02:29:16.840 INFO - Driver provider com.opera.core.systems.OperaDriver registration is skipped:
 Unable to create new instances on this machine.
-02:20:04.196 INFO - Driver class not found: com.opera.core.systems.OperaDriver
-02:20:04.196 INFO - Driver provider com.opera.core.systems.OperaDriver is not registered
-2017-05-11 02:20:04.445:INFO:osjs.Server:main: jetty-9.4.3.v20170317
-2017-05-11 02:20:04.504:INFO:osjsh.ContextHandler:main: Started o.s.j.s.ServletContextHandler@6f7fd0e6{/,null,AVAILABLE}
-2017-05-11 02:20:04.558:INFO:osjs.AbstractConnector:main: Started ServerConnector@16bb1f8d{HTTP/1.1,[http/1.1]}{0.0.0.0:4444}
-2017-05-11 02:20:04.559:INFO:osjs.Server:main: Started @1133ms
-02:20:04.559 INFO - Selenium Server is up and running
+02:29:16.840 INFO - Driver class not found: com.opera.core.systems.OperaDriver
+02:29:16.841 INFO - Driver provider com.opera.core.systems.OperaDriver is not registered
+2017-05-11 02:29:16.884:INFO:osjs.Server:main: jetty-9.4.3.v20170317
+2017-05-11 02:29:16.927:INFO:osjsh.ContextHandler:main: Started o.s.j.s.ServletContextHandler@6f7fd0e6{/,null,AVAILABLE}
+2017-05-11 02:29:16.967:INFO:osjs.AbstractConnector:main: Started ServerConnector@16bb1f8d{HTTP/1.1,[http/1.1]}{0.0.0.0:4444}
+2017-05-11 02:29:16.968:INFO:osjs.Server:main: Started @463ms
+02:29:16.968 INFO - Selenium Server is up and running
+02:29:17.242 INFO - SessionCleaner initialized with insideBrowserTimeout 0 and clientGoneTimeout 1800000 polling every 180000
+02:29:17.269 INFO - Executing: [new session: Capabilities [{acceptSslCerts=true, name=Simple Test, browserName=chrome, javascriptEnabled=true, platform=ANY}]])
+02:29:17.292 INFO - Creating a new session for Capabilities [{acceptSslCerts=true, name=Simple Test, browserName=chrome, javascriptEnabled=true, platform=ANY}]
+Starting ChromeDriver 2.29.461585 (0be2cd95f834e9ee7c46bcc7cf405b483f5ae83b) on port 34360
+Only local connections are allowed.
+02:29:18.648 INFO - Detected dialect: OSS
+02:29:18.678 INFO - Done: [new session: Capabilities [{acceptSslCerts=true, name=Simple Test, browserName=chrome, javascriptEnabled=true, platform=ANY}]]
+02:29:18.700 INFO - Executing: [get: http://10.200.1.63:3000/])
+02:29:19.749 INFO - Done: [get: http://10.200.1.63:3000/]
+02:29:19.762 INFO - Executing: [find elements: By.cssSelector: body])
+02:29:19.809 INFO - Done: [find elements: By.cssSelector: body]
+02:29:19.814 INFO - Executing: [is displayed: 0 [[ChromeDriver: chrome on MAC (cf0119541c26f08e4f6ee1653cad881c)] -> css selector: body]])
+02:29:19.847 INFO - Done: [is displayed: 0 [[ChromeDriver: chrome on MAC (cf0119541c26f08e4f6ee1653cad881c)] -> css selector: body]]
+02:29:19.853 INFO - Executing: [find elements: By.cssSelector: #myToggle])
+02:29:19.874 INFO - Done: [find elements: By.cssSelector: #myToggle]
+02:29:19.878 INFO - Executing: [is displayed: 1 [[ChromeDriver: chrome on MAC (cf0119541c26f08e4f6ee1653cad881c)] -> css selector: #myToggle]])
+02:29:19.903 INFO - Done: [is displayed: 1 [[ChromeDriver: chrome on MAC (cf0119541c26f08e4f6ee1653cad881c)] -> css selector: #myToggle]]
+02:29:19.908 INFO - Executing: [execute script: var passedArgs = Array.prototype.slice.call(arguments,0); return function () {
+        var toggle = document.getElementById("myToggle")
+        toggle.click()
+      }.apply(window, passedArgs);, []])
+02:29:19.933 INFO - Done: [execute script: var passedArgs = Array.prototype.slice.call(arguments,0); return function () {
+        var toggle = document.getElementById("myToggle")
+        toggle.click()
+      }.apply(window, passedArgs);, []]
+02:29:29.944 INFO - Executing: [delete session: 77789ce0-e1aa-46bb-b397-94bfd23f843b])
+02:29:30.021 INFO - Done: [delete session: 77789ce0-e1aa-46bb-b397-94bfd23f843b]
