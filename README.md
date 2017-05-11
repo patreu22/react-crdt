@@ -2,7 +2,7 @@
 
 To be continued with awesome instructions...
 
-### How to test the demo
+### How to test the demo on your local machine
 1. Get the project: `git clone https://github.com/patreu22/BachelorCRDT.git`
 2. Navigate to demo folder: `cd BachelorCRDT/Code/crdt_demo`
 3. Install all necessary dependencies: `npm install`
