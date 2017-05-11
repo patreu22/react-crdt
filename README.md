@@ -8,3 +8,6 @@ To be continued with awesome instructions...
 3. Install all necessary dependencies: `npm install`
 4. Run the application: `nodemon`
 5. Enter your browser and go to `localhost:3000`
+
+### How to run the tests
+For an automated test using Nightwatch.js make sure you have installed Google Chrome and run `npm run test`
