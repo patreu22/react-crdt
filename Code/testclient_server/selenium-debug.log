@@ -1,52 +1,86 @@
-13:43:16.454 INFO - Selenium build info: version: '3.4.0', revision: 'unknown'
-13:43:16.455 INFO - Launching a standalone Selenium Server
-2017-05-11 13:43:16.477:INFO::main: Logging initialized @288ms to org.seleniumhq.jetty9.util.log.StdErrLog
-13:43:16.530 INFO - Driver provider org.openqa.selenium.ie.InternetExplorerDriver registration is skipped:
+15:23:29.044 INFO - Selenium build info: version: '3.4.0', revision: 'unknown'
+15:23:29.045 INFO - Launching a standalone Selenium Server
+2017-05-11 15:23:29.136:INFO::main: Logging initialized @1200ms to org.seleniumhq.jetty9.util.log.StdErrLog
+15:23:29.226 INFO - Driver provider org.openqa.selenium.ie.InternetExplorerDriver registration is skipped:
  registration capabilities Capabilities [{ensureCleanSession=true, browserName=internet explorer, version=, platform=WINDOWS}] does not match the current platform MAC
-13:43:16.531 INFO - Driver provider org.openqa.selenium.edge.EdgeDriver registration is skipped:
+15:23:29.227 INFO - Driver provider org.openqa.selenium.edge.EdgeDriver registration is skipped:
  registration capabilities Capabilities [{browserName=MicrosoftEdge, version=, platform=WINDOWS}] does not match the current platform MAC
-13:43:16.531 INFO - Driver class not found: com.opera.core.systems.OperaDriver
-13:43:16.531 INFO - Driver provider com.opera.core.systems.OperaDriver registration is skipped:
+15:23:29.227 INFO - Driver class not found: com.opera.core.systems.OperaDriver
+15:23:29.227 INFO - Driver provider com.opera.core.systems.OperaDriver registration is skipped:
 Unable to create new instances on this machine.
-13:43:16.531 INFO - Driver class not found: com.opera.core.systems.OperaDriver
-13:43:16.531 INFO - Driver provider com.opera.core.systems.OperaDriver is not registered
-2017-05-11 13:43:16.573:INFO:osjs.Server:main: jetty-9.4.3.v20170317
-2017-05-11 13:43:16.613:INFO:osjsh.ContextHandler:main: Started o.s.j.s.ServletContextHandler@6f7fd0e6{/,null,AVAILABLE}
-2017-05-11 13:43:16.652:INFO:osjs.AbstractConnector:main: Started ServerConnector@271053e1{HTTP/1.1,[http/1.1]}{0.0.0.0:4444}
-2017-05-11 13:43:16.653:INFO:osjs.Server:main: Started @464ms
-13:43:16.653 INFO - Selenium Server is up and running
-13:43:16.972 INFO - SessionCleaner initialized with insideBrowserTimeout 0 and clientGoneTimeout 1800000 polling every 180000
-13:43:17.010 INFO - Executing: [new session: Capabilities [{acceptSslCerts=true, name=Simple Test, browserName=chrome, javascriptEnabled=true, platform=ANY}]])
-13:43:17.107 INFO - Creating a new session for Capabilities [{acceptSslCerts=true, name=Simple Test, browserName=chrome, javascriptEnabled=true, platform=ANY}]
-Starting ChromeDriver 2.29.461585 (0be2cd95f834e9ee7c46bcc7cf405b483f5ae83b) on port 23954
+15:23:29.227 INFO - Driver class not found: com.opera.core.systems.OperaDriver
+15:23:29.228 INFO - Driver provider com.opera.core.systems.OperaDriver is not registered
+2017-05-11 15:23:29.312:INFO:osjs.Server:main: jetty-9.4.3.v20170317
+2017-05-11 15:23:29.372:INFO:osjsh.ContextHandler:main: Started o.s.j.s.ServletContextHandler@6f7fd0e6{/,null,AVAILABLE}
+2017-05-11 15:23:29.509:INFO:osjs.AbstractConnector:main: Started ServerConnector@271053e1{HTTP/1.1,[http/1.1]}{0.0.0.0:4444}
+2017-05-11 15:23:29.510:INFO:osjs.Server:main: Started @1575ms
+15:23:29.510 INFO - Selenium Server is up and running
+15:23:30.450 INFO - SessionCleaner initialized with insideBrowserTimeout 0 and clientGoneTimeout 1800000 polling every 180000
+15:23:30.489 INFO - Executing: [new session: Capabilities [{acceptSslCerts=true, name=Simple Test, browserName=chrome, javascriptEnabled=true, platform=ANY}]])
+15:23:30.684 INFO - Creating a new session for Capabilities [{acceptSslCerts=true, name=Simple Test, browserName=chrome, javascriptEnabled=true, platform=ANY}]
+Starting ChromeDriver 2.29.461585 (0be2cd95f834e9ee7c46bcc7cf405b483f5ae83b) on port 2811
 Only local connections are allowed.
-13:43:19.146 INFO - Detected dialect: OSS
-13:43:19.171 INFO - Done: [new session: Capabilities [{acceptSslCerts=true, name=Simple Test, browserName=chrome, javascriptEnabled=true, platform=ANY}]]
-13:43:19.196 INFO - Executing: [get: http://10.200.1.63:3000/])
-13:43:23.618 INFO - Done: [get: http://10.200.1.63:3000/]
-13:43:23.629 INFO - Executing: [find elements: By.cssSelector: body])
-13:43:23.683 INFO - Done: [find elements: By.cssSelector: body]
-13:43:23.696 INFO - Executing: [is displayed: 0 [[ChromeDriver: chrome on MAC (028f1f408a4786385588d207109c797a)] -> css selector: body]])
-13:43:23.724 INFO - Done: [is displayed: 0 [[ChromeDriver: chrome on MAC (028f1f408a4786385588d207109c797a)] -> css selector: body]]
-13:43:23.840 INFO - Executing: [get: http://10.200.1.63:3000/])
-13:43:24.130 INFO - Done: [get: http://10.200.1.63:3000/]
-13:43:24.137 INFO - Executing: [find elements: By.cssSelector: body])
-13:43:24.153 INFO - Done: [find elements: By.cssSelector: body]
-13:43:24.160 INFO - Executing: [is displayed: 1 [[ChromeDriver: chrome on MAC (028f1f408a4786385588d207109c797a)] -> css selector: body]])
-13:43:24.181 INFO - Done: [is displayed: 1 [[ChromeDriver: chrome on MAC (028f1f408a4786385588d207109c797a)] -> css selector: body]]
-13:43:24.188 INFO - Executing: [find element: By.cssSelector: #myToggle])
-13:43:24.212 INFO - Done: [find element: By.cssSelector: #myToggle]
-13:43:24.216 INFO - Executing: [click: 2 [[ChromeDriver: chrome on MAC (028f1f408a4786385588d207109c797a)] -> css selector: #myToggle]])
-13:43:25.396 WARN - Exception thrown
+15:23:33.552 INFO - Detected dialect: OSS
+15:23:33.577 INFO - Done: [new session: Capabilities [{acceptSslCerts=true, name=Simple Test, browserName=chrome, javascriptEnabled=true, platform=ANY}]]
+15:23:33.600 INFO - Executing: [get: http://10.200.1.63:3000/])
+15:23:34.666 INFO - Done: [get: http://10.200.1.63:3000/]
+15:23:34.683 INFO - Executing: [find elements: By.cssSelector: body])
+15:23:34.754 INFO - Done: [find elements: By.cssSelector: body]
+15:23:34.761 INFO - Executing: [is displayed: 0 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: body]])
+15:23:34.798 INFO - Done: [is displayed: 0 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: body]]
+15:23:34.909 INFO - Executing: [find element: By.cssSelector: #incrementCounter])
+15:23:34.930 INFO - Done: [find element: By.cssSelector: #incrementCounter]
+15:23:34.935 INFO - Executing: [click: 1 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #incrementCounter]])
+15:23:35.036 INFO - Done: [click: 1 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #incrementCounter]]
+15:23:35.095 INFO - Executing: [find element: By.cssSelector: #incrementCounter])
+15:23:35.108 INFO - Done: [find element: By.cssSelector: #incrementCounter]
+15:23:35.112 INFO - Executing: [click: 1 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #incrementCounter]])
+15:23:35.141 INFO - Done: [click: 1 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #incrementCounter]]
+15:23:35.198 INFO - Executing: [find element: By.cssSelector: #incrementCounter])
+15:23:35.209 INFO - Done: [find element: By.cssSelector: #incrementCounter]
+15:23:35.214 INFO - Executing: [click: 1 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #incrementCounter]])
+15:23:35.244 INFO - Done: [click: 1 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #incrementCounter]]
+15:23:35.304 INFO - Executing: [find element: By.cssSelector: #incrementCounter])
+15:23:35.315 INFO - Done: [find element: By.cssSelector: #incrementCounter]
+15:23:35.320 INFO - Executing: [click: 1 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #incrementCounter]])
+15:23:35.351 INFO - Done: [click: 1 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #incrementCounter]]
+15:23:35.408 INFO - Executing: [find element: By.cssSelector: #incrementCounter])
+15:23:35.419 INFO - Done: [find element: By.cssSelector: #incrementCounter]
+15:23:35.424 INFO - Executing: [click: 1 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #incrementCounter]])
+15:23:35.464 INFO - Done: [click: 1 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #incrementCounter]]
+15:23:35.526 INFO - Executing: [find element: By.cssSelector: #incrementCounter])
+15:23:35.536 INFO - Done: [find element: By.cssSelector: #incrementCounter]
+15:23:35.539 INFO - Executing: [click: 1 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #incrementCounter]])
+15:23:35.569 INFO - Done: [click: 1 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #incrementCounter]]
+15:23:35.627 INFO - Executing: [find element: By.cssSelector: #incrementCounter])
+15:23:35.636 INFO - Done: [find element: By.cssSelector: #incrementCounter]
+15:23:35.639 INFO - Executing: [click: 1 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #incrementCounter]])
+15:23:35.669 INFO - Done: [click: 1 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #incrementCounter]]
+15:23:35.730 INFO - Executing: [find element: By.cssSelector: #incrementCounter])
+15:23:35.740 INFO - Done: [find element: By.cssSelector: #incrementCounter]
+15:23:35.747 INFO - Executing: [click: 1 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #incrementCounter]])
+15:23:35.776 INFO - Done: [click: 1 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #incrementCounter]]
+15:23:35.834 INFO - Executing: [find element: By.cssSelector: #incrementCounter])
+15:23:35.844 INFO - Done: [find element: By.cssSelector: #incrementCounter]
+15:23:35.849 INFO - Executing: [click: 1 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #incrementCounter]])
+15:23:35.875 INFO - Done: [click: 1 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #incrementCounter]]
+15:23:35.931 INFO - Executing: [find element: By.cssSelector: #incrementCounter])
+15:23:35.940 INFO - Done: [find element: By.cssSelector: #incrementCounter]
+15:23:35.945 INFO - Executing: [click: 1 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #incrementCounter]])
+15:23:35.974 INFO - Done: [click: 1 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #incrementCounter]]
+15:23:36.035 INFO - Executing: [find element: By.cssSelector: #myToggle])
+15:23:36.056 INFO - Done: [find element: By.cssSelector: #myToggle]
+15:23:36.060 INFO - Executing: [click: 2 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #myToggle]])
+15:23:37.384 WARN - Exception thrown
 org.openqa.selenium.WebDriverException: unknown error: Element <input type="checkbox" id="myToggle" class="react-toggle-screenreader-only" value="on"> is not clickable at point (530, 123). Other element would receive the click: <div class="Content">...</div>
   (Session info: chrome=57.0.2987.133)
   (Driver info: chromedriver=2.29.461585 (0be2cd95f834e9ee7c46bcc7cf405b483f5ae83b),platform=Mac OS X 10.12.4 x86_64) (WARNING: The server did not provide any stacktrace information)
-Command duration or timeout: 68 milliseconds
+Command duration or timeout: 48 milliseconds
 Build info: version: '3.4.0', revision: 'unknown', time: 'unknown'
 System info: host: 'dhcp-214-247.vpn.tu-berlin.de', ip: '2a02:8109:8900:3258:2db8:d96d:a8df:47e2', os.name: 'Mac OS X', os.arch: 'x86_64', os.version: '10.12.4', java.version: '1.8.0_131'
 Driver info: org.openqa.selenium.chrome.ChromeDriver
-Capabilities [{applicationCacheEnabled=false, rotatable=false, mobileEmulationEnabled=false, networkConnectionEnabled=false, chrome={chromedriverVersion=2.29.461585 (0be2cd95f834e9ee7c46bcc7cf405b483f5ae83b), userDataDir=/var/folders/bs/7lc_4jvd59zcyz8pc5bf2y4r0000gn/T/.org.chromium.Chromium.MLDmyc}, takesHeapSnapshot=true, pageLoadStrategy=normal, databaseEnabled=false, handlesAlerts=true, hasTouchScreen=false, version=57.0.2987.133, platform=MAC, browserConnectionEnabled=false, nativeEvents=true, acceptSslCerts=true, locationContextEnabled=true, webStorageEnabled=true, browserName=chrome, takesScreenshot=true, javascriptEnabled=true, cssSelectorsEnabled=true, unexpectedAlertBehaviour=}]
-Session ID: 028f1f408a4786385588d207109c797a
+Capabilities [{applicationCacheEnabled=false, rotatable=false, mobileEmulationEnabled=false, networkConnectionEnabled=false, chrome={chromedriverVersion=2.29.461585 (0be2cd95f834e9ee7c46bcc7cf405b483f5ae83b), userDataDir=/var/folders/bs/7lc_4jvd59zcyz8pc5bf2y4r0000gn/T/.org.chromium.Chromium.QU3Dfr}, takesHeapSnapshot=true, pageLoadStrategy=normal, databaseEnabled=false, handlesAlerts=true, hasTouchScreen=false, version=57.0.2987.133, platform=MAC, browserConnectionEnabled=false, nativeEvents=true, acceptSslCerts=true, locationContextEnabled=true, webStorageEnabled=true, browserName=chrome, takesScreenshot=true, javascriptEnabled=true, cssSelectorsEnabled=true, unexpectedAlertBehaviour=}]
+Session ID: fb1a5190b38e19aa177ceb8f41b617c4
 	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
 	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
 	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
@@ -56,15 +90,13 @@ Session ID: 028f1f408a4786385588d207109c797a
 	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:671)
 	at org.openqa.selenium.remote.RemoteWebElement.execute(RemoteWebElement.java:272)
 	at org.openqa.selenium.remote.RemoteWebElement.click(RemoteWebElement.java:82)
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.GeneratedMethodAccessor7.invoke(Unknown Source)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
 	at java.lang.reflect.Method.invoke(Method.java:498)
 	at org.openqa.selenium.support.events.EventFiringWebDriver$EventFiringWebElement$1.invoke(EventFiringWebDriver.java:332)
 	at com.sun.proxy.$Proxy5.click(Unknown Source)
 	at org.openqa.selenium.support.events.EventFiringWebDriver$EventFiringWebElement.click(EventFiringWebDriver.java:345)
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.GeneratedMethodAccessor7.invoke(Unknown Source)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
 	at java.lang.reflect.Method.invoke(Method.java:498)
 	at org.openqa.selenium.remote.server.KnownElements$1.invoke(KnownElements.java:64)
@@ -76,210 +108,468 @@ Session ID: 028f1f408a4786385588d207109c797a
 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
 	at java.lang.Thread.run(Thread.java:748)
-13:43:25.399 WARN - Exception: unknown error: Element <input type="checkbox" id="myToggle" class="react-toggle-screenreader-only" value="on"> is not clickable at point (530, 123). Other element would receive the click: <div class="Content">...</div>
+15:23:37.387 WARN - Exception: unknown error: Element <input type="checkbox" id="myToggle" class="react-toggle-screenreader-only" value="on"> is not clickable at point (530, 123). Other element would receive the click: <div class="Content">...</div>
   (Session info: chrome=57.0.2987.133)
   (Driver info: chromedriver=2.29.461585 (0be2cd95f834e9ee7c46bcc7cf405b483f5ae83b),platform=Mac OS X 10.12.4 x86_64) (WARNING: The server did not provide any stacktrace information)
-Command duration or timeout: 68 milliseconds
+Command duration or timeout: 48 milliseconds
 Build info: version: '3.4.0', revision: 'unknown', time: 'unknown'
 System info: host: 'dhcp-214-247.vpn.tu-berlin.de', ip: '2a02:8109:8900:3258:2db8:d96d:a8df:47e2', os.name: 'Mac OS X', os.arch: 'x86_64', os.version: '10.12.4', java.version: '1.8.0_131'
 Driver info: org.openqa.selenium.chrome.ChromeDriver
-Capabilities [{applicationCacheEnabled=false, rotatable=false, mobileEmulationEnabled=false, networkConnectionEnabled=false, chrome={chromedriverVersion=2.29.461585 (0be2cd95f834e9ee7c46bcc7cf405b483f5ae83b), userDataDir=/var/folders/bs/7lc_4jvd59zcyz8pc5bf2y4r0000gn/T/.org.chromium.Chromium.MLDmyc}, takesHeapSnapshot=true, pageLoadStrategy=normal, databaseEnabled=false, handlesAlerts=true, hasTouchScreen=false, version=57.0.2987.133, platform=MAC, browserConnectionEnabled=false, nativeEvents=true, acceptSslCerts=true, locationContextEnabled=true, webStorageEnabled=true, browserName=chrome, takesScreenshot=true, javascriptEnabled=true, cssSelectorsEnabled=true, unexpectedAlertBehaviour=}]
-Session ID: 028f1f408a4786385588d207109c797a
-13:43:25.614 INFO - Executing: [find element: By.cssSelector: #incrementCounter])
-13:43:25.634 INFO - Done: [find element: By.cssSelector: #incrementCounter]
-13:43:25.639 INFO - Executing: [click: 3 [[ChromeDriver: chrome on MAC (028f1f408a4786385588d207109c797a)] -> css selector: #incrementCounter]])
-13:43:25.703 INFO - Done: [click: 3 [[ChromeDriver: chrome on MAC (028f1f408a4786385588d207109c797a)] -> css selector: #incrementCounter]]
-13:43:25.763 INFO - Executing: [find element: By.cssSelector: #incrementCounter])
-13:43:25.775 INFO - Done: [find element: By.cssSelector: #incrementCounter]
-13:43:25.779 INFO - Executing: [click: 3 [[ChromeDriver: chrome on MAC (028f1f408a4786385588d207109c797a)] -> css selector: #incrementCounter]])
-13:43:25.814 INFO - Done: [click: 3 [[ChromeDriver: chrome on MAC (028f1f408a4786385588d207109c797a)] -> css selector: #incrementCounter]]
-13:43:25.875 INFO - Executing: [find element: By.cssSelector: #incrementCounter])
-13:43:25.885 INFO - Done: [find element: By.cssSelector: #incrementCounter]
-13:43:25.888 INFO - Executing: [click: 3 [[ChromeDriver: chrome on MAC (028f1f408a4786385588d207109c797a)] -> css selector: #incrementCounter]])
-13:43:25.921 INFO - Done: [click: 3 [[ChromeDriver: chrome on MAC (028f1f408a4786385588d207109c797a)] -> css selector: #incrementCounter]]
-13:43:25.979 INFO - Executing: [find element: By.cssSelector: #incrementCounter])
-13:43:25.989 INFO - Done: [find element: By.cssSelector: #incrementCounter]
-13:43:25.994 INFO - Executing: [click: 3 [[ChromeDriver: chrome on MAC (028f1f408a4786385588d207109c797a)] -> css selector: #incrementCounter]])
-13:43:26.025 INFO - Done: [click: 3 [[ChromeDriver: chrome on MAC (028f1f408a4786385588d207109c797a)] -> css selector: #incrementCounter]]
-13:43:26.085 INFO - Executing: [find element: By.cssSelector: #incrementCounter])
-13:43:26.095 INFO - Done: [find element: By.cssSelector: #incrementCounter]
-13:43:26.098 INFO - Executing: [click: 3 [[ChromeDriver: chrome on MAC (028f1f408a4786385588d207109c797a)] -> css selector: #incrementCounter]])
-13:43:26.132 INFO - Done: [click: 3 [[ChromeDriver: chrome on MAC (028f1f408a4786385588d207109c797a)] -> css selector: #incrementCounter]]
-13:43:26.193 INFO - Executing: [find element: By.cssSelector: #incrementCounter])
-13:43:26.204 INFO - Done: [find element: By.cssSelector: #incrementCounter]
-13:43:26.208 INFO - Executing: [click: 3 [[ChromeDriver: chrome on MAC (028f1f408a4786385588d207109c797a)] -> css selector: #incrementCounter]])
-13:43:26.237 INFO - Done: [click: 3 [[ChromeDriver: chrome on MAC (028f1f408a4786385588d207109c797a)] -> css selector: #incrementCounter]]
-13:43:26.298 INFO - Executing: [find element: By.cssSelector: #incrementCounter])
-13:43:26.308 INFO - Done: [find element: By.cssSelector: #incrementCounter]
-13:43:26.312 INFO - Executing: [click: 3 [[ChromeDriver: chrome on MAC (028f1f408a4786385588d207109c797a)] -> css selector: #incrementCounter]])
-13:43:26.341 INFO - Done: [click: 3 [[ChromeDriver: chrome on MAC (028f1f408a4786385588d207109c797a)] -> css selector: #incrementCounter]]
-13:43:26.399 INFO - Executing: [find element: By.cssSelector: #incrementCounter])
-13:43:26.409 INFO - Done: [find element: By.cssSelector: #incrementCounter]
-13:43:26.412 INFO - Executing: [click: 3 [[ChromeDriver: chrome on MAC (028f1f408a4786385588d207109c797a)] -> css selector: #incrementCounter]])
-13:43:26.441 INFO - Done: [click: 3 [[ChromeDriver: chrome on MAC (028f1f408a4786385588d207109c797a)] -> css selector: #incrementCounter]]
-13:43:26.499 INFO - Executing: [find element: By.cssSelector: #incrementCounter])
-13:43:26.509 INFO - Done: [find element: By.cssSelector: #incrementCounter]
-13:43:26.512 INFO - Executing: [click: 3 [[ChromeDriver: chrome on MAC (028f1f408a4786385588d207109c797a)] -> css selector: #incrementCounter]])
-13:43:26.543 INFO - Done: [click: 3 [[ChromeDriver: chrome on MAC (028f1f408a4786385588d207109c797a)] -> css selector: #incrementCounter]]
-13:43:26.601 INFO - Executing: [find element: By.cssSelector: #incrementCounter])
-13:43:26.610 INFO - Done: [find element: By.cssSelector: #incrementCounter]
-13:43:26.614 INFO - Executing: [click: 3 [[ChromeDriver: chrome on MAC (028f1f408a4786385588d207109c797a)] -> css selector: #incrementCounter]])
-13:43:26.643 INFO - Done: [click: 3 [[ChromeDriver: chrome on MAC (028f1f408a4786385588d207109c797a)] -> css selector: #incrementCounter]]
-13:43:27.708 INFO - Executing: [find element: By.cssSelector: #addItemField])
-13:43:27.728 INFO - Done: [find element: By.cssSelector: #addItemField]
-13:43:27.733 INFO - Executing: [send keys: 4 [[ChromeDriver: chrome on MAC (028f1f408a4786385588d207109c797a)] -> css selector: #addItemField], [n, i, g, h, t, w, a, t, c, h,  , 0]])
-13:43:27.935 INFO - Done: [send keys: 4 [[ChromeDriver: chrome on MAC (028f1f408a4786385588d207109c797a)] -> css selector: #addItemField], [n, i, g, h, t, w, a, t, c, h,  , 0]]
-13:43:28.146 INFO - Executing: [find element: By.cssSelector: #addItemBtn])
-13:43:28.166 INFO - Done: [find element: By.cssSelector: #addItemBtn]
-13:43:28.169 INFO - Executing: [click: 5 [[ChromeDriver: chrome on MAC (028f1f408a4786385588d207109c797a)] -> css selector: #addItemBtn]])
-13:43:28.229 INFO - Done: [click: 5 [[ChromeDriver: chrome on MAC (028f1f408a4786385588d207109c797a)] -> css selector: #addItemBtn]]
-13:43:28.234 INFO - Executing: [find element: By.cssSelector: #addItemField])
-13:43:28.243 INFO - Done: [find element: By.cssSelector: #addItemField]
-13:43:28.248 INFO - Executing: [send keys: 4 [[ChromeDriver: chrome on MAC (028f1f408a4786385588d207109c797a)] -> css selector: #addItemField], [n, i, g, h, t, w, a, t, c, h,  , 1]])
-13:43:28.397 INFO - Done: [send keys: 4 [[ChromeDriver: chrome on MAC (028f1f408a4786385588d207109c797a)] -> css selector: #addItemField], [n, i, g, h, t, w, a, t, c, h,  , 1]]
-13:43:28.607 INFO - Executing: [find element: By.cssSelector: #addItemBtn])
-13:43:28.616 INFO - Done: [find element: By.cssSelector: #addItemBtn]
-13:43:28.619 INFO - Executing: [click: 5 [[ChromeDriver: chrome on MAC (028f1f408a4786385588d207109c797a)] -> css selector: #addItemBtn]])
-13:43:28.651 INFO - Done: [click: 5 [[ChromeDriver: chrome on MAC (028f1f408a4786385588d207109c797a)] -> css selector: #addItemBtn]]
-13:43:28.655 INFO - Executing: [find element: By.cssSelector: #addItemField])
-13:43:28.665 INFO - Done: [find element: By.cssSelector: #addItemField]
-13:43:28.668 INFO - Executing: [send keys: 4 [[ChromeDriver: chrome on MAC (028f1f408a4786385588d207109c797a)] -> css selector: #addItemField], [n, i, g, h, t, w, a, t, c, h,  , 2]])
-13:43:28.799 INFO - Done: [send keys: 4 [[ChromeDriver: chrome on MAC (028f1f408a4786385588d207109c797a)] -> css selector: #addItemField], [n, i, g, h, t, w, a, t, c, h,  , 2]]
-13:43:29.009 INFO - Executing: [find element: By.cssSelector: #addItemBtn])
-13:43:29.019 INFO - Done: [find element: By.cssSelector: #addItemBtn]
-13:43:29.022 INFO - Executing: [click: 5 [[ChromeDriver: chrome on MAC (028f1f408a4786385588d207109c797a)] -> css selector: #addItemBtn]])
-13:43:29.053 INFO - Done: [click: 5 [[ChromeDriver: chrome on MAC (028f1f408a4786385588d207109c797a)] -> css selector: #addItemBtn]]
-13:43:29.057 INFO - Executing: [find element: By.cssSelector: #addItemField])
-13:43:29.069 INFO - Done: [find element: By.cssSelector: #addItemField]
-13:43:29.074 INFO - Executing: [send keys: 4 [[ChromeDriver: chrome on MAC (028f1f408a4786385588d207109c797a)] -> css selector: #addItemField], [n, i, g, h, t, w, a, t, c, h,  , 3]])
-13:43:29.219 INFO - Done: [send keys: 4 [[ChromeDriver: chrome on MAC (028f1f408a4786385588d207109c797a)] -> css selector: #addItemField], [n, i, g, h, t, w, a, t, c, h,  , 3]]
-13:43:29.430 INFO - Executing: [find element: By.cssSelector: #addItemBtn])
-13:43:29.442 INFO - Done: [find element: By.cssSelector: #addItemBtn]
-13:43:29.445 INFO - Executing: [click: 5 [[ChromeDriver: chrome on MAC (028f1f408a4786385588d207109c797a)] -> css selector: #addItemBtn]])
-13:43:29.480 INFO - Done: [click: 5 [[ChromeDriver: chrome on MAC (028f1f408a4786385588d207109c797a)] -> css selector: #addItemBtn]]
-13:43:29.486 INFO - Executing: [find element: By.cssSelector: #addItemField])
-13:43:29.495 INFO - Done: [find element: By.cssSelector: #addItemField]
-13:43:29.501 INFO - Executing: [send keys: 4 [[ChromeDriver: chrome on MAC (028f1f408a4786385588d207109c797a)] -> css selector: #addItemField], [n, i, g, h, t, w, a, t, c, h,  , 4]])
-13:43:29.645 INFO - Done: [send keys: 4 [[ChromeDriver: chrome on MAC (028f1f408a4786385588d207109c797a)] -> css selector: #addItemField], [n, i, g, h, t, w, a, t, c, h,  , 4]]
-13:43:29.856 INFO - Executing: [find element: By.cssSelector: #addItemBtn])
-13:43:29.865 INFO - Done: [find element: By.cssSelector: #addItemBtn]
-13:43:29.869 INFO - Executing: [click: 5 [[ChromeDriver: chrome on MAC (028f1f408a4786385588d207109c797a)] -> css selector: #addItemBtn]])
-13:43:29.904 INFO - Done: [click: 5 [[ChromeDriver: chrome on MAC (028f1f408a4786385588d207109c797a)] -> css selector: #addItemBtn]]
-13:43:29.908 INFO - Executing: [find element: By.cssSelector: #addItemField])
-13:43:29.918 INFO - Done: [find element: By.cssSelector: #addItemField]
-13:43:29.923 INFO - Executing: [send keys: 4 [[ChromeDriver: chrome on MAC (028f1f408a4786385588d207109c797a)] -> css selector: #addItemField], [n, i, g, h, t, w, a, t, c, h,  , 5]])
-13:43:30.052 INFO - Done: [send keys: 4 [[ChromeDriver: chrome on MAC (028f1f408a4786385588d207109c797a)] -> css selector: #addItemField], [n, i, g, h, t, w, a, t, c, h,  , 5]]
-13:43:30.258 INFO - Executing: [find element: By.cssSelector: #addItemBtn])
-13:43:30.268 INFO - Done: [find element: By.cssSelector: #addItemBtn]
-13:43:30.271 INFO - Executing: [click: 5 [[ChromeDriver: chrome on MAC (028f1f408a4786385588d207109c797a)] -> css selector: #addItemBtn]])
-13:43:30.302 INFO - Done: [click: 5 [[ChromeDriver: chrome on MAC (028f1f408a4786385588d207109c797a)] -> css selector: #addItemBtn]]
-13:43:30.308 INFO - Executing: [find element: By.cssSelector: #addItemField])
-13:43:30.318 INFO - Done: [find element: By.cssSelector: #addItemField]
-13:43:30.322 INFO - Executing: [send keys: 4 [[ChromeDriver: chrome on MAC (028f1f408a4786385588d207109c797a)] -> css selector: #addItemField], [n, i, g, h, t, w, a, t, c, h,  , 6]])
-13:43:30.445 INFO - Done: [send keys: 4 [[ChromeDriver: chrome on MAC (028f1f408a4786385588d207109c797a)] -> css selector: #addItemField], [n, i, g, h, t, w, a, t, c, h,  , 6]]
-13:43:30.657 INFO - Executing: [find element: By.cssSelector: #addItemBtn])
-13:43:30.666 INFO - Done: [find element: By.cssSelector: #addItemBtn]
-13:43:30.669 INFO - Executing: [click: 5 [[ChromeDriver: chrome on MAC (028f1f408a4786385588d207109c797a)] -> css selector: #addItemBtn]])
-13:43:30.701 INFO - Done: [click: 5 [[ChromeDriver: chrome on MAC (028f1f408a4786385588d207109c797a)] -> css selector: #addItemBtn]]
-13:43:30.705 INFO - Executing: [find element: By.cssSelector: #addItemField])
-13:43:30.715 INFO - Done: [find element: By.cssSelector: #addItemField]
-13:43:30.719 INFO - Executing: [send keys: 4 [[ChromeDriver: chrome on MAC (028f1f408a4786385588d207109c797a)] -> css selector: #addItemField], [n, i, g, h, t, w, a, t, c, h,  , 7]])
-13:43:30.844 INFO - Done: [send keys: 4 [[ChromeDriver: chrome on MAC (028f1f408a4786385588d207109c797a)] -> css selector: #addItemField], [n, i, g, h, t, w, a, t, c, h,  , 7]]
-13:43:31.054 INFO - Executing: [find element: By.cssSelector: #addItemBtn])
-13:43:31.065 INFO - Done: [find element: By.cssSelector: #addItemBtn]
-13:43:31.068 INFO - Executing: [click: 5 [[ChromeDriver: chrome on MAC (028f1f408a4786385588d207109c797a)] -> css selector: #addItemBtn]])
-13:43:31.099 INFO - Done: [click: 5 [[ChromeDriver: chrome on MAC (028f1f408a4786385588d207109c797a)] -> css selector: #addItemBtn]]
-13:43:31.102 INFO - Executing: [find element: By.cssSelector: #addItemField])
-13:43:31.111 INFO - Done: [find element: By.cssSelector: #addItemField]
-13:43:31.115 INFO - Executing: [send keys: 4 [[ChromeDriver: chrome on MAC (028f1f408a4786385588d207109c797a)] -> css selector: #addItemField], [n, i, g, h, t, w, a, t, c, h,  , 8]])
-13:43:31.241 INFO - Done: [send keys: 4 [[ChromeDriver: chrome on MAC (028f1f408a4786385588d207109c797a)] -> css selector: #addItemField], [n, i, g, h, t, w, a, t, c, h,  , 8]]
-13:43:31.450 INFO - Executing: [find element: By.cssSelector: #addItemBtn])
-13:43:31.460 INFO - Done: [find element: By.cssSelector: #addItemBtn]
-13:43:31.463 INFO - Executing: [click: 5 [[ChromeDriver: chrome on MAC (028f1f408a4786385588d207109c797a)] -> css selector: #addItemBtn]])
-13:43:31.495 INFO - Done: [click: 5 [[ChromeDriver: chrome on MAC (028f1f408a4786385588d207109c797a)] -> css selector: #addItemBtn]]
-13:43:31.498 INFO - Executing: [find element: By.cssSelector: #addItemField])
-13:43:31.508 INFO - Done: [find element: By.cssSelector: #addItemField]
-13:43:31.511 INFO - Executing: [send keys: 4 [[ChromeDriver: chrome on MAC (028f1f408a4786385588d207109c797a)] -> css selector: #addItemField], [n, i, g, h, t, w, a, t, c, h,  , 9]])
-13:43:31.637 INFO - Done: [send keys: 4 [[ChromeDriver: chrome on MAC (028f1f408a4786385588d207109c797a)] -> css selector: #addItemField], [n, i, g, h, t, w, a, t, c, h,  , 9]]
-13:43:31.841 INFO - Executing: [find element: By.cssSelector: #addItemBtn])
-13:43:31.851 INFO - Done: [find element: By.cssSelector: #addItemBtn]
-13:43:31.854 INFO - Executing: [click: 5 [[ChromeDriver: chrome on MAC (028f1f408a4786385588d207109c797a)] -> css selector: #addItemBtn]])
-13:43:31.885 INFO - Done: [click: 5 [[ChromeDriver: chrome on MAC (028f1f408a4786385588d207109c797a)] -> css selector: #addItemBtn]]
-13:43:32.902 INFO - Executing: [find elements: By.cssSelector: #myToggle])
-13:43:32.921 INFO - Done: [find elements: By.cssSelector: #myToggle]
-13:43:32.925 INFO - Executing: [is displayed: 2 [[ChromeDriver: chrome on MAC (028f1f408a4786385588d207109c797a)] -> css selector: #myToggle]])
-13:43:32.945 INFO - Done: [is displayed: 2 [[ChromeDriver: chrome on MAC (028f1f408a4786385588d207109c797a)] -> css selector: #myToggle]]
-13:43:32.951 INFO - Executing: [execute script: var passedArgs = Array.prototype.slice.call(arguments,0); return function () {
-        var toggle = document.getElementById("myToggle")
-        toggle.click()
-      }.apply(window, passedArgs);, []])
-13:43:32.972 INFO - Done: [execute script: var passedArgs = Array.prototype.slice.call(arguments,0); return function () {
-        var toggle = document.getElementById("myToggle")
-        toggle.click()
-      }.apply(window, passedArgs);, []]
-13:43:33.079 INFO - Executing: [execute script: var passedArgs = Array.prototype.slice.call(arguments,0); return function () {
-        var toggle = document.getElementById("myToggle")
-        toggle.click()
-      }.apply(window, passedArgs);, []])
-13:43:33.096 INFO - Done: [execute script: var passedArgs = Array.prototype.slice.call(arguments,0); return function () {
-        var toggle = document.getElementById("myToggle")
-        toggle.click()
-      }.apply(window, passedArgs);, []]
-13:43:33.205 INFO - Executing: [execute script: var passedArgs = Array.prototype.slice.call(arguments,0); return function () {
-        var toggle = document.getElementById("myToggle")
-        toggle.click()
-      }.apply(window, passedArgs);, []])
-13:43:33.220 INFO - Done: [execute script: var passedArgs = Array.prototype.slice.call(arguments,0); return function () {
-        var toggle = document.getElementById("myToggle")
-        toggle.click()
-      }.apply(window, passedArgs);, []]
-13:43:33.329 INFO - Executing: [execute script: var passedArgs = Array.prototype.slice.call(arguments,0); return function () {
-        var toggle = document.getElementById("myToggle")
-        toggle.click()
-      }.apply(window, passedArgs);, []])
-13:43:33.344 INFO - Done: [execute script: var passedArgs = Array.prototype.slice.call(arguments,0); return function () {
-        var toggle = document.getElementById("myToggle")
-        toggle.click()
-      }.apply(window, passedArgs);, []]
-13:43:33.455 INFO - Executing: [execute script: var passedArgs = Array.prototype.slice.call(arguments,0); return function () {
-        var toggle = document.getElementById("myToggle")
-        toggle.click()
-      }.apply(window, passedArgs);, []])
-13:43:33.470 INFO - Done: [execute script: var passedArgs = Array.prototype.slice.call(arguments,0); return function () {
-        var toggle = document.getElementById("myToggle")
-        toggle.click()
-      }.apply(window, passedArgs);, []]
-13:43:33.580 INFO - Executing: [execute script: var passedArgs = Array.prototype.slice.call(arguments,0); return function () {
-        var toggle = document.getElementById("myToggle")
-        toggle.click()
-      }.apply(window, passedArgs);, []])
-13:43:33.597 INFO - Done: [execute script: var passedArgs = Array.prototype.slice.call(arguments,0); return function () {
-        var toggle = document.getElementById("myToggle")
-        toggle.click()
-      }.apply(window, passedArgs);, []]
-13:43:33.703 INFO - Executing: [execute script: var passedArgs = Array.prototype.slice.call(arguments,0); return function () {
-        var toggle = document.getElementById("myToggle")
-        toggle.click()
-      }.apply(window, passedArgs);, []])
-13:43:33.718 INFO - Done: [execute script: var passedArgs = Array.prototype.slice.call(arguments,0); return function () {
-        var toggle = document.getElementById("myToggle")
-        toggle.click()
-      }.apply(window, passedArgs);, []]
-13:43:33.837 INFO - Executing: [execute script: var passedArgs = Array.prototype.slice.call(arguments,0); return function () {
-        var toggle = document.getElementById("myToggle")
-        toggle.click()
-      }.apply(window, passedArgs);, []])
-13:43:33.849 INFO - Done: [execute script: var passedArgs = Array.prototype.slice.call(arguments,0); return function () {
-        var toggle = document.getElementById("myToggle")
-        toggle.click()
-      }.apply(window, passedArgs);, []]
-13:43:33.955 INFO - Executing: [execute script: var passedArgs = Array.prototype.slice.call(arguments,0); return function () {
-        var toggle = document.getElementById("myToggle")
-        toggle.click()
-      }.apply(window, passedArgs);, []])
-13:43:33.969 INFO - Done: [execute script: var passedArgs = Array.prototype.slice.call(arguments,0); return function () {
-        var toggle = document.getElementById("myToggle")
-        toggle.click()
-      }.apply(window, passedArgs);, []]
-13:43:35.081 INFO - Executing: [delete session: d58d072b-105e-40d6-81fe-ea89f66376b5])
-13:43:35.216 INFO - Done: [delete session: d58d072b-105e-40d6-81fe-ea89f66376b5]
+Capabilities [{applicationCacheEnabled=false, rotatable=false, mobileEmulationEnabled=false, networkConnectionEnabled=false, chrome={chromedriverVersion=2.29.461585 (0be2cd95f834e9ee7c46bcc7cf405b483f5ae83b), userDataDir=/var/folders/bs/7lc_4jvd59zcyz8pc5bf2y4r0000gn/T/.org.chromium.Chromium.QU3Dfr}, takesHeapSnapshot=true, pageLoadStrategy=normal, databaseEnabled=false, handlesAlerts=true, hasTouchScreen=false, version=57.0.2987.133, platform=MAC, browserConnectionEnabled=false, nativeEvents=true, acceptSslCerts=true, locationContextEnabled=true, webStorageEnabled=true, browserName=chrome, takesScreenshot=true, javascriptEnabled=true, cssSelectorsEnabled=true, unexpectedAlertBehaviour=}]
+Session ID: fb1a5190b38e19aa177ceb8f41b617c4
+15:23:37.577 INFO - Executing: [find element: By.cssSelector: #addItemField])
+15:23:37.598 INFO - Done: [find element: By.cssSelector: #addItemField]
+15:23:37.603 INFO - Executing: [send keys: 3 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #addItemField], [M, i, l, k]])
+15:23:37.721 INFO - Done: [send keys: 3 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #addItemField], [M, i, l, k]]
+15:23:37.926 INFO - Executing: [find element: By.cssSelector: #addItemBtn])
+15:23:37.949 INFO - Done: [find element: By.cssSelector: #addItemBtn]
+15:23:37.952 INFO - Executing: [click: 4 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #addItemBtn]])
+15:23:38.013 INFO - Done: [click: 4 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #addItemBtn]]
+15:23:38.017 INFO - Executing: [find element: By.cssSelector: #addItemField])
+15:23:38.026 INFO - Done: [find element: By.cssSelector: #addItemField]
+15:23:38.030 INFO - Executing: [send keys: 3 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #addItemField], [S, u, g, a, r]])
+15:23:38.097 INFO - Done: [send keys: 3 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #addItemField], [S, u, g, a, r]]
+15:23:38.306 INFO - Executing: [find element: By.cssSelector: #addItemBtn])
+15:23:38.317 INFO - Done: [find element: By.cssSelector: #addItemBtn]
+15:23:38.320 INFO - Executing: [click: 4 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #addItemBtn]])
+15:23:38.361 INFO - Done: [click: 4 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #addItemBtn]]
+15:23:38.368 INFO - Executing: [find element: By.cssSelector: #addItemField])
+15:23:38.380 INFO - Done: [find element: By.cssSelector: #addItemField]
+15:23:38.384 INFO - Executing: [send keys: 3 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #addItemField], [C, a, n, d, y]])
+15:23:38.457 INFO - Done: [send keys: 3 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #addItemField], [C, a, n, d, y]]
+15:23:38.663 INFO - Executing: [find element: By.cssSelector: #addItemBtn])
+15:23:38.672 INFO - Done: [find element: By.cssSelector: #addItemBtn]
+15:23:38.675 INFO - Executing: [click: 4 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #addItemBtn]])
+15:23:38.715 INFO - Done: [click: 4 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #addItemBtn]]
+15:23:38.719 INFO - Executing: [find element: By.cssSelector: #addItemField])
+15:23:38.728 INFO - Done: [find element: By.cssSelector: #addItemField]
+15:23:38.733 INFO - Executing: [send keys: 3 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #addItemField], [S, a, l, a, d]])
+15:23:38.801 INFO - Done: [send keys: 3 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #addItemField], [S, a, l, a, d]]
+15:23:39.011 INFO - Executing: [find element: By.cssSelector: #addItemBtn])
+15:23:39.021 INFO - Done: [find element: By.cssSelector: #addItemBtn]
+15:23:39.024 INFO - Executing: [click: 4 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #addItemBtn]])
+15:23:39.064 INFO - Done: [click: 4 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #addItemBtn]]
+15:23:39.068 INFO - Executing: [find element: By.cssSelector: #addItemField])
+15:23:39.079 INFO - Done: [find element: By.cssSelector: #addItemField]
+15:23:39.083 INFO - Executing: [send keys: 3 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #addItemField], [C, h, e, e, s, e]])
+15:23:39.170 INFO - Done: [send keys: 3 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #addItemField], [C, h, e, e, s, e]]
+15:23:39.377 INFO - Executing: [find element: By.cssSelector: #addItemBtn])
+15:23:39.386 INFO - Done: [find element: By.cssSelector: #addItemBtn]
+15:23:39.389 INFO - Executing: [click: 4 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #addItemBtn]])
+15:23:39.429 INFO - Done: [click: 4 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #addItemBtn]]
+15:23:39.434 INFO - Executing: [find element: By.cssSelector: #addItemField])
+15:23:39.442 INFO - Done: [find element: By.cssSelector: #addItemField]
+15:23:39.446 INFO - Executing: [send keys: 3 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #addItemField], [H, a, l, l, o, u, m, i]])
+15:23:39.544 INFO - Done: [send keys: 3 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #addItemField], [H, a, l, l, o, u, m, i]]
+15:23:39.758 INFO - Executing: [find element: By.cssSelector: #addItemBtn])
+15:23:39.767 INFO - Done: [find element: By.cssSelector: #addItemBtn]
+15:23:39.770 INFO - Executing: [click: 4 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #addItemBtn]])
+15:23:39.810 INFO - Done: [click: 4 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #addItemBtn]]
+15:23:39.815 INFO - Executing: [find element: By.cssSelector: #addItemField])
+15:23:39.823 INFO - Done: [find element: By.cssSelector: #addItemField]
+15:23:39.829 INFO - Executing: [send keys: 3 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #addItemField], [A,  , b, o, t, t, l, e,  , o, f,  , w, i, n, e]])
+15:23:40.021 INFO - Done: [send keys: 3 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #addItemField], [A,  , b, o, t, t, l, e,  , o, f,  , w, i, n, e]]
+15:23:40.230 INFO - Executing: [find element: By.cssSelector: #addItemBtn])
+15:23:40.239 INFO - Done: [find element: By.cssSelector: #addItemBtn]
+15:23:40.242 INFO - Executing: [click: 4 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #addItemBtn]])
+15:23:40.284 INFO - Done: [click: 4 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #addItemBtn]]
+15:23:40.288 INFO - Executing: [find element: By.cssSelector: #incrementCounter])
+15:23:40.299 INFO - Done: [find element: By.cssSelector: #incrementCounter]
+15:23:40.303 INFO - Executing: [click: 1 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #incrementCounter]])
+15:23:40.341 INFO - Done: [click: 1 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #incrementCounter]]
+15:23:40.400 INFO - Executing: [find element: By.cssSelector: #incrementCounter])
+15:23:40.409 INFO - Done: [find element: By.cssSelector: #incrementCounter]
+15:23:40.413 INFO - Executing: [click: 1 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #incrementCounter]])
+15:23:40.444 INFO - Done: [click: 1 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #incrementCounter]]
+15:23:40.504 INFO - Executing: [find element: By.cssSelector: #incrementCounter])
+15:23:40.514 INFO - Done: [find element: By.cssSelector: #incrementCounter]
+15:23:40.517 INFO - Executing: [click: 1 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #incrementCounter]])
+15:23:40.545 INFO - Done: [click: 1 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #incrementCounter]]
+15:23:40.605 INFO - Executing: [find element: By.cssSelector: #incrementCounter])
+15:23:40.614 INFO - Done: [find element: By.cssSelector: #incrementCounter]
+15:23:40.618 INFO - Executing: [click: 1 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #incrementCounter]])
+15:23:40.646 INFO - Done: [click: 1 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #incrementCounter]]
+15:23:40.707 INFO - Executing: [find element: By.cssSelector: #incrementCounter])
+15:23:40.717 INFO - Done: [find element: By.cssSelector: #incrementCounter]
+15:23:40.721 INFO - Executing: [click: 1 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #incrementCounter]])
+15:23:40.754 INFO - Done: [click: 1 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #incrementCounter]]
+15:23:40.813 INFO - Executing: [find element: By.cssSelector: #incrementCounter])
+15:23:40.823 INFO - Done: [find element: By.cssSelector: #incrementCounter]
+15:23:40.825 INFO - Executing: [click: 1 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #incrementCounter]])
+15:23:40.857 INFO - Done: [click: 1 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #incrementCounter]]
+15:23:40.917 INFO - Executing: [find element: By.cssSelector: #incrementCounter])
+15:23:40.934 INFO - Done: [find element: By.cssSelector: #incrementCounter]
+15:23:40.945 INFO - Executing: [click: 1 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #incrementCounter]])
+15:23:41.021 INFO - Done: [click: 1 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #incrementCounter]]
+15:23:41.077 INFO - Executing: [find element: By.cssSelector: #incrementCounter])
+15:23:41.086 INFO - Done: [find element: By.cssSelector: #incrementCounter]
+15:23:41.090 INFO - Executing: [click: 1 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #incrementCounter]])
+15:23:41.118 INFO - Done: [click: 1 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #incrementCounter]]
+15:23:41.177 INFO - Executing: [find element: By.cssSelector: #incrementCounter])
+15:23:41.186 INFO - Done: [find element: By.cssSelector: #incrementCounter]
+15:23:41.189 INFO - Executing: [click: 1 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #incrementCounter]])
+15:23:41.217 INFO - Done: [click: 1 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #incrementCounter]]
+15:23:41.276 INFO - Executing: [find element: By.cssSelector: #incrementCounter])
+15:23:41.286 INFO - Done: [find element: By.cssSelector: #incrementCounter]
+15:23:41.290 INFO - Executing: [click: 1 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #incrementCounter]])
+15:23:41.309 INFO - Done: [click: 1 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #incrementCounter]]
+15:23:41.365 INFO - Executing: [find element: By.cssSelector: #incrementCounter])
+15:23:41.377 INFO - Done: [find element: By.cssSelector: #incrementCounter]
+15:23:41.380 INFO - Executing: [click: 1 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #incrementCounter]])
+15:23:41.408 INFO - Done: [click: 1 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #incrementCounter]]
+15:23:41.465 INFO - Executing: [find element: By.cssSelector: #incrementCounter])
+15:23:41.474 INFO - Done: [find element: By.cssSelector: #incrementCounter]
+15:23:41.477 INFO - Executing: [click: 1 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #incrementCounter]])
+15:23:41.496 INFO - Done: [click: 1 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #incrementCounter]]
+15:23:41.557 INFO - Executing: [find element: By.cssSelector: #incrementCounter])
+15:23:41.567 INFO - Done: [find element: By.cssSelector: #incrementCounter]
+15:23:41.571 INFO - Executing: [click: 1 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #incrementCounter]])
+15:23:41.597 INFO - Done: [click: 1 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #incrementCounter]]
+15:23:41.654 INFO - Executing: [find element: By.cssSelector: #incrementCounter])
+15:23:41.663 INFO - Done: [find element: By.cssSelector: #incrementCounter]
+15:23:41.666 INFO - Executing: [click: 1 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #incrementCounter]])
+15:23:41.693 INFO - Done: [click: 1 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #incrementCounter]]
+15:23:41.750 INFO - Executing: [find element: By.cssSelector: #incrementCounter])
+15:23:41.759 INFO - Done: [find element: By.cssSelector: #incrementCounter]
+15:23:41.763 INFO - Executing: [click: 1 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #incrementCounter]])
+15:23:41.789 INFO - Done: [click: 1 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #incrementCounter]]
+15:23:41.845 INFO - Executing: [find element: By.cssSelector: #incrementCounter])
+15:23:41.854 INFO - Done: [find element: By.cssSelector: #incrementCounter]
+15:23:41.857 INFO - Executing: [click: 1 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #incrementCounter]])
+15:23:41.883 INFO - Done: [click: 1 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #incrementCounter]]
+15:23:41.943 INFO - Executing: [find element: By.cssSelector: #incrementCounter])
+15:23:41.953 INFO - Done: [find element: By.cssSelector: #incrementCounter]
+15:23:41.956 INFO - Executing: [click: 1 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #incrementCounter]])
+15:23:41.986 INFO - Done: [click: 1 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #incrementCounter]]
+15:23:42.044 INFO - Executing: [find element: By.cssSelector: #incrementCounter])
+15:23:42.054 INFO - Done: [find element: By.cssSelector: #incrementCounter]
+15:23:42.057 INFO - Executing: [click: 1 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #incrementCounter]])
+15:23:42.085 INFO - Done: [click: 1 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #incrementCounter]]
+15:23:42.146 INFO - Executing: [find element: By.cssSelector: #incrementCounter])
+15:23:42.155 INFO - Done: [find element: By.cssSelector: #incrementCounter]
+15:23:42.158 INFO - Executing: [click: 1 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #incrementCounter]])
+15:23:42.187 INFO - Done: [click: 1 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #incrementCounter]]
+15:23:42.245 INFO - Executing: [find element: By.cssSelector: #incrementCounter])
+15:23:42.254 INFO - Done: [find element: By.cssSelector: #incrementCounter]
+15:23:42.257 INFO - Executing: [click: 1 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #incrementCounter]])
+15:23:42.292 INFO - Done: [click: 1 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #incrementCounter]]
+15:23:42.351 INFO - Executing: [find element: By.cssSelector: #incrementCounter])
+15:23:42.361 INFO - Done: [find element: By.cssSelector: #incrementCounter]
+15:23:42.364 INFO - Executing: [click: 1 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #incrementCounter]])
+15:23:42.393 INFO - Done: [click: 1 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #incrementCounter]]
+15:23:42.449 INFO - Executing: [find element: By.cssSelector: #incrementCounter])
+15:23:42.459 INFO - Done: [find element: By.cssSelector: #incrementCounter]
+15:23:42.462 INFO - Executing: [click: 1 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #incrementCounter]])
+15:23:42.488 INFO - Done: [click: 1 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #incrementCounter]]
+15:23:42.548 INFO - Executing: [find element: By.cssSelector: #incrementCounter])
+15:23:42.558 INFO - Done: [find element: By.cssSelector: #incrementCounter]
+15:23:42.562 INFO - Executing: [click: 1 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #incrementCounter]])
+15:23:42.588 INFO - Done: [click: 1 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #incrementCounter]]
+15:23:42.647 INFO - Executing: [find element: By.cssSelector: #incrementCounter])
+15:23:42.656 INFO - Done: [find element: By.cssSelector: #incrementCounter]
+15:23:42.659 INFO - Executing: [click: 1 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #incrementCounter]])
+15:23:42.686 INFO - Done: [click: 1 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #incrementCounter]]
+15:23:42.744 INFO - Executing: [find element: By.cssSelector: #incrementCounter])
+15:23:42.753 INFO - Done: [find element: By.cssSelector: #incrementCounter]
+15:23:42.756 INFO - Executing: [click: 1 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #incrementCounter]])
+15:23:42.775 INFO - Done: [click: 1 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #incrementCounter]]
+15:23:42.834 INFO - Executing: [find element: By.cssSelector: #incrementCounter])
+15:23:42.844 INFO - Done: [find element: By.cssSelector: #incrementCounter]
+15:23:42.847 INFO - Executing: [click: 1 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #incrementCounter]])
+15:23:42.866 INFO - Done: [click: 1 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #incrementCounter]]
+15:23:42.926 INFO - Executing: [find element: By.cssSelector: #incrementCounter])
+15:23:42.936 INFO - Done: [find element: By.cssSelector: #incrementCounter]
+15:23:42.939 INFO - Executing: [click: 1 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #incrementCounter]])
+15:23:42.966 INFO - Done: [click: 1 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #incrementCounter]]
+15:23:43.026 INFO - Executing: [find element: By.cssSelector: #incrementCounter])
+15:23:43.035 INFO - Done: [find element: By.cssSelector: #incrementCounter]
+15:23:43.039 INFO - Executing: [click: 1 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #incrementCounter]])
+15:23:43.066 INFO - Done: [click: 1 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #incrementCounter]]
+15:23:43.125 INFO - Executing: [find element: By.cssSelector: #incrementCounter])
+15:23:43.133 INFO - Done: [find element: By.cssSelector: #incrementCounter]
+15:23:43.136 INFO - Executing: [click: 1 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #incrementCounter]])
+15:23:43.161 INFO - Done: [click: 1 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #incrementCounter]]
+15:23:43.218 INFO - Executing: [find element: By.cssSelector: #incrementCounter])
+15:23:43.227 INFO - Done: [find element: By.cssSelector: #incrementCounter]
+15:23:43.230 INFO - Executing: [click: 1 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #incrementCounter]])
+15:23:43.256 INFO - Done: [click: 1 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #incrementCounter]]
+15:23:43.315 INFO - Executing: [find element: By.cssSelector: #incrementCounter])
+15:23:43.324 INFO - Done: [find element: By.cssSelector: #incrementCounter]
+15:23:43.327 INFO - Executing: [click: 1 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #incrementCounter]])
+15:23:43.354 INFO - Done: [click: 1 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #incrementCounter]]
+15:23:43.414 INFO - Executing: [find element: By.cssSelector: #incrementCounter])
+15:23:43.423 INFO - Done: [find element: By.cssSelector: #incrementCounter]
+15:23:43.426 INFO - Executing: [click: 1 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #incrementCounter]])
+15:23:43.453 INFO - Done: [click: 1 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #incrementCounter]]
+15:23:43.510 INFO - Executing: [find element: By.cssSelector: #incrementCounter])
+15:23:43.520 INFO - Done: [find element: By.cssSelector: #incrementCounter]
+15:23:43.524 INFO - Executing: [click: 1 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #incrementCounter]])
+15:23:43.550 INFO - Done: [click: 1 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #incrementCounter]]
+15:23:43.608 INFO - Executing: [find element: By.cssSelector: #incrementCounter])
+15:23:43.617 INFO - Done: [find element: By.cssSelector: #incrementCounter]
+15:23:43.620 INFO - Executing: [click: 1 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #incrementCounter]])
+15:23:43.644 INFO - Done: [click: 1 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #incrementCounter]]
+15:23:43.705 INFO - Executing: [find element: By.cssSelector: #incrementCounter])
+15:23:43.713 INFO - Done: [find element: By.cssSelector: #incrementCounter]
+15:23:43.716 INFO - Executing: [click: 1 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #incrementCounter]])
+15:23:43.742 INFO - Done: [click: 1 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #incrementCounter]]
+15:23:43.799 INFO - Executing: [find element: By.cssSelector: #incrementCounter])
+15:23:43.808 INFO - Done: [find element: By.cssSelector: #incrementCounter]
+15:23:43.813 INFO - Executing: [click: 1 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #incrementCounter]])
+15:23:43.840 INFO - Done: [click: 1 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #incrementCounter]]
+15:23:43.898 INFO - Executing: [find element: By.cssSelector: #incrementCounter])
+15:23:43.908 INFO - Done: [find element: By.cssSelector: #incrementCounter]
+15:23:43.912 INFO - Executing: [click: 1 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #incrementCounter]])
+15:23:43.944 INFO - Done: [click: 1 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #incrementCounter]]
+15:23:44.007 INFO - Executing: [find element: By.cssSelector: #incrementCounter])
+15:23:44.071 INFO - Done: [find element: By.cssSelector: #incrementCounter]
+15:23:44.075 INFO - Executing: [click: 1 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #incrementCounter]])
+15:23:44.104 INFO - Done: [click: 1 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #incrementCounter]]
+15:23:44.161 INFO - Executing: [find element: By.cssSelector: #incrementCounter])
+15:23:44.170 INFO - Done: [find element: By.cssSelector: #incrementCounter]
+15:23:44.177 INFO - Executing: [click: 1 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #incrementCounter]])
+15:23:44.206 INFO - Done: [click: 1 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #incrementCounter]]
+15:23:44.268 INFO - Executing: [find element: By.cssSelector: #incrementCounter])
+15:23:44.276 INFO - Done: [find element: By.cssSelector: #incrementCounter]
+15:23:44.279 INFO - Executing: [click: 1 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #incrementCounter]])
+15:23:44.308 INFO - Done: [click: 1 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #incrementCounter]]
+15:23:44.367 INFO - Executing: [find element: By.cssSelector: #incrementCounter])
+15:23:44.376 INFO - Done: [find element: By.cssSelector: #incrementCounter]
+15:23:44.379 INFO - Executing: [click: 1 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #incrementCounter]])
+15:23:44.405 INFO - Done: [click: 1 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #incrementCounter]]
+15:23:44.464 INFO - Executing: [find element: By.cssSelector: #incrementCounter])
+15:23:44.473 INFO - Done: [find element: By.cssSelector: #incrementCounter]
+15:23:44.476 INFO - Executing: [click: 1 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #incrementCounter]])
+15:23:44.503 INFO - Done: [click: 1 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #incrementCounter]]
+15:23:44.560 INFO - Executing: [find element: By.cssSelector: #incrementCounter])
+15:23:44.569 INFO - Done: [find element: By.cssSelector: #incrementCounter]
+15:23:44.572 INFO - Executing: [click: 1 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #incrementCounter]])
+15:23:44.596 INFO - Done: [click: 1 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #incrementCounter]]
+15:23:44.653 INFO - Executing: [find element: By.cssSelector: #incrementCounter])
+15:23:44.662 INFO - Done: [find element: By.cssSelector: #incrementCounter]
+15:23:44.665 INFO - Executing: [click: 1 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #incrementCounter]])
+15:23:44.692 INFO - Done: [click: 1 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #incrementCounter]]
+15:23:44.750 INFO - Executing: [find element: By.cssSelector: #incrementCounter])
+15:23:44.759 INFO - Done: [find element: By.cssSelector: #incrementCounter]
+15:23:44.762 INFO - Executing: [click: 1 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #incrementCounter]])
+15:23:44.789 INFO - Done: [click: 1 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #incrementCounter]]
+15:23:44.848 INFO - Executing: [find element: By.cssSelector: #incrementCounter])
+15:23:44.857 INFO - Done: [find element: By.cssSelector: #incrementCounter]
+15:23:44.860 INFO - Executing: [click: 1 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #incrementCounter]])
+15:23:44.879 INFO - Done: [click: 1 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #incrementCounter]]
+15:23:44.937 INFO - Executing: [find element: By.cssSelector: #incrementCounter])
+15:23:44.947 INFO - Done: [find element: By.cssSelector: #incrementCounter]
+15:23:44.950 INFO - Executing: [click: 1 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #incrementCounter]])
+15:23:44.978 INFO - Done: [click: 1 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #incrementCounter]]
+15:23:45.038 INFO - Executing: [find element: By.cssSelector: #incrementCounter])
+15:23:45.047 INFO - Done: [find element: By.cssSelector: #incrementCounter]
+15:23:45.050 INFO - Executing: [click: 1 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #incrementCounter]])
+15:23:45.075 INFO - Done: [click: 1 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #incrementCounter]]
+15:23:45.130 INFO - Executing: [find element: By.cssSelector: #incrementCounter])
+15:23:45.139 INFO - Done: [find element: By.cssSelector: #incrementCounter]
+15:23:45.142 INFO - Executing: [click: 1 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #incrementCounter]])
+15:23:45.167 INFO - Done: [click: 1 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #incrementCounter]]
+15:23:45.223 INFO - Executing: [find element: By.cssSelector: #incrementCounter])
+15:23:45.232 INFO - Done: [find element: By.cssSelector: #incrementCounter]
+15:23:45.235 INFO - Executing: [click: 1 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #incrementCounter]])
+15:23:45.260 INFO - Done: [click: 1 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #incrementCounter]]
+15:23:45.318 INFO - Executing: [find element: By.cssSelector: #decrementCounter])
+15:23:45.337 INFO - Done: [find element: By.cssSelector: #decrementCounter]
+15:23:45.340 INFO - Executing: [click: 5 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #decrementCounter]])
+15:23:45.392 INFO - Done: [click: 5 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #decrementCounter]]
+15:23:45.452 INFO - Executing: [find element: By.cssSelector: #decrementCounter])
+15:23:45.461 INFO - Done: [find element: By.cssSelector: #decrementCounter]
+15:23:45.463 INFO - Executing: [click: 5 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #decrementCounter]])
+15:23:45.489 INFO - Done: [click: 5 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #decrementCounter]]
+15:23:45.546 INFO - Executing: [find element: By.cssSelector: #decrementCounter])
+15:23:45.555 INFO - Done: [find element: By.cssSelector: #decrementCounter]
+15:23:45.558 INFO - Executing: [click: 5 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #decrementCounter]])
+15:23:45.583 INFO - Done: [click: 5 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #decrementCounter]]
+15:23:45.638 INFO - Executing: [find element: By.cssSelector: #decrementCounter])
+15:23:45.647 INFO - Done: [find element: By.cssSelector: #decrementCounter]
+15:23:45.650 INFO - Executing: [click: 5 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #decrementCounter]])
+15:23:45.675 INFO - Done: [click: 5 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #decrementCounter]]
+15:23:45.732 INFO - Executing: [find element: By.cssSelector: #decrementCounter])
+15:23:45.741 INFO - Done: [find element: By.cssSelector: #decrementCounter]
+15:23:45.744 INFO - Executing: [click: 5 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #decrementCounter]])
+15:23:45.770 INFO - Done: [click: 5 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #decrementCounter]]
+15:23:45.829 INFO - Executing: [find element: By.cssSelector: #decrementCounter])
+15:23:45.839 INFO - Done: [find element: By.cssSelector: #decrementCounter]
+15:23:45.842 INFO - Executing: [click: 5 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #decrementCounter]])
+15:23:45.867 INFO - Done: [click: 5 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #decrementCounter]]
+15:23:45.926 INFO - Executing: [find element: By.cssSelector: #decrementCounter])
+15:23:45.935 INFO - Done: [find element: By.cssSelector: #decrementCounter]
+15:23:45.937 INFO - Executing: [click: 5 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #decrementCounter]])
+15:23:45.962 INFO - Done: [click: 5 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #decrementCounter]]
+15:23:46.018 INFO - Executing: [find element: By.cssSelector: #decrementCounter])
+15:23:46.027 INFO - Done: [find element: By.cssSelector: #decrementCounter]
+15:23:46.030 INFO - Executing: [click: 5 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #decrementCounter]])
+15:23:46.057 INFO - Done: [click: 5 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #decrementCounter]]
+15:23:46.114 INFO - Executing: [find element: By.cssSelector: #decrementCounter])
+15:23:46.123 INFO - Done: [find element: By.cssSelector: #decrementCounter]
+15:23:46.126 INFO - Executing: [click: 5 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #decrementCounter]])
+15:23:46.152 INFO - Done: [click: 5 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #decrementCounter]]
+15:23:46.210 INFO - Executing: [find element: By.cssSelector: #decrementCounter])
+15:23:46.219 INFO - Done: [find element: By.cssSelector: #decrementCounter]
+15:23:46.222 INFO - Executing: [click: 5 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #decrementCounter]])
+15:23:46.247 INFO - Done: [click: 5 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #decrementCounter]]
+15:23:46.304 INFO - Executing: [find element: By.cssSelector: #decrementCounter])
+15:23:46.314 INFO - Done: [find element: By.cssSelector: #decrementCounter]
+15:23:46.317 INFO - Executing: [click: 5 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #decrementCounter]])
+15:23:46.345 INFO - Done: [click: 5 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #decrementCounter]]
+15:23:46.405 INFO - Executing: [find element: By.cssSelector: #decrementCounter])
+15:23:46.414 INFO - Done: [find element: By.cssSelector: #decrementCounter]
+15:23:46.417 INFO - Executing: [click: 5 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #decrementCounter]])
+15:23:46.444 INFO - Done: [click: 5 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #decrementCounter]]
+15:23:46.503 INFO - Executing: [find element: By.cssSelector: #decrementCounter])
+15:23:46.512 INFO - Done: [find element: By.cssSelector: #decrementCounter]
+15:23:46.515 INFO - Executing: [click: 5 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #decrementCounter]])
+15:23:46.541 INFO - Done: [click: 5 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #decrementCounter]]
+15:23:46.601 INFO - Executing: [find element: By.cssSelector: #decrementCounter])
+15:23:46.610 INFO - Done: [find element: By.cssSelector: #decrementCounter]
+15:23:46.612 INFO - Executing: [click: 5 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #decrementCounter]])
+15:23:46.637 INFO - Done: [click: 5 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #decrementCounter]]
+15:23:46.694 INFO - Executing: [find element: By.cssSelector: #decrementCounter])
+15:23:46.702 INFO - Done: [find element: By.cssSelector: #decrementCounter]
+15:23:46.705 INFO - Executing: [click: 5 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #decrementCounter]])
+15:23:46.731 INFO - Done: [click: 5 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #decrementCounter]]
+15:23:46.788 INFO - Executing: [find element: By.cssSelector: #decrementCounter])
+15:23:46.796 INFO - Done: [find element: By.cssSelector: #decrementCounter]
+15:23:46.799 INFO - Executing: [click: 5 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #decrementCounter]])
+15:23:46.826 INFO - Done: [click: 5 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #decrementCounter]]
+15:23:46.884 INFO - Executing: [find element: By.cssSelector: #decrementCounter])
+15:23:46.893 INFO - Done: [find element: By.cssSelector: #decrementCounter]
+15:23:46.896 INFO - Executing: [click: 5 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #decrementCounter]])
+15:23:46.921 INFO - Done: [click: 5 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #decrementCounter]]
+15:23:46.979 INFO - Executing: [find element: By.cssSelector: #decrementCounter])
+15:23:46.988 INFO - Done: [find element: By.cssSelector: #decrementCounter]
+15:23:46.990 INFO - Executing: [click: 5 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #decrementCounter]])
+15:23:47.015 INFO - Done: [click: 5 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #decrementCounter]]
+15:23:47.074 INFO - Executing: [find element: By.cssSelector: #decrementCounter])
+15:23:47.083 INFO - Done: [find element: By.cssSelector: #decrementCounter]
+15:23:47.086 INFO - Executing: [click: 5 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #decrementCounter]])
+15:23:47.111 INFO - Done: [click: 5 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #decrementCounter]]
+15:23:47.170 INFO - Executing: [find element: By.cssSelector: #decrementCounter])
+15:23:47.179 INFO - Done: [find element: By.cssSelector: #decrementCounter]
+15:23:47.182 INFO - Executing: [click: 5 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #decrementCounter]])
+15:23:47.208 INFO - Done: [click: 5 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #decrementCounter]]
+15:23:47.267 INFO - Executing: [find element: By.cssSelector: #decrementCounter])
+15:23:47.275 INFO - Done: [find element: By.cssSelector: #decrementCounter]
+15:23:47.279 INFO - Executing: [click: 5 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #decrementCounter]])
+15:23:47.308 INFO - Done: [click: 5 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #decrementCounter]]
+15:23:47.368 INFO - Executing: [find element: By.cssSelector: #decrementCounter])
+15:23:47.377 INFO - Done: [find element: By.cssSelector: #decrementCounter]
+15:23:47.380 INFO - Executing: [click: 5 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #decrementCounter]])
+15:23:47.406 INFO - Done: [click: 5 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #decrementCounter]]
+15:23:47.467 INFO - Executing: [find element: By.cssSelector: #decrementCounter])
+15:23:47.475 INFO - Done: [find element: By.cssSelector: #decrementCounter]
+15:23:47.478 INFO - Executing: [click: 5 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #decrementCounter]])
+15:23:47.503 INFO - Done: [click: 5 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #decrementCounter]]
+15:23:47.558 INFO - Executing: [find element: By.cssSelector: #decrementCounter])
+15:23:47.567 INFO - Done: [find element: By.cssSelector: #decrementCounter]
+15:23:47.570 INFO - Executing: [click: 5 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #decrementCounter]])
+15:23:47.595 INFO - Done: [click: 5 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #decrementCounter]]
+15:23:47.648 INFO - Executing: [find element: By.cssSelector: #decrementCounter])
+15:23:47.657 INFO - Done: [find element: By.cssSelector: #decrementCounter]
+15:23:47.660 INFO - Executing: [click: 5 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #decrementCounter]])
+15:23:47.684 INFO - Done: [click: 5 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #decrementCounter]]
+15:23:47.741 INFO - Executing: [find element: By.cssSelector: #decrementCounter])
+15:23:47.750 INFO - Done: [find element: By.cssSelector: #decrementCounter]
+15:23:47.753 INFO - Executing: [click: 5 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #decrementCounter]])
+15:23:47.784 INFO - Done: [click: 5 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #decrementCounter]]
+15:23:47.840 INFO - Executing: [find element: By.cssSelector: #decrementCounter])
+15:23:47.848 INFO - Done: [find element: By.cssSelector: #decrementCounter]
+15:23:47.851 INFO - Executing: [click: 5 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #decrementCounter]])
+15:23:47.878 INFO - Done: [click: 5 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #decrementCounter]]
+15:23:47.938 INFO - Executing: [find element: By.cssSelector: #decrementCounter])
+15:23:47.946 INFO - Done: [find element: By.cssSelector: #decrementCounter]
+15:23:47.949 INFO - Executing: [click: 5 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #decrementCounter]])
+15:23:47.974 INFO - Done: [click: 5 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #decrementCounter]]
+15:23:48.033 INFO - Executing: [find element: By.cssSelector: #decrementCounter])
+15:23:48.042 INFO - Done: [find element: By.cssSelector: #decrementCounter]
+15:23:48.045 INFO - Executing: [click: 5 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #decrementCounter]])
+15:23:48.070 INFO - Done: [click: 5 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #decrementCounter]]
+15:23:48.125 INFO - Executing: [find element: By.cssSelector: #decrementCounter])
+15:23:48.134 INFO - Done: [find element: By.cssSelector: #decrementCounter]
+15:23:48.137 INFO - Executing: [click: 5 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #decrementCounter]])
+15:23:48.163 INFO - Done: [click: 5 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #decrementCounter]]
+15:23:48.223 INFO - Executing: [find element: By.cssSelector: #decrementCounter])
+15:23:48.231 INFO - Done: [find element: By.cssSelector: #decrementCounter]
+15:23:48.234 INFO - Executing: [click: 5 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #decrementCounter]])
+15:23:48.259 INFO - Done: [click: 5 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #decrementCounter]]
+15:23:48.315 INFO - Executing: [find element: By.cssSelector: #decrementCounter])
+15:23:48.324 INFO - Done: [find element: By.cssSelector: #decrementCounter]
+15:23:48.326 INFO - Executing: [click: 5 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #decrementCounter]])
+15:23:48.351 INFO - Done: [click: 5 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #decrementCounter]]
+15:23:48.411 INFO - Executing: [find element: By.cssSelector: #decrementCounter])
+15:23:48.420 INFO - Done: [find element: By.cssSelector: #decrementCounter]
+15:23:48.422 INFO - Executing: [click: 5 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #decrementCounter]])
+15:23:48.447 INFO - Done: [click: 5 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #decrementCounter]]
+15:23:48.502 INFO - Executing: [find element: By.cssSelector: #decrementCounter])
+15:23:48.511 INFO - Done: [find element: By.cssSelector: #decrementCounter]
+15:23:48.514 INFO - Executing: [click: 5 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #decrementCounter]])
+15:23:48.539 INFO - Done: [click: 5 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #decrementCounter]]
+15:23:48.598 INFO - Executing: [find element: By.cssSelector: #decrementCounter])
+15:23:48.607 INFO - Done: [find element: By.cssSelector: #decrementCounter]
+15:23:48.609 INFO - Executing: [click: 5 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #decrementCounter]])
+15:23:48.634 INFO - Done: [click: 5 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #decrementCounter]]
+15:23:48.693 INFO - Executing: [find element: By.cssSelector: #decrementCounter])
+15:23:48.702 INFO - Done: [find element: By.cssSelector: #decrementCounter]
+15:23:48.704 INFO - Executing: [click: 5 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #decrementCounter]])
+15:23:48.729 INFO - Done: [click: 5 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #decrementCounter]]
+15:23:48.788 INFO - Executing: [find element: By.cssSelector: #decrementCounter])
+15:23:48.797 INFO - Done: [find element: By.cssSelector: #decrementCounter]
+15:23:48.800 INFO - Executing: [click: 5 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #decrementCounter]])
+15:23:48.825 INFO - Done: [click: 5 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #decrementCounter]]
+15:23:48.883 INFO - Executing: [find element: By.cssSelector: #decrementCounter])
+15:23:48.891 INFO - Done: [find element: By.cssSelector: #decrementCounter]
+15:23:48.894 INFO - Executing: [click: 5 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #decrementCounter]])
+15:23:48.922 INFO - Done: [click: 5 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #decrementCounter]]
+15:23:48.980 INFO - Executing: [find element: By.cssSelector: #decrementCounter])
+15:23:48.989 INFO - Done: [find element: By.cssSelector: #decrementCounter]
+15:23:48.992 INFO - Executing: [click: 5 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #decrementCounter]])
+15:23:49.010 INFO - Done: [click: 5 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #decrementCounter]]
+15:23:49.069 INFO - Executing: [find element: By.cssSelector: #decrementCounter])
+15:23:49.078 INFO - Done: [find element: By.cssSelector: #decrementCounter]
+15:23:49.081 INFO - Executing: [click: 5 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #decrementCounter]])
+15:23:49.106 INFO - Done: [click: 5 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #decrementCounter]]
+15:23:49.160 INFO - Executing: [find element: By.cssSelector: #decrementCounter])
+15:23:49.169 INFO - Done: [find element: By.cssSelector: #decrementCounter]
+15:23:49.171 INFO - Executing: [click: 5 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #decrementCounter]])
+15:23:49.198 INFO - Done: [click: 5 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #decrementCounter]]
+15:23:49.253 INFO - Executing: [find element: By.cssSelector: #decrementCounter])
+15:23:49.262 INFO - Done: [find element: By.cssSelector: #decrementCounter]
+15:23:49.265 INFO - Executing: [click: 5 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #decrementCounter]])
+15:23:49.290 INFO - Done: [click: 5 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #decrementCounter]]
+15:23:49.347 INFO - Executing: [find element: By.cssSelector: #decrementCounter])
+15:23:49.356 INFO - Done: [find element: By.cssSelector: #decrementCounter]
+15:23:49.359 INFO - Executing: [click: 5 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #decrementCounter]])
+15:23:49.384 INFO - Done: [click: 5 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #decrementCounter]]
+15:23:49.441 INFO - Executing: [find element: By.cssSelector: #decrementCounter])
+15:23:49.450 INFO - Done: [find element: By.cssSelector: #decrementCounter]
+15:23:49.453 INFO - Executing: [click: 5 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #decrementCounter]])
+15:23:49.479 INFO - Done: [click: 5 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #decrementCounter]]
+15:23:49.538 INFO - Executing: [find element: By.cssSelector: #decrementCounter])
+15:23:49.547 INFO - Done: [find element: By.cssSelector: #decrementCounter]
+15:23:49.550 INFO - Executing: [click: 5 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #decrementCounter]])
+15:23:49.575 INFO - Done: [click: 5 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #decrementCounter]]
+15:23:49.630 INFO - Executing: [find element: By.cssSelector: #decrementCounter])
+15:23:49.638 INFO - Done: [find element: By.cssSelector: #decrementCounter]
+15:23:49.641 INFO - Executing: [click: 5 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #decrementCounter]])
+15:23:49.667 INFO - Done: [click: 5 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #decrementCounter]]
+15:23:49.722 INFO - Executing: [find element: By.cssSelector: #decrementCounter])
+15:23:49.731 INFO - Done: [find element: By.cssSelector: #decrementCounter]
+15:23:49.733 INFO - Executing: [click: 5 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #decrementCounter]])
+15:23:49.758 INFO - Done: [click: 5 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #decrementCounter]]
+15:23:49.817 INFO - Executing: [find element: By.cssSelector: #decrementCounter])
+15:23:49.826 INFO - Done: [find element: By.cssSelector: #decrementCounter]
+15:23:49.829 INFO - Executing: [click: 5 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #decrementCounter]])
+15:23:49.854 INFO - Done: [click: 5 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #decrementCounter]]
+15:23:49.908 INFO - Executing: [find element: By.cssSelector: #decrementCounter])
+15:23:49.917 INFO - Done: [find element: By.cssSelector: #decrementCounter]
+15:23:49.920 INFO - Executing: [click: 5 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #decrementCounter]])
+15:23:49.945 INFO - Done: [click: 5 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #decrementCounter]]
+15:23:50.004 INFO - Executing: [find element: By.cssSelector: #decrementCounter])
+15:23:50.012 INFO - Done: [find element: By.cssSelector: #decrementCounter]
+15:23:50.015 INFO - Executing: [click: 5 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #decrementCounter]])
+15:23:50.041 INFO - Done: [click: 5 [[ChromeDriver: chrome on MAC (fb1a5190b38e19aa177ceb8f41b617c4)] -> css selector: #decrementCounter]]

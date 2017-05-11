@@ -21,7 +21,6 @@ module.exports = { // adapted from: https://git.io/vodU0
         browser.setValue('#addItemField', item)
             .pause(200)
             .click('#addItemBtn')
-        }
     })
 
     console.log("I did find 50€ on the street! Add them to the budget...")

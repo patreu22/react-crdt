@@ -1,26 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testsuites errors="0"
             failures="0"
-            tests="4">
+            tests="1">
 
   <testsuite name="simpleTest"
     errors="0" failures="0" hostname="" id="" package="simpleTest" skipped="0"
-    tests="4" time="18.48" timestamp="Thu, 11 May 2017 11:43:16 GMT">
+    tests="1" time="19.92" timestamp="Thu, 11 May 2017 13:23:29 GMT">
   
-    <testcase name="User behaviour 1" classname="simpleTest" time="7.099" assertions="1">
-
-    
-    </testcase>
-  
-    <testcase name="Increment the Counter" classname="simpleTest" time="3.865" assertions="1">
-
-    
-    </testcase>
-  
-    <testcase name="Write to the Textfield" classname="simpleTest" time="5.192" assertions="0">
-    </testcase>
-  
-    <testcase name="Trigger the Toggle" classname="simpleTest" time="2.327" assertions="1">
+    <testcase name="User behaviour 1" classname="simpleTest" time="19.92" assertions="1">
 
     
     </testcase>
