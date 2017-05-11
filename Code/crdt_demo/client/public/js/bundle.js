@@ -22107,21 +22107,21 @@
 	      var myMap = elements.map(function (element) {
 	        return React.createElement(
 	          "li",
-	          { className: "shoppingElement", key: element.uniqueID },
+	          { className: "shoppingElement", id: "item" + element.element, key: element.uniqueID },
 	          element.element,
 	          React.createElement(
 	            "span",
 	            null,
 	            React.createElement(
 	              "button",
-	              { className: "boughtItemButton", onClick: function onClick() {
+	              { id: "bought" + element.element, className: "boughtItemButton", onClick: function onClick() {
 	                  return _this2.removeElementFromORSet(_this2.state.localOpORSet, element);
 	                } },
 	              React.createElement("span", { className: "glyphicon glyphicon-check" })
 	            ),
 	            React.createElement(
 	              "button",
-	              { className: "decrementButton", onClick: function onClick() {
+	              { id: "bought" + element.element, className: "decrementButton", onClick: function onClick() {
 	                  return _this2.removeElementFromORSet(_this2.state.localOpORSet, element);
 	                } },
 	              React.createElement("span", { className: "glyphicon glyphicon-minus" })
