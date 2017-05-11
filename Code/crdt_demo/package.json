@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "e2e": "node_modules/.bin/nightwatch --config nightwatch.conf.BASIC.js"
+    "e2e": "./node_modules/.bin/nightwatch --config nightwatch.conf.BASIC.js"
   },
   "author": "",
   "license": "ISC",

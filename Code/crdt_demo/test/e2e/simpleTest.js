@@ -5,11 +5,12 @@ module.exports = { // adapted from: https://git.io/vodU0
     browser
       .url('http://10.200.1.63:3000/')
       .waitForElementVisible('body')
+      .click('#myToggle').pause(100)
 
-    var loops = 10
-    for(var i=0;i<loops;i++){
-      browser.click('#incrementCounter').pause(50)
-    }
+    // var loops = 10
+    // for(var i=0;i<loops;i++){
+    //   browser.click('#incrementCounter').pause(50)
+    // }
 
     browser
       .pause(1000)
@@ -26,13 +27,13 @@ module.exports = { // adapted from: https://git.io/vodU0
   //   browser
   //     .pause(1000)
   // },
-
-  'Trigger the Toggle': function(browser) {
-      browser
-      .waitForElementVisible('#myToggle')
-        .click('#myToggle').pause(100)
-        .click('#incrementCounter').pause(50)
-        .pause(500)
+  //
+  // 'Trigger the Toggle': function(browser) {
+  //     browser
+  //     .waitForElementVisible('#myToggle')
+  //       .click('#myToggle').pause(100)
+  //       .click('#incrementCounter').pause(50)
+  //       .pause(500)
 
     // var loops = 10
     // for (var i=0;i<loops;i++){
