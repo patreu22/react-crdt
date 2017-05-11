@@ -4,14 +4,20 @@
   "description": "",
   "main": "client.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+   "test": "./node_modules/.bin/nightwatch --config nightwatch.conf.BASIC.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "env2": "^2.1.1",
     "express": "^4.15.2",
     "ip": "^1.1.5",
     "node-dom": "^0.1.0",
+    "selenium-download": "^2.0.10",
     "xmlhttprequest": "^1.8.0"
+  },
+  "devDependencies": {
+    "nightwatch": "^0.9.15",
+    "selenium-download": "^2.0.10"
   }
 }

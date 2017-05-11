@@ -1,0 +1,285 @@
+13:43:16.454 INFO - Selenium build info: version: '3.4.0', revision: 'unknown'
+13:43:16.455 INFO - Launching a standalone Selenium Server
+2017-05-11 13:43:16.477:INFO::main: Logging initialized @288ms to org.seleniumhq.jetty9.util.log.StdErrLog
+13:43:16.530 INFO - Driver provider org.openqa.selenium.ie.InternetExplorerDriver registration is skipped:
+ registration capabilities Capabilities [{ensureCleanSession=true, browserName=internet explorer, version=, platform=WINDOWS}] does not match the current platform MAC
+13:43:16.531 INFO - Driver provider org.openqa.selenium.edge.EdgeDriver registration is skipped:
+ registration capabilities Capabilities [{browserName=MicrosoftEdge, version=, platform=WINDOWS}] does not match the current platform MAC
+13:43:16.531 INFO - Driver class not found: com.opera.core.systems.OperaDriver
+13:43:16.531 INFO - Driver provider com.opera.core.systems.OperaDriver registration is skipped:
+Unable to create new instances on this machine.
+13:43:16.531 INFO - Driver class not found: com.opera.core.systems.OperaDriver
+13:43:16.531 INFO - Driver provider com.opera.core.systems.OperaDriver is not registered
+2017-05-11 13:43:16.573:INFO:osjs.Server:main: jetty-9.4.3.v20170317
+2017-05-11 13:43:16.613:INFO:osjsh.ContextHandler:main: Started o.s.j.s.ServletContextHandler@6f7fd0e6{/,null,AVAILABLE}
+2017-05-11 13:43:16.652:INFO:osjs.AbstractConnector:main: Started ServerConnector@271053e1{HTTP/1.1,[http/1.1]}{0.0.0.0:4444}
+2017-05-11 13:43:16.653:INFO:osjs.Server:main: Started @464ms
+13:43:16.653 INFO - Selenium Server is up and running
+13:43:16.972 INFO - SessionCleaner initialized with insideBrowserTimeout 0 and clientGoneTimeout 1800000 polling every 180000
+13:43:17.010 INFO - Executing: [new session: Capabilities [{acceptSslCerts=true, name=Simple Test, browserName=chrome, javascriptEnabled=true, platform=ANY}]])
+13:43:17.107 INFO - Creating a new session for Capabilities [{acceptSslCerts=true, name=Simple Test, browserName=chrome, javascriptEnabled=true, platform=ANY}]
+Starting ChromeDriver 2.29.461585 (0be2cd95f834e9ee7c46bcc7cf405b483f5ae83b) on port 23954
+Only local connections are allowed.
+13:43:19.146 INFO - Detected dialect: OSS
+13:43:19.171 INFO - Done: [new session: Capabilities [{acceptSslCerts=true, name=Simple Test, browserName=chrome, javascriptEnabled=true, platform=ANY}]]
+13:43:19.196 INFO - Executing: [get: http://10.200.1.63:3000/])
+13:43:23.618 INFO - Done: [get: http://10.200.1.63:3000/]
+13:43:23.629 INFO - Executing: [find elements: By.cssSelector: body])
+13:43:23.683 INFO - Done: [find elements: By.cssSelector: body]
+13:43:23.696 INFO - Executing: [is displayed: 0 [[ChromeDriver: chrome on MAC (028f1f408a4786385588d207109c797a)] -> css selector: body]])
+13:43:23.724 INFO - Done: [is displayed: 0 [[ChromeDriver: chrome on MAC (028f1f408a4786385588d207109c797a)] -> css selector: body]]
+13:43:23.840 INFO - Executing: [get: http://10.200.1.63:3000/])
+13:43:24.130 INFO - Done: [get: http://10.200.1.63:3000/]
+13:43:24.137 INFO - Executing: [find elements: By.cssSelector: body])
+13:43:24.153 INFO - Done: [find elements: By.cssSelector: body]
+13:43:24.160 INFO - Executing: [is displayed: 1 [[ChromeDriver: chrome on MAC (028f1f408a4786385588d207109c797a)] -> css selector: body]])
+13:43:24.181 INFO - Done: [is displayed: 1 [[ChromeDriver: chrome on MAC (028f1f408a4786385588d207109c797a)] -> css selector: body]]
+13:43:24.188 INFO - Executing: [find element: By.cssSelector: #myToggle])
+13:43:24.212 INFO - Done: [find element: By.cssSelector: #myToggle]
+13:43:24.216 INFO - Executing: [click: 2 [[ChromeDriver: chrome on MAC (028f1f408a4786385588d207109c797a)] -> css selector: #myToggle]])
+13:43:25.396 WARN - Exception thrown
+org.openqa.selenium.WebDriverException: unknown error: Element <input type="checkbox" id="myToggle" class="react-toggle-screenreader-only" value="on"> is not clickable at point (530, 123). Other element would receive the click: <div class="Content">...</div>
+  (Session info: chrome=57.0.2987.133)
+  (Driver info: chromedriver=2.29.461585 (0be2cd95f834e9ee7c46bcc7cf405b483f5ae83b),platform=Mac OS X 10.12.4 x86_64) (WARNING: The server did not provide any stacktrace information)
+Command duration or timeout: 68 milliseconds
+Build info: version: '3.4.0', revision: 'unknown', time: 'unknown'
+System info: host: 'dhcp-214-247.vpn.tu-berlin.de', ip: '2a02:8109:8900:3258:2db8:d96d:a8df:47e2', os.name: 'Mac OS X', os.arch: 'x86_64', os.version: '10.12.4', java.version: '1.8.0_131'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities [{applicationCacheEnabled=false, rotatable=false, mobileEmulationEnabled=false, networkConnectionEnabled=false, chrome={chromedriverVersion=2.29.461585 (0be2cd95f834e9ee7c46bcc7cf405b483f5ae83b), userDataDir=/var/folders/bs/7lc_4jvd59zcyz8pc5bf2y4r0000gn/T/.org.chromium.Chromium.MLDmyc}, takesHeapSnapshot=true, pageLoadStrategy=normal, databaseEnabled=false, handlesAlerts=true, hasTouchScreen=false, version=57.0.2987.133, platform=MAC, browserConnectionEnabled=false, nativeEvents=true, acceptSslCerts=true, locationContextEnabled=true, webStorageEnabled=true, browserName=chrome, takesScreenshot=true, javascriptEnabled=true, cssSelectorsEnabled=true, unexpectedAlertBehaviour=}]
+Session ID: 028f1f408a4786385588d207109c797a
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:423)
+	at org.openqa.selenium.remote.ErrorHandler.createThrowable(ErrorHandler.java:215)
+	at org.openqa.selenium.remote.ErrorHandler.throwIfResponseFailed(ErrorHandler.java:167)
+	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:671)
+	at org.openqa.selenium.remote.RemoteWebElement.execute(RemoteWebElement.java:272)
+	at org.openqa.selenium.remote.RemoteWebElement.click(RemoteWebElement.java:82)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.openqa.selenium.support.events.EventFiringWebDriver$EventFiringWebElement$1.invoke(EventFiringWebDriver.java:332)
+	at com.sun.proxy.$Proxy5.click(Unknown Source)
+	at org.openqa.selenium.support.events.EventFiringWebDriver$EventFiringWebElement.click(EventFiringWebDriver.java:345)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.openqa.selenium.remote.server.KnownElements$1.invoke(KnownElements.java:64)
+	at com.sun.proxy.$Proxy6.click(Unknown Source)
+	at org.openqa.selenium.remote.server.handler.ClickElement.call(ClickElement.java:30)
+	at org.openqa.selenium.remote.server.handler.ClickElement.call(ClickElement.java:22)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at org.openqa.selenium.remote.server.DefaultSession$1.run(DefaultSession.java:176)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at java.lang.Thread.run(Thread.java:748)
+13:43:25.399 WARN - Exception: unknown error: Element <input type="checkbox" id="myToggle" class="react-toggle-screenreader-only" value="on"> is not clickable at point (530, 123). Other element would receive the click: <div class="Content">...</div>
+  (Session info: chrome=57.0.2987.133)
+  (Driver info: chromedriver=2.29.461585 (0be2cd95f834e9ee7c46bcc7cf405b483f5ae83b),platform=Mac OS X 10.12.4 x86_64) (WARNING: The server did not provide any stacktrace information)
+Command duration or timeout: 68 milliseconds
+Build info: version: '3.4.0', revision: 'unknown', time: 'unknown'
+System info: host: 'dhcp-214-247.vpn.tu-berlin.de', ip: '2a02:8109:8900:3258:2db8:d96d:a8df:47e2', os.name: 'Mac OS X', os.arch: 'x86_64', os.version: '10.12.4', java.version: '1.8.0_131'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities [{applicationCacheEnabled=false, rotatable=false, mobileEmulationEnabled=false, networkConnectionEnabled=false, chrome={chromedriverVersion=2.29.461585 (0be2cd95f834e9ee7c46bcc7cf405b483f5ae83b), userDataDir=/var/folders/bs/7lc_4jvd59zcyz8pc5bf2y4r0000gn/T/.org.chromium.Chromium.MLDmyc}, takesHeapSnapshot=true, pageLoadStrategy=normal, databaseEnabled=false, handlesAlerts=true, hasTouchScreen=false, version=57.0.2987.133, platform=MAC, browserConnectionEnabled=false, nativeEvents=true, acceptSslCerts=true, locationContextEnabled=true, webStorageEnabled=true, browserName=chrome, takesScreenshot=true, javascriptEnabled=true, cssSelectorsEnabled=true, unexpectedAlertBehaviour=}]
+Session ID: 028f1f408a4786385588d207109c797a
+13:43:25.614 INFO - Executing: [find element: By.cssSelector: #incrementCounter])
+13:43:25.634 INFO - Done: [find element: By.cssSelector: #incrementCounter]
+13:43:25.639 INFO - Executing: [click: 3 [[ChromeDriver: chrome on MAC (028f1f408a4786385588d207109c797a)] -> css selector: #incrementCounter]])
+13:43:25.703 INFO - Done: [click: 3 [[ChromeDriver: chrome on MAC (028f1f408a4786385588d207109c797a)] -> css selector: #incrementCounter]]
+13:43:25.763 INFO - Executing: [find element: By.cssSelector: #incrementCounter])
+13:43:25.775 INFO - Done: [find element: By.cssSelector: #incrementCounter]
+13:43:25.779 INFO - Executing: [click: 3 [[ChromeDriver: chrome on MAC (028f1f408a4786385588d207109c797a)] -> css selector: #incrementCounter]])
+13:43:25.814 INFO - Done: [click: 3 [[ChromeDriver: chrome on MAC (028f1f408a4786385588d207109c797a)] -> css selector: #incrementCounter]]
+13:43:25.875 INFO - Executing: [find element: By.cssSelector: #incrementCounter])
+13:43:25.885 INFO - Done: [find element: By.cssSelector: #incrementCounter]
+13:43:25.888 INFO - Executing: [click: 3 [[ChromeDriver: chrome on MAC (028f1f408a4786385588d207109c797a)] -> css selector: #incrementCounter]])
+13:43:25.921 INFO - Done: [click: 3 [[ChromeDriver: chrome on MAC (028f1f408a4786385588d207109c797a)] -> css selector: #incrementCounter]]
+13:43:25.979 INFO - Executing: [find element: By.cssSelector: #incrementCounter])
+13:43:25.989 INFO - Done: [find element: By.cssSelector: #incrementCounter]
+13:43:25.994 INFO - Executing: [click: 3 [[ChromeDriver: chrome on MAC (028f1f408a4786385588d207109c797a)] -> css selector: #incrementCounter]])
+13:43:26.025 INFO - Done: [click: 3 [[ChromeDriver: chrome on MAC (028f1f408a4786385588d207109c797a)] -> css selector: #incrementCounter]]
+13:43:26.085 INFO - Executing: [find element: By.cssSelector: #incrementCounter])
+13:43:26.095 INFO - Done: [find element: By.cssSelector: #incrementCounter]
+13:43:26.098 INFO - Executing: [click: 3 [[ChromeDriver: chrome on MAC (028f1f408a4786385588d207109c797a)] -> css selector: #incrementCounter]])
+13:43:26.132 INFO - Done: [click: 3 [[ChromeDriver: chrome on MAC (028f1f408a4786385588d207109c797a)] -> css selector: #incrementCounter]]
+13:43:26.193 INFO - Executing: [find element: By.cssSelector: #incrementCounter])
+13:43:26.204 INFO - Done: [find element: By.cssSelector: #incrementCounter]
+13:43:26.208 INFO - Executing: [click: 3 [[ChromeDriver: chrome on MAC (028f1f408a4786385588d207109c797a)] -> css selector: #incrementCounter]])
+13:43:26.237 INFO - Done: [click: 3 [[ChromeDriver: chrome on MAC (028f1f408a4786385588d207109c797a)] -> css selector: #incrementCounter]]
+13:43:26.298 INFO - Executing: [find element: By.cssSelector: #incrementCounter])
+13:43:26.308 INFO - Done: [find element: By.cssSelector: #incrementCounter]
+13:43:26.312 INFO - Executing: [click: 3 [[ChromeDriver: chrome on MAC (028f1f408a4786385588d207109c797a)] -> css selector: #incrementCounter]])
+13:43:26.341 INFO - Done: [click: 3 [[ChromeDriver: chrome on MAC (028f1f408a4786385588d207109c797a)] -> css selector: #incrementCounter]]
+13:43:26.399 INFO - Executing: [find element: By.cssSelector: #incrementCounter])
+13:43:26.409 INFO - Done: [find element: By.cssSelector: #incrementCounter]
+13:43:26.412 INFO - Executing: [click: 3 [[ChromeDriver: chrome on MAC (028f1f408a4786385588d207109c797a)] -> css selector: #incrementCounter]])
+13:43:26.441 INFO - Done: [click: 3 [[ChromeDriver: chrome on MAC (028f1f408a4786385588d207109c797a)] -> css selector: #incrementCounter]]
+13:43:26.499 INFO - Executing: [find element: By.cssSelector: #incrementCounter])
+13:43:26.509 INFO - Done: [find element: By.cssSelector: #incrementCounter]
+13:43:26.512 INFO - Executing: [click: 3 [[ChromeDriver: chrome on MAC (028f1f408a4786385588d207109c797a)] -> css selector: #incrementCounter]])
+13:43:26.543 INFO - Done: [click: 3 [[ChromeDriver: chrome on MAC (028f1f408a4786385588d207109c797a)] -> css selector: #incrementCounter]]
+13:43:26.601 INFO - Executing: [find element: By.cssSelector: #incrementCounter])
+13:43:26.610 INFO - Done: [find element: By.cssSelector: #incrementCounter]
+13:43:26.614 INFO - Executing: [click: 3 [[ChromeDriver: chrome on MAC (028f1f408a4786385588d207109c797a)] -> css selector: #incrementCounter]])
+13:43:26.643 INFO - Done: [click: 3 [[ChromeDriver: chrome on MAC (028f1f408a4786385588d207109c797a)] -> css selector: #incrementCounter]]
+13:43:27.708 INFO - Executing: [find element: By.cssSelector: #addItemField])
+13:43:27.728 INFO - Done: [find element: By.cssSelector: #addItemField]
+13:43:27.733 INFO - Executing: [send keys: 4 [[ChromeDriver: chrome on MAC (028f1f408a4786385588d207109c797a)] -> css selector: #addItemField], [n, i, g, h, t, w, a, t, c, h,  , 0]])
+13:43:27.935 INFO - Done: [send keys: 4 [[ChromeDriver: chrome on MAC (028f1f408a4786385588d207109c797a)] -> css selector: #addItemField], [n, i, g, h, t, w, a, t, c, h,  , 0]]
+13:43:28.146 INFO - Executing: [find element: By.cssSelector: #addItemBtn])
+13:43:28.166 INFO - Done: [find element: By.cssSelector: #addItemBtn]
+13:43:28.169 INFO - Executing: [click: 5 [[ChromeDriver: chrome on MAC (028f1f408a4786385588d207109c797a)] -> css selector: #addItemBtn]])
+13:43:28.229 INFO - Done: [click: 5 [[ChromeDriver: chrome on MAC (028f1f408a4786385588d207109c797a)] -> css selector: #addItemBtn]]
+13:43:28.234 INFO - Executing: [find element: By.cssSelector: #addItemField])
+13:43:28.243 INFO - Done: [find element: By.cssSelector: #addItemField]
+13:43:28.248 INFO - Executing: [send keys: 4 [[ChromeDriver: chrome on MAC (028f1f408a4786385588d207109c797a)] -> css selector: #addItemField], [n, i, g, h, t, w, a, t, c, h,  , 1]])
+13:43:28.397 INFO - Done: [send keys: 4 [[ChromeDriver: chrome on MAC (028f1f408a4786385588d207109c797a)] -> css selector: #addItemField], [n, i, g, h, t, w, a, t, c, h,  , 1]]
+13:43:28.607 INFO - Executing: [find element: By.cssSelector: #addItemBtn])
+13:43:28.616 INFO - Done: [find element: By.cssSelector: #addItemBtn]
+13:43:28.619 INFO - Executing: [click: 5 [[ChromeDriver: chrome on MAC (028f1f408a4786385588d207109c797a)] -> css selector: #addItemBtn]])
+13:43:28.651 INFO - Done: [click: 5 [[ChromeDriver: chrome on MAC (028f1f408a4786385588d207109c797a)] -> css selector: #addItemBtn]]
+13:43:28.655 INFO - Executing: [find element: By.cssSelector: #addItemField])
+13:43:28.665 INFO - Done: [find element: By.cssSelector: #addItemField]
+13:43:28.668 INFO - Executing: [send keys: 4 [[ChromeDriver: chrome on MAC (028f1f408a4786385588d207109c797a)] -> css selector: #addItemField], [n, i, g, h, t, w, a, t, c, h,  , 2]])
+13:43:28.799 INFO - Done: [send keys: 4 [[ChromeDriver: chrome on MAC (028f1f408a4786385588d207109c797a)] -> css selector: #addItemField], [n, i, g, h, t, w, a, t, c, h,  , 2]]
+13:43:29.009 INFO - Executing: [find element: By.cssSelector: #addItemBtn])
+13:43:29.019 INFO - Done: [find element: By.cssSelector: #addItemBtn]
+13:43:29.022 INFO - Executing: [click: 5 [[ChromeDriver: chrome on MAC (028f1f408a4786385588d207109c797a)] -> css selector: #addItemBtn]])
+13:43:29.053 INFO - Done: [click: 5 [[ChromeDriver: chrome on MAC (028f1f408a4786385588d207109c797a)] -> css selector: #addItemBtn]]
+13:43:29.057 INFO - Executing: [find element: By.cssSelector: #addItemField])
+13:43:29.069 INFO - Done: [find element: By.cssSelector: #addItemField]
+13:43:29.074 INFO - Executing: [send keys: 4 [[ChromeDriver: chrome on MAC (028f1f408a4786385588d207109c797a)] -> css selector: #addItemField], [n, i, g, h, t, w, a, t, c, h,  , 3]])
+13:43:29.219 INFO - Done: [send keys: 4 [[ChromeDriver: chrome on MAC (028f1f408a4786385588d207109c797a)] -> css selector: #addItemField], [n, i, g, h, t, w, a, t, c, h,  , 3]]
+13:43:29.430 INFO - Executing: [find element: By.cssSelector: #addItemBtn])
+13:43:29.442 INFO - Done: [find element: By.cssSelector: #addItemBtn]
+13:43:29.445 INFO - Executing: [click: 5 [[ChromeDriver: chrome on MAC (028f1f408a4786385588d207109c797a)] -> css selector: #addItemBtn]])
+13:43:29.480 INFO - Done: [click: 5 [[ChromeDriver: chrome on MAC (028f1f408a4786385588d207109c797a)] -> css selector: #addItemBtn]]
+13:43:29.486 INFO - Executing: [find element: By.cssSelector: #addItemField])
+13:43:29.495 INFO - Done: [find element: By.cssSelector: #addItemField]
+13:43:29.501 INFO - Executing: [send keys: 4 [[ChromeDriver: chrome on MAC (028f1f408a4786385588d207109c797a)] -> css selector: #addItemField], [n, i, g, h, t, w, a, t, c, h,  , 4]])
+13:43:29.645 INFO - Done: [send keys: 4 [[ChromeDriver: chrome on MAC (028f1f408a4786385588d207109c797a)] -> css selector: #addItemField], [n, i, g, h, t, w, a, t, c, h,  , 4]]
+13:43:29.856 INFO - Executing: [find element: By.cssSelector: #addItemBtn])
+13:43:29.865 INFO - Done: [find element: By.cssSelector: #addItemBtn]
+13:43:29.869 INFO - Executing: [click: 5 [[ChromeDriver: chrome on MAC (028f1f408a4786385588d207109c797a)] -> css selector: #addItemBtn]])
+13:43:29.904 INFO - Done: [click: 5 [[ChromeDriver: chrome on MAC (028f1f408a4786385588d207109c797a)] -> css selector: #addItemBtn]]
+13:43:29.908 INFO - Executing: [find element: By.cssSelector: #addItemField])
+13:43:29.918 INFO - Done: [find element: By.cssSelector: #addItemField]
+13:43:29.923 INFO - Executing: [send keys: 4 [[ChromeDriver: chrome on MAC (028f1f408a4786385588d207109c797a)] -> css selector: #addItemField], [n, i, g, h, t, w, a, t, c, h,  , 5]])
+13:43:30.052 INFO - Done: [send keys: 4 [[ChromeDriver: chrome on MAC (028f1f408a4786385588d207109c797a)] -> css selector: #addItemField], [n, i, g, h, t, w, a, t, c, h,  , 5]]
+13:43:30.258 INFO - Executing: [find element: By.cssSelector: #addItemBtn])
+13:43:30.268 INFO - Done: [find element: By.cssSelector: #addItemBtn]
+13:43:30.271 INFO - Executing: [click: 5 [[ChromeDriver: chrome on MAC (028f1f408a4786385588d207109c797a)] -> css selector: #addItemBtn]])
+13:43:30.302 INFO - Done: [click: 5 [[ChromeDriver: chrome on MAC (028f1f408a4786385588d207109c797a)] -> css selector: #addItemBtn]]
+13:43:30.308 INFO - Executing: [find element: By.cssSelector: #addItemField])
+13:43:30.318 INFO - Done: [find element: By.cssSelector: #addItemField]
+13:43:30.322 INFO - Executing: [send keys: 4 [[ChromeDriver: chrome on MAC (028f1f408a4786385588d207109c797a)] -> css selector: #addItemField], [n, i, g, h, t, w, a, t, c, h,  , 6]])
+13:43:30.445 INFO - Done: [send keys: 4 [[ChromeDriver: chrome on MAC (028f1f408a4786385588d207109c797a)] -> css selector: #addItemField], [n, i, g, h, t, w, a, t, c, h,  , 6]]
+13:43:30.657 INFO - Executing: [find element: By.cssSelector: #addItemBtn])
+13:43:30.666 INFO - Done: [find element: By.cssSelector: #addItemBtn]
+13:43:30.669 INFO - Executing: [click: 5 [[ChromeDriver: chrome on MAC (028f1f408a4786385588d207109c797a)] -> css selector: #addItemBtn]])
+13:43:30.701 INFO - Done: [click: 5 [[ChromeDriver: chrome on MAC (028f1f408a4786385588d207109c797a)] -> css selector: #addItemBtn]]
+13:43:30.705 INFO - Executing: [find element: By.cssSelector: #addItemField])
+13:43:30.715 INFO - Done: [find element: By.cssSelector: #addItemField]
+13:43:30.719 INFO - Executing: [send keys: 4 [[ChromeDriver: chrome on MAC (028f1f408a4786385588d207109c797a)] -> css selector: #addItemField], [n, i, g, h, t, w, a, t, c, h,  , 7]])
+13:43:30.844 INFO - Done: [send keys: 4 [[ChromeDriver: chrome on MAC (028f1f408a4786385588d207109c797a)] -> css selector: #addItemField], [n, i, g, h, t, w, a, t, c, h,  , 7]]
+13:43:31.054 INFO - Executing: [find element: By.cssSelector: #addItemBtn])
+13:43:31.065 INFO - Done: [find element: By.cssSelector: #addItemBtn]
+13:43:31.068 INFO - Executing: [click: 5 [[ChromeDriver: chrome on MAC (028f1f408a4786385588d207109c797a)] -> css selector: #addItemBtn]])
+13:43:31.099 INFO - Done: [click: 5 [[ChromeDriver: chrome on MAC (028f1f408a4786385588d207109c797a)] -> css selector: #addItemBtn]]
+13:43:31.102 INFO - Executing: [find element: By.cssSelector: #addItemField])
+13:43:31.111 INFO - Done: [find element: By.cssSelector: #addItemField]
+13:43:31.115 INFO - Executing: [send keys: 4 [[ChromeDriver: chrome on MAC (028f1f408a4786385588d207109c797a)] -> css selector: #addItemField], [n, i, g, h, t, w, a, t, c, h,  , 8]])
+13:43:31.241 INFO - Done: [send keys: 4 [[ChromeDriver: chrome on MAC (028f1f408a4786385588d207109c797a)] -> css selector: #addItemField], [n, i, g, h, t, w, a, t, c, h,  , 8]]
+13:43:31.450 INFO - Executing: [find element: By.cssSelector: #addItemBtn])
+13:43:31.460 INFO - Done: [find element: By.cssSelector: #addItemBtn]
+13:43:31.463 INFO - Executing: [click: 5 [[ChromeDriver: chrome on MAC (028f1f408a4786385588d207109c797a)] -> css selector: #addItemBtn]])
+13:43:31.495 INFO - Done: [click: 5 [[ChromeDriver: chrome on MAC (028f1f408a4786385588d207109c797a)] -> css selector: #addItemBtn]]
+13:43:31.498 INFO - Executing: [find element: By.cssSelector: #addItemField])
+13:43:31.508 INFO - Done: [find element: By.cssSelector: #addItemField]
+13:43:31.511 INFO - Executing: [send keys: 4 [[ChromeDriver: chrome on MAC (028f1f408a4786385588d207109c797a)] -> css selector: #addItemField], [n, i, g, h, t, w, a, t, c, h,  , 9]])
+13:43:31.637 INFO - Done: [send keys: 4 [[ChromeDriver: chrome on MAC (028f1f408a4786385588d207109c797a)] -> css selector: #addItemField], [n, i, g, h, t, w, a, t, c, h,  , 9]]
+13:43:31.841 INFO - Executing: [find element: By.cssSelector: #addItemBtn])
+13:43:31.851 INFO - Done: [find element: By.cssSelector: #addItemBtn]
+13:43:31.854 INFO - Executing: [click: 5 [[ChromeDriver: chrome on MAC (028f1f408a4786385588d207109c797a)] -> css selector: #addItemBtn]])
+13:43:31.885 INFO - Done: [click: 5 [[ChromeDriver: chrome on MAC (028f1f408a4786385588d207109c797a)] -> css selector: #addItemBtn]]
+13:43:32.902 INFO - Executing: [find elements: By.cssSelector: #myToggle])
+13:43:32.921 INFO - Done: [find elements: By.cssSelector: #myToggle]
+13:43:32.925 INFO - Executing: [is displayed: 2 [[ChromeDriver: chrome on MAC (028f1f408a4786385588d207109c797a)] -> css selector: #myToggle]])
+13:43:32.945 INFO - Done: [is displayed: 2 [[ChromeDriver: chrome on MAC (028f1f408a4786385588d207109c797a)] -> css selector: #myToggle]]
+13:43:32.951 INFO - Executing: [execute script: var passedArgs = Array.prototype.slice.call(arguments,0); return function () {
+        var toggle = document.getElementById("myToggle")
+        toggle.click()
+      }.apply(window, passedArgs);, []])
+13:43:32.972 INFO - Done: [execute script: var passedArgs = Array.prototype.slice.call(arguments,0); return function () {
+        var toggle = document.getElementById("myToggle")
+        toggle.click()
+      }.apply(window, passedArgs);, []]
+13:43:33.079 INFO - Executing: [execute script: var passedArgs = Array.prototype.slice.call(arguments,0); return function () {
+        var toggle = document.getElementById("myToggle")
+        toggle.click()
+      }.apply(window, passedArgs);, []])
+13:43:33.096 INFO - Done: [execute script: var passedArgs = Array.prototype.slice.call(arguments,0); return function () {
+        var toggle = document.getElementById("myToggle")
+        toggle.click()
+      }.apply(window, passedArgs);, []]
+13:43:33.205 INFO - Executing: [execute script: var passedArgs = Array.prototype.slice.call(arguments,0); return function () {
+        var toggle = document.getElementById("myToggle")
+        toggle.click()
+      }.apply(window, passedArgs);, []])
+13:43:33.220 INFO - Done: [execute script: var passedArgs = Array.prototype.slice.call(arguments,0); return function () {
+        var toggle = document.getElementById("myToggle")
+        toggle.click()
+      }.apply(window, passedArgs);, []]
+13:43:33.329 INFO - Executing: [execute script: var passedArgs = Array.prototype.slice.call(arguments,0); return function () {
+        var toggle = document.getElementById("myToggle")
+        toggle.click()
+      }.apply(window, passedArgs);, []])
+13:43:33.344 INFO - Done: [execute script: var passedArgs = Array.prototype.slice.call(arguments,0); return function () {
+        var toggle = document.getElementById("myToggle")
+        toggle.click()
+      }.apply(window, passedArgs);, []]
+13:43:33.455 INFO - Executing: [execute script: var passedArgs = Array.prototype.slice.call(arguments,0); return function () {
+        var toggle = document.getElementById("myToggle")
+        toggle.click()
+      }.apply(window, passedArgs);, []])
+13:43:33.470 INFO - Done: [execute script: var passedArgs = Array.prototype.slice.call(arguments,0); return function () {
+        var toggle = document.getElementById("myToggle")
+        toggle.click()
+      }.apply(window, passedArgs);, []]
+13:43:33.580 INFO - Executing: [execute script: var passedArgs = Array.prototype.slice.call(arguments,0); return function () {
+        var toggle = document.getElementById("myToggle")
+        toggle.click()
+      }.apply(window, passedArgs);, []])
+13:43:33.597 INFO - Done: [execute script: var passedArgs = Array.prototype.slice.call(arguments,0); return function () {
+        var toggle = document.getElementById("myToggle")
+        toggle.click()
+      }.apply(window, passedArgs);, []]
+13:43:33.703 INFO - Executing: [execute script: var passedArgs = Array.prototype.slice.call(arguments,0); return function () {
+        var toggle = document.getElementById("myToggle")
+        toggle.click()
+      }.apply(window, passedArgs);, []])
+13:43:33.718 INFO - Done: [execute script: var passedArgs = Array.prototype.slice.call(arguments,0); return function () {
+        var toggle = document.getElementById("myToggle")
+        toggle.click()
+      }.apply(window, passedArgs);, []]
+13:43:33.837 INFO - Executing: [execute script: var passedArgs = Array.prototype.slice.call(arguments,0); return function () {
+        var toggle = document.getElementById("myToggle")
+        toggle.click()
+      }.apply(window, passedArgs);, []])
+13:43:33.849 INFO - Done: [execute script: var passedArgs = Array.prototype.slice.call(arguments,0); return function () {
+        var toggle = document.getElementById("myToggle")
+        toggle.click()
+      }.apply(window, passedArgs);, []]
+13:43:33.955 INFO - Executing: [execute script: var passedArgs = Array.prototype.slice.call(arguments,0); return function () {
+        var toggle = document.getElementById("myToggle")
+        toggle.click()
+      }.apply(window, passedArgs);, []])
+13:43:33.969 INFO - Done: [execute script: var passedArgs = Array.prototype.slice.call(arguments,0); return function () {
+        var toggle = document.getElementById("myToggle")
+        toggle.click()
+      }.apply(window, passedArgs);, []]
+13:43:35.081 INFO - Executing: [delete session: d58d072b-105e-40d6-81fe-ea89f66376b5])
+13:43:35.216 INFO - Done: [delete session: d58d072b-105e-40d6-81fe-ea89f66376b5]
