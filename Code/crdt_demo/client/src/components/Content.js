@@ -65,10 +65,10 @@ class Content extends React.Component {
     console.log("++++++++Elements: ")
     console.log(elements)
     var myMap = elements.map((element) =>
-      <li className="shoppingElement" key={element.uniqueID}>{element.element}
+      <li className="shoppingElement" id={"item"+element.element} key={element.uniqueID}>{element.element}
       <span>
-        <button className={"boughtItemButton"} onClick={() => this.removeElementFromORSet(this.state.localOpORSet, element)}><span className={"glyphicon glyphicon-check"}/></button>
-        <button className={"decrementButton"} onClick={() => this.removeElementFromORSet(this.state.localOpORSet, element)}><span className={"glyphicon glyphicon-minus"}/></button>
+        <button id={"bought"+element.element}className={"boughtItemButton"} onClick={() => this.removeElementFromORSet(this.state.localOpORSet, element)}><span className={"glyphicon glyphicon-check"}/></button>
+        <button id={"bought"+element.element} className={"decrementButton"} onClick={() => this.removeElementFromORSet(this.state.localOpORSet, element)}><span className={"glyphicon glyphicon-minus"}/></button>
       </span>
       </li>
     )

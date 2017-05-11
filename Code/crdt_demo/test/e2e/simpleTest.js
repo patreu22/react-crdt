@@ -1,6 +1,13 @@
-var config = require('../../nightwatch.conf.BASIC.js');
+// var config = require('../../nightwatch.conf.BASIC.js');
+var config = require('../../nightwatch.conf.offline.js');
 
 module.exports = { // adapted from: https://git.io/vodU0
+  'User behaviour 1': function(browser) {
+    browser.url('http://10.200.1.63:3000/')
+    .waitForElementVisible('body').pause(100)
+
+  },
+
   'Increment the Counter': function(browser) {
     browser
       .url('http://10.200.1.63:3000/')
