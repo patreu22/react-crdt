@@ -6,16 +6,16 @@ module.exports = { // adapted from: https://git.io/vodU0
     browser.url('http://10.200.1.63:3000/')
     .waitForElementVisible('body').pause(100)
 
-    console.log("Yey, I have 10€ in my pocket. Add them to my budget")
+
     var budget = 10
     for(var i=0;i<budget;i++){
         browser.click('#incrementCounter').pause(50)
     }
 
-    console.log("Hooray, not broke anymore")
-    browser.click('#myToggle').pause(100)
 
-    console.log("Mhm, I'm hungry and thirsty...")
+    browser.click('#myToggle').pause(300)
+
+
     var items = ["Milk", "Sugar", "Candy", "Salad", "Cheese", "Halloumi", "A bottle of wine"]
     items.forEach(function(item){
         browser.setValue('#addItemField', item)
@@ -23,20 +23,30 @@ module.exports = { // adapted from: https://git.io/vodU0
             .click('#addItemBtn')
     })
 
-    console.log("I did find 50€ on the street! Add them to the budget...")
-    var budget = 50
+
+    var items = ["Halloumi", "Candy", "Milk", "Cheese"]
+    items.forEach(function(element){
+      var btnToRemove = "#bought"+element
+      browser.click(btnToRemove).pause(100)
+    })
+
+
+    var budget = 25
     for(var i=0;i<budget;i++){
         browser.click('#incrementCounter').pause(50)
     }
 
-    console.log("Oh so hungry, I bought a Kebap on my way to the supermarket. Price: 3€")
     var cost = 3
     for(var i=0;i<budget;i++){
         browser.click('#decrementCounter').pause(50)
     }
 
-    console.log("Finally reached the market. But didn't find all products")
-    var items = ["Halloumi", "Candy", "Milk", "Cheese"]
+    var toggles = 5
+    for(var i=0;i<toggles;i++){
+        browser.click('#myToggle').pause(300)
+    }
+
+    browser.perform(function(){console.log("-----Finished!-----")})
 
 
   },
