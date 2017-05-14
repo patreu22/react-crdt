@@ -2,6 +2,8 @@
 
 ![Alt text](https://github.com/patreu22/react-crdt/blob/master/rsc/chrome_screenshot.png "Screenshot" | width=100)
 
+<img src="https://github.com/patreu22/react-crdt/blob/master/rsc/chrome_screenshot.png"  width="200" height="400" />
+
 To be continued with awesome instructions...
 
 ### How to test the demo on your local machine
