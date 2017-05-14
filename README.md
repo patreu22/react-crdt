@@ -1,6 +1,6 @@
 # BachelorCRDT
 
-![Alt text](https://github.com/patreu22/react-crdt/blob/master/rsc/chrome_screenshot.png "Screenshot")
+![Alt text](https://github.com/patreu22/react-crdt/blob/master/rsc/chrome_screenshot.png "Screenshot" =500px)
 
 To be continued with awesome instructions...
 
