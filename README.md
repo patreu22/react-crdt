@@ -11,7 +11,7 @@ If you don't know yet what CRDTs are you can get a fast introduction here: https
  
 <img src="https://github.com/patreu22/react-crdt/blob/master/img/chrome_screenshot.png"  width="300" height="320"/> 
  
-The demo is a shopping cart driven by a set of CRDTs. You can use a toggle for setting a LWW-Register, 
+I implemented a shopping cart driven by a set of CRDTs for demo reasons. You can use a toggle for setting a LWW-Register, 
 increment/decrement a PN-Counter and add or remove elements to/from a Observed-Removed set. 
 
 
