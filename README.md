@@ -1,5 +1,7 @@
 # BachelorCRDT
 
+[[https://github.com/patreu22/react-crdt/blob/master/rsc/chrome_screenshot.png]]
+
 To be continued with awesome instructions...
 
 ### How to test the demo on your local machine
