@@ -1,9 +1,10 @@
 # React CRDT
  
-### What is it? 
+### What is this about? 
 `react-crdt` is part of a bachelor thesis dealing with conflict-free data types in web development. 
 It is a npm package for embedding conflict-free replicated data types into your project. 
-Currently it only works with React but for the future it should be continued
+Currently it only works with React but for the future it should be continued. 
+If you don't know yet what CRDTs are you can get a fast introduction here: https://vaughnvernon.co/?p=1012
 
 
 ### Try the Demo 
