@@ -1,6 +1,6 @@
 # BachelorCRDT
 
-<img src="https://github.com/patreu22/react-crdt/blob/master/rsc/chrome_screenshot.png"  width="300" height="320" align="center" />
+<img style="text-align: center" src="https://github.com/patreu22/react-crdt/blob/master/rsc/chrome_screenshot.png"  width="300" height="320" />
 
 To be continued with awesome instructions...
 
