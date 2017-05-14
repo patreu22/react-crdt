@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "test": "./node_modules/.bin/nightwatch --config nightwatch.conf.BASIC.js",
-    "offline": "./node_modules/.bin/nightwatch --config nightwatch.conf.offline.js"
+    "offline": "./node_modules/.bin/nightwatch --config nightwatch.conf.offline.js",
   },
   "author": "",
   "license": "ISC",
